@@ -49,6 +49,7 @@ public class MainView {
 		m.mainFrame.setResizable(true);
 		m.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		m.mainFrame.setMinimumSize(new Dimension(800,600));
+		m.mainFrame.setLocationRelativeTo(null);
 		m.mainFrame.setJMenuBar(m.menuBar);//TODO make menu bar
 		
 		// Icon code

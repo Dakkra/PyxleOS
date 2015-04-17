@@ -28,6 +28,7 @@ public class AboutView {
 		
 		JFrame aboutViewFrame = new JFrame("About PyxleOS");
 		aboutViewFrame.setSize(250, 150);
+		aboutViewFrame.setLocationRelativeTo(null);
 		aboutViewFrame.setResizable(false);
 		aboutViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
