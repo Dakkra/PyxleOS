@@ -3,6 +3,8 @@ package com.dakkra.pyxleos.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -76,6 +78,7 @@ public class MainView {
 		m.fileOpen = new JMenuItem("Open");
 		m.fileSave = new JMenuItem("Save");
 		m.fileQuit = new JMenuItem("Quit "+m.applicationName);
+		m.fileQuit.addActionListener(new CloseListener());
 		m.fileMenu.add(m.fileNew);
 		m.fileMenu.add(m.fileOpen);
 		m.fileMenu.add(m.fileSave);
@@ -97,6 +100,12 @@ public class MainView {
 		//General Changes
 //		UIManager.put("control", PANELCOLOR);
 		
+	}
+	private class CloseListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	System.out.println("File > Quit: Exitting Application");
+	        System.exit(0);
+	    }
 	}
 
 }

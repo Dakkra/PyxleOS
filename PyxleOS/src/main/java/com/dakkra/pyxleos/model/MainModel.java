@@ -8,8 +8,8 @@ import javax.swing.JMenuItem;
 
 public class MainModel {
 	public final String version = "0.1.1";
-	public String applicationNameVersion = "PyxleOS "+version;
 	public String applicationName = "PyxleOS";
+	public String applicationNameVersion = applicationName+" "+version;
 	//main frame
 	public JFrame mainFrame;
 	//main menu bar
