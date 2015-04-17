@@ -85,16 +85,24 @@ public class MainView {
 		m.fileMenu.add(m.fileSave);
 		m.fileMenu.add(m.fileQuit);
 	
-		//add items to about menu
+		//tools menu
+		m.toolsMenu = new JMenu(" Tools ");
+		
+		//about menu
 		m.aboutMenu = new JMenu(" About ");
 		m.aboutGithub = new JMenuItem("Github");
+		m.aboutSourceForge = new JMenuItem("SourceForge");
+		m.aboutWebsite = new JMenuItem("Website");
 		m.aboutAbout = new JMenuItem("About "+m.applicationNameVersion);
 		m.aboutAbout.addActionListener(new AboutListener());
+		m.aboutMenu.add(m.aboutWebsite);
 		m.aboutMenu.add(m.aboutGithub);
+		m.aboutMenu.add(m.aboutSourceForge);
 		m.aboutMenu.add(m.aboutAbout);
 		
 		//add menus to the main menu bar
 		m.menuBar.add(m.fileMenu);
+		m.menuBar.add(m.toolsMenu);
 		m.menuBar.add(m.aboutMenu);
 	}
 	

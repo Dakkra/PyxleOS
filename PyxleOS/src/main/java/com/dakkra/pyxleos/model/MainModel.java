@@ -14,6 +14,7 @@ public class MainModel {
 	public JFrame mainFrame;
 	//main menu bar
 	public JMenuBar menuBar;
+	
 	//file menu
 	public JMenu fileMenu;
 	//file menu items
@@ -21,9 +22,16 @@ public class MainModel {
 	public JMenuItem fileNew;
 	public JMenuItem fileOpen;
 	public JMenuItem fileSave;
+	
+	//tools menu
+	public JMenu toolsMenu;
+	//tools menu items
+	
 	//about menu
 	public JMenu aboutMenu;
 	//about menu item
 	public JMenuItem aboutAbout;
 	public JMenuItem aboutGithub;
+	public JMenuItem aboutSourceForge;
+	public JMenuItem aboutWebsite;
 }
