@@ -25,4 +25,5 @@ public class MainModel {
 	public JMenu aboutMenu;
 	//about menu item
 	public JMenuItem aboutAbout;
+	public JMenuItem aboutGithub;
 }

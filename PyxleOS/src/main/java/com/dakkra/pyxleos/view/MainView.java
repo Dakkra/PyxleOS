@@ -84,6 +84,8 @@ public class MainView {
 		//add items to about menu
 		m.aboutMenu = new JMenu(" About ");
 		m.aboutAbout = new JMenuItem("About "+m.applicationNameVersion);
+		m.aboutGithub = new JMenuItem("Github");
+		m.aboutMenu.add(m.aboutGithub);
 		m.aboutMenu.add(m.aboutAbout);
 		
 		//add menus to the main menu bar

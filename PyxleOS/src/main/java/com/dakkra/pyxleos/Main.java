@@ -23,7 +23,7 @@ public class Main {
 		c.v = v;
 		
 		//Start GUI
-		System.out.println("Starting GUI");
+		System.out.println("Displaying GUI");
 		v.createAndShowGUI();
 	}
 
