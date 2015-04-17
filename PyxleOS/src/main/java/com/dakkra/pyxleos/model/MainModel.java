@@ -8,7 +8,8 @@ import javax.swing.JMenuItem;
 import com.dakkra.pyxleos.Main;
 
 public class MainModel {
-	public String applicationNameVersion = "PyxleOS "+Main.version;
+	public static final String version = "0.1.1";
+	public String applicationNameVersion = "PyxleOS "+version;
 	public String applicationName = "PyxleOS";
 	//main frame
 	public JFrame mainFrame;

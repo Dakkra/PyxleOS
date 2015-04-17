@@ -5,11 +5,9 @@ import com.dakkra.pyxleos.model.MainModel;
 import com.dakkra.pyxleos.view.MainView;
 
 public class Main {
-	public static String version = "0.1.1";
 
 	public static void main(String[] args) {
 		
-		System.out.println("Welcome to PyxleOS! Version: "+version);
 		System.out.println("Getting started...");
 		
 		MainView v = new MainView();
@@ -21,7 +19,7 @@ public class Main {
 		v.m = m;
 		c.m = m;
 		c.v = v;
-		
+		System.out.println("Welcome to PyxleOS! Version: "+m.version);
 		//Start GUI
 		System.out.println("Displaying GUI");
 		v.createAndShowGUI();
