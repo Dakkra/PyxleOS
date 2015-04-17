@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		System.out.println("Welcome to PyxleOS! Version: "+version);
-		System.out.println("Setting up...");
+		System.out.println("Getting started...");
 		
 		MainView v = new MainView();
 		MainModel m = new MainModel();
