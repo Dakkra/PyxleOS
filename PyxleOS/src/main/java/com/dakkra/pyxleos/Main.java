@@ -5,7 +5,7 @@ import com.dakkra.pyxleos.model.MainModel;
 import com.dakkra.pyxleos.view.MainView;
 
 public class Main {
-	public static String version = "0.1.0";
+	public static String version = "0.1.1";
 
 	public static void main(String[] args) {
 		
