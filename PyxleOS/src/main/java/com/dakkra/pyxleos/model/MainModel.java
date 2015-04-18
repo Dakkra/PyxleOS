@@ -27,6 +27,7 @@ public class MainModel {
 	//tools menu
 	public JMenu toolsMenu;
 	//tools menu items
+	public JMenuItem toolDemo;
 	
 	//about menu
 	public JMenu aboutMenu;

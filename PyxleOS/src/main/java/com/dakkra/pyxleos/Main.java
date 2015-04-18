@@ -8,7 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.println("Getting started...");
+		System.out.println("Starting up...");
 		
 		MainView v = new MainView();
 		MainModel m = new MainModel();

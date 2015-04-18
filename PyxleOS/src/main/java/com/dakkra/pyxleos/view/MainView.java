@@ -86,6 +86,8 @@ public class MainView {
 	
 		//tools menu
 		m.toolsMenu = new JMenu(" Tools ");
+		m.toolDemo = new JMenuItem("Fake Tool");
+		m.toolsMenu.add(m.toolDemo);
 		
 		//about menu
 		m.aboutMenu = new JMenu(" About ");
