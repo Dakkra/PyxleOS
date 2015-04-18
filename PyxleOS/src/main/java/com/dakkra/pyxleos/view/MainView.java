@@ -13,7 +13,6 @@ import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -27,9 +26,6 @@ public class MainView {
 	public MainController c;
 	public MainModel m;
 	
-	public static final Color BGCOLOR = new Color(17, 17, 17);
-	public static final Color PANELCOLOR = new Color(75, 75, 75);
-	public static final Color SCBLUE = new Color(95, 115, 133);
 	
 	public void createAndShowGUI(){
 		//Use nimbus
@@ -66,9 +62,6 @@ public class MainView {
 			// Intentionally ignore exception (because it should never happen)
 		}
 		
-		JLabel contentDemo = new JLabel("Early Alpha. Nothing has been added yet");
-		
-		m.mainFrame.add(contentDemo);
 		
 		m.mainFrame.setVisible(true);
 		
@@ -79,8 +72,11 @@ public class MainView {
 		//file menu
 		m.fileMenu = new JMenu(" File ");
 		m.fileNew = new JMenuItem("New Project");
+		m.fileNew.addActionListener(new NewProjectListener());
 		m.fileOpen = new JMenuItem("Open");
+		m.fileOpen.addActionListener(new OpenListener());
 		m.fileSave = new JMenuItem("Save");
+		m.fileSave.addActionListener(new SaveListener());
 		m.fileQuit = new JMenuItem("Quit "+m.applicationName);
 		m.fileQuit.addActionListener(new CloseListener());
 		m.fileMenu.add(m.fileNew);
@@ -113,13 +109,27 @@ public class MainView {
 	}
 	
 	private void customizeNimbus(){
+		//Colors
+//		Color bgColor = new Color(64,64,80);
+//		Color baseColor = new Color(64,64,80);
+		Color bgColor = new Color(43,57,71);
+		Color baseColor = new Color(43,57,71);
 		//General Changes
-//		UIManager.put("control", PANELCOLOR);
+		UIManager.put("control", bgColor);
+		UIManager.put("nimbusBase", baseColor);
 		
 	}
+    private static void openURI(URI uri) {
+        if (Desktop.isDesktopSupported()) {
+          try {Desktop.getDesktop().browse(uri);
+          } catch (IOException e) {}} else {}
+
+    }
+	
+//  ***!From here down are listeners!***
 	private class CloseListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	System.out.println("File > Quit: Exitting Application");
+	    	System.out.println("File > Quit: Exitting Application (This is ok)");
 	        System.exit(0);
 	    }
 	}
@@ -159,10 +169,22 @@ public class MainView {
 			openURI(websiteURI);
 	    }
 	}
-    private static void openURI(URI uri) {
-        if (Desktop.isDesktopSupported()) {
-          try {Desktop.getDesktop().browse(uri);
-          } catch (IOException e) {}} else {}
-
-    }
+	private class NewProjectListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	System.out.println("Will create an image");
+	    	//TODO create an image here
+	    }
+	}
+	private class OpenListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	System.out.println("Will open an image");
+	    	//TODO open an image here
+	    }
+	}
+	private class SaveListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	System.out.println("Will save an image");
+	    	//TODO save an image here
+	    }
+	}
 }

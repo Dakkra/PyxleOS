@@ -1,5 +1,6 @@
 package com.dakkra.pyxleos.view;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,8 +55,11 @@ public class AboutView {
 	}
 	
 	private void customizeNimbus(){
+		//Colors
+		Color bgColor = new Color(43,57,71);
+		Color baseColor = new Color(43,57,71);
 		//General Changes
-//		UIManager.put("control", PANELCOLOR);
-		
+		UIManager.put("control", bgColor);
+		UIManager.put("nimbusBase", baseColor);
 	}
 }
