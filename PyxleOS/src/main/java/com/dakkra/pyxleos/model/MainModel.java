@@ -1,7 +1,11 @@
 package com.dakkra.pyxleos.model;
 
 
+import java.awt.Container;
+
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -15,6 +19,13 @@ public class MainModel {
 	public JFrame mainFrame;
 	//main menu bar
 	public JMenuBar menuBar;
+	//main container
+	public Container pane;
+	//main jdpane
+	public JDesktopPane mainJDPane;
+	
+	//internal frames
+	public JInternalFrame textEditor;
 	
 	//file menu
 	public JMenu fileMenu;
@@ -27,7 +38,7 @@ public class MainModel {
 	//tools menu
 	public JMenu toolsMenu;
 	//tools menu items
-	public JMenuItem toolDemo;
+	public JMenuItem toolTextEditor;
 	
 	//about menu
 	public JMenu aboutMenu;

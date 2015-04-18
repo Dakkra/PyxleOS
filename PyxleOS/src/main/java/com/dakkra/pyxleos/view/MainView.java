@@ -12,7 +12,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -50,7 +52,6 @@ public class MainView {
 		m.mainFrame.setMinimumSize(new Dimension(800,600));
 		m.mainFrame.setLocationRelativeTo(null);
 		m.mainFrame.setJMenuBar(m.menuBar);
-		
 		// Icon code
 		Image icon;
 		InputStream input = getClass().getResourceAsStream(
@@ -61,8 +62,15 @@ public class MainView {
 		} catch (IOException e) {
 			// Intentionally ignore exception (because it should never happen)
 		}
+		m.mainJDPane = new JDesktopPane();
 		
+		JInternalFrame frame = new JInternalFrame("Inside Frame",true,true,true,true);
+		frame.setBounds(25, 25, 200, 100);
+		frame.setVisible(true);
 		
+		m.mainJDPane.add(frame);
+		
+		m.mainFrame.add(m.mainJDPane);
 		m.mainFrame.setVisible(true);
 		
 	}
@@ -86,8 +94,8 @@ public class MainView {
 	
 		//tools menu
 		m.toolsMenu = new JMenu(" Tools ");
-		m.toolDemo = new JMenuItem("Fake Tool");
-		m.toolsMenu.add(m.toolDemo);
+		m.toolTextEditor = new JMenuItem("New Text Editor");
+		m.toolsMenu.add(m.toolTextEditor);
 		
 		//about menu
 		m.aboutMenu = new JMenu(" About ");
