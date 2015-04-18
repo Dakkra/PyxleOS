@@ -14,7 +14,6 @@ import java.net.URISyntaxException;
 import javax.imageio.ImageIO;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -66,11 +65,6 @@ public class MainView {
 		}
 		m.mainJDPane = new JDesktopPane();
 		
-		JInternalFrame frame = new JInternalFrame("Inside Frame",true,true,true,true);
-		frame.setBounds(25, 25, 200, 100);
-		frame.setVisible(true);
-		
-		m.mainJDPane.add(frame);
 		
 		m.mainFrame.add(m.mainJDPane);
 		m.mainFrame.setVisible(true);
@@ -219,8 +213,8 @@ public class MainView {
 			this.m = m;
 		}
 		public void actionPerformed(ActionEvent e) {
-	    	TextEdit textEdit = new TextEdit(m);
-	    	
+	    	@SuppressWarnings("unused")
+			TextEdit textEdit = new TextEdit(m);
 	    }
 	}
 }

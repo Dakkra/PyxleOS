@@ -7,19 +7,16 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
 
 
 public class MainModel {
-	public final String version = "0.1.5";
+	public final String version = "0.1.6";
 	public String applicationName = "PyxleOS";
 	public String applicationNameVersion = applicationName+" "+version;
 	//main frame
 	public JFrame mainFrame;
 	//main menu bar
 	public JMenuBar menuBar;
-	//main container
-	public JScrollPane mainScrollPane;
 	//main jdpane
 	public JDesktopPane mainJDPane;
 	
@@ -46,4 +43,5 @@ public class MainModel {
 	public JMenuItem aboutGithub;
 	public JMenuItem aboutSourceForge;
 	public JMenuItem aboutWebsite;
+	
 }
