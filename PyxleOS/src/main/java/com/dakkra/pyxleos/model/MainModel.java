@@ -12,7 +12,7 @@ import javax.swing.JMenuItem;
 
 
 public class MainModel {
-	public final String version = "0.1.4";
+	public final String version = "0.1.5";
 	public String applicationName = "PyxleOS";
 	public String applicationNameVersion = applicationName+" "+version;
 	//main frame

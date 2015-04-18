@@ -29,6 +29,7 @@ public class MainView {
 	public MainModel m;
 	
 	
+	
 	public void createAndShowGUI(){
 		//Use nimbus
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -95,6 +96,7 @@ public class MainView {
 		//tools menu
 		m.toolsMenu = new JMenu(" Tools ");
 		m.toolTextEditor = new JMenuItem("New Text Editor");
+		m.toolTextEditor.addActionListener(new ToolTextEditorListener());
 		m.toolsMenu.add(m.toolTextEditor);
 		
 		//about menu
@@ -124,9 +126,13 @@ public class MainView {
 //		Color baseColor = new Color(64,64,80);
 		Color bgColor = new Color(43,57,71);
 		Color baseColor = new Color(43,57,71);
+		Color baseRedColor = new Color(60,57,71);
 		//General Changes
 		UIManager.put("control", bgColor);
 		UIManager.put("nimbusBase", baseColor);
+		UIManager.put("nimbusOrange", baseColor);
+		UIManager.put("nimbusGreen", baseColor);
+		UIManager.put("nimbusRed", baseRedColor);
 		
 	}
     private static void openURI(URI uri) {
@@ -195,6 +201,13 @@ public class MainView {
 	    public void actionPerformed(ActionEvent e) {
 	    	System.out.println("Will save an image");
 	    	//TODO save an image here
+	    }
+	}
+	public class ToolTextEditorListener implements ActionListener{
+		public MainModel m;
+		public void actionPerformed(ActionEvent e) {
+	    	//Add text editor
+	    	
 	    }
 	}
 }
