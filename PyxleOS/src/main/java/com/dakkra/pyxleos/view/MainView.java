@@ -131,40 +131,37 @@ public class MainView {
 	}
 	private class AboutGithubListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
+	    	
 	    	URI githubURI = null;
-			try {
-				githubURI = new URI("https://github.com/Dakkra/PyxleOS");
-			} catch (URISyntaxException e1) {
-				e1.printStackTrace();
-			}
-	    	openURI(githubURI);
+			try {githubURI = new URI("https://github.com/Dakkra/PyxleOS");
+			} catch (URISyntaxException e1){e1.printStackTrace();}
+	    	
+			openURI(githubURI);
 	    }
 	}
 	private class AboutSourceForgeListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
+	    	
 	    	URI sourceforgeURI = null;
-			try {
-				sourceforgeURI = new URI("https://sourceforge.net/projects/pyxleos/");
-			} catch (URISyntaxException e1) {
-				e1.printStackTrace();
-			}
-	    	openURI(sourceforgeURI);
+			try {sourceforgeURI = new URI("https://sourceforge.net/projects/pyxleos/");
+			} catch (URISyntaxException e1){e1.printStackTrace();}
+	    	
+			openURI(sourceforgeURI);
 	    }
 	}
 	private class AboutWebsiteListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
+	    	
 	    	URI websiteURI = null;
-			try {
-				websiteURI = new URI("http://pyxleos.sourceforge.net/");
-			} catch (URISyntaxException e1) {
-				e1.printStackTrace();}
-	    	openURI(websiteURI);
+			try {websiteURI = new URI("http://pyxleos.sourceforge.net/");
+			} catch (URISyntaxException e1){e1.printStackTrace();}
+	    	
+			openURI(websiteURI);
 	    }
 	}
     private static void openURI(URI uri) {
         if (Desktop.isDesktopSupported()) {
-          try {
-            Desktop.getDesktop().browse(uri);
+          try {Desktop.getDesktop().browse(uri);
           } catch (IOException e) {}} else {}
 
     }
