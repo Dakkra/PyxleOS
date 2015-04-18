@@ -1,12 +1,15 @@
 package com.dakkra.pyxleos.view;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -91,8 +94,11 @@ public class MainView {
 		//about menu
 		m.aboutMenu = new JMenu(" About ");
 		m.aboutGithub = new JMenuItem("Github");
+		m.aboutGithub.addActionListener(new AboutGithubListener());
 		m.aboutSourceForge = new JMenuItem("SourceForge");
+		m.aboutSourceForge.addActionListener(new AboutSourceForgeListener());
 		m.aboutWebsite = new JMenuItem("Website");
+		m.aboutWebsite.addActionListener(new AboutWebsiteListener());
 		m.aboutAbout = new JMenuItem("About "+m.applicationNameVersion);
 		m.aboutAbout.addActionListener(new AboutListener());
 		m.aboutMenu.add(m.aboutWebsite);
@@ -123,5 +129,43 @@ public class MainView {
 	    	aboutView.showAboutView();
 	    }
 	}
+	private class AboutGithubListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	URI githubURI = null;
+			try {
+				githubURI = new URI("https://github.com/Dakkra/PyxleOS");
+			} catch (URISyntaxException e1) {
+				e1.printStackTrace();
+			}
+	    	openURI(githubURI);
+	    }
+	}
+	private class AboutSourceForgeListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	URI sourceforgeURI = null;
+			try {
+				sourceforgeURI = new URI("https://sourceforge.net/projects/pyxleos/");
+			} catch (URISyntaxException e1) {
+				e1.printStackTrace();
+			}
+	    	openURI(sourceforgeURI);
+	    }
+	}
+	private class AboutWebsiteListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	URI websiteURI = null;
+			try {
+				websiteURI = new URI("http://pyxleos.sourceforge.net/");
+			} catch (URISyntaxException e1) {
+				e1.printStackTrace();}
+	    	openURI(websiteURI);
+	    }
+	}
+    private static void openURI(URI uri) {
+        if (Desktop.isDesktopSupported()) {
+          try {
+            Desktop.getDesktop().browse(uri);
+          } catch (IOException e) {}} else {}
 
+    }
 }

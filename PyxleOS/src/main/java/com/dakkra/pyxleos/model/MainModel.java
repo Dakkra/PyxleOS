@@ -1,5 +1,6 @@
 package com.dakkra.pyxleos.model;
 
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -7,7 +8,7 @@ import javax.swing.JMenuItem;
 
 
 public class MainModel {
-	public final String version = "0.1.2";
+	public final String version = "0.1.3";
 	public String applicationName = "PyxleOS";
 	public String applicationNameVersion = applicationName+" "+version;
 	//main frame
