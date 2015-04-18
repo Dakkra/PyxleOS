@@ -1,14 +1,13 @@
 package com.dakkra.pyxleos.model;
 
 
-import java.awt.Container;
-
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 
 
 public class MainModel {
@@ -20,7 +19,7 @@ public class MainModel {
 	//main menu bar
 	public JMenuBar menuBar;
 	//main container
-	public Container pane;
+	public JScrollPane mainScrollPane;
 	//main jdpane
 	public JDesktopPane mainJDPane;
 	

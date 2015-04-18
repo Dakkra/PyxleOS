@@ -16,8 +16,8 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.dakkra.pyxleos.model.MainModel;
 
 public class AboutView {
-	public MainModel m = new MainModel();
-	public void showAboutView(){
+	public MainModel m;
+	public void showAboutView(MainModel m){
 		//use ninbus
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		    if ("Nimbus".equals(info.getName())) {
@@ -35,7 +35,7 @@ public class AboutView {
 		JFrame aboutViewFrame = new JFrame("About PyxleOS");
 		aboutViewFrame.setMinimumSize(new Dimension(390,170));
 		aboutViewFrame.setSize(390, 170);
-		aboutViewFrame.setLocationRelativeTo(null);
+		aboutViewFrame.setLocationRelativeTo(m.mainFrame);
 		aboutViewFrame.setResizable(true);
 		aboutViewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		

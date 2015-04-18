@@ -23,6 +23,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.dakkra.pyxleos.controller.MainController;
 import com.dakkra.pyxleos.model.MainModel;
+import com.dakkra.pyxleos.modules.TextEdit;
 
 public class MainView {
 	public MainController c;
@@ -82,9 +83,9 @@ public class MainView {
 		m.fileMenu = new JMenu(" File ");
 		m.fileNew = new JMenuItem("New Project");
 		m.fileNew.addActionListener(new NewProjectListener());
-		m.fileOpen = new JMenuItem("Open");
+		m.fileOpen = new JMenuItem("Open Project");
 		m.fileOpen.addActionListener(new OpenListener());
-		m.fileSave = new JMenuItem("Save");
+		m.fileSave = new JMenuItem("Save Project");
 		m.fileSave.addActionListener(new SaveListener());
 		m.fileQuit = new JMenuItem("Quit "+m.applicationName);
 		m.fileQuit.addActionListener(new CloseListener());
@@ -96,7 +97,7 @@ public class MainView {
 		//tools menu
 		m.toolsMenu = new JMenu(" Tools ");
 		m.toolTextEditor = new JMenuItem("New Text Editor");
-		m.toolTextEditor.addActionListener(new ToolTextEditorListener());
+		m.toolTextEditor.addActionListener(new ToolTextEditorListener(m));
 		m.toolsMenu.add(m.toolTextEditor);
 		
 		//about menu
@@ -108,7 +109,7 @@ public class MainView {
 		m.aboutWebsite = new JMenuItem("Website");
 		m.aboutWebsite.addActionListener(new AboutWebsiteListener());
 		m.aboutAbout = new JMenuItem("About "+m.applicationNameVersion);
-		m.aboutAbout.addActionListener(new AboutListener());
+		m.aboutAbout.addActionListener(new AboutListener(m));
 		m.aboutMenu.add(m.aboutWebsite);
 		m.aboutMenu.add(m.aboutGithub);
 		m.aboutMenu.add(m.aboutSourceForge);
@@ -127,12 +128,16 @@ public class MainView {
 		Color bgColor = new Color(43,57,71);
 		Color baseColor = new Color(43,57,71);
 		Color baseRedColor = new Color(60,57,71);
+		
 		//General Changes
 		UIManager.put("control", bgColor);
 		UIManager.put("nimbusBase", baseColor);
 		UIManager.put("nimbusOrange", baseColor);
 		UIManager.put("nimbusGreen", baseColor);
 		UIManager.put("nimbusRed", baseRedColor);
+		UIManager.put("nimbusLightBackground", baseColor);
+		UIManager.put("text", Color.WHITE);
+		UIManager.put("nimbusDisabledText", Color.WHITE);
 		
 	}
     private static void openURI(URI uri) {
@@ -150,9 +155,13 @@ public class MainView {
 	    }
 	}
 	private class AboutListener implements ActionListener{
+		MainModel m;
+		public AboutListener(MainModel m){
+			this.m = m;
+		}
 	    public void actionPerformed(ActionEvent e) {
 	    	AboutView aboutView = new AboutView();
-	    	aboutView.showAboutView();
+	    	aboutView.showAboutView(m);
 	    }
 	}
 	private class AboutGithubListener implements ActionListener{
@@ -203,10 +212,14 @@ public class MainView {
 	    	//TODO save an image here
 	    }
 	}
-	public class ToolTextEditorListener implements ActionListener{
-		public MainModel m;
+	private class ToolTextEditorListener implements ActionListener{
+		MainModel m;
+		
+		public ToolTextEditorListener(MainModel m) {
+			this.m = m;
+		}
 		public void actionPerformed(ActionEvent e) {
-	    	//Add text editor
+	    	TextEdit textEdit = new TextEdit(m);
 	    	
 	    }
 	}
