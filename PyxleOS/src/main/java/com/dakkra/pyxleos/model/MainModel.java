@@ -7,6 +7,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 
 
 public class MainModel {
@@ -17,6 +18,8 @@ public class MainModel {
 	public JFrame mainFrame;
 	//main menu bar
 	public JMenuBar menuBar;
+	//main scroll pane
+	public JScrollPane mainScrollPane;
 	//main jdpane
 	public JDesktopPane mainJDPane;
 	

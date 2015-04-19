@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -64,9 +65,10 @@ public class MainView {
 			// Intentionally ignore exception (because it should never happen)
 		}
 		m.mainJDPane = new JDesktopPane();
+		m.mainScrollPane = new JScrollPane(m.mainJDPane);
 		
-		
-		m.mainFrame.add(m.mainJDPane);
+		m.mainScrollPane.add(m.mainJDPane);
+		m.mainFrame.add(m.mainScrollPane);
 		m.mainFrame.setVisible(true);
 		
 	}
