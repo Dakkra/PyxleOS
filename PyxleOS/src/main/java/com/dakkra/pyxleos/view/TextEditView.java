@@ -3,11 +3,7 @@ package com.dakkra.pyxleos.view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -21,20 +17,26 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import com.dakkra.pyxleos.controller.TextEditController;
 import com.dakkra.pyxleos.model.MainModel;
 import com.dakkra.pyxleos.model.TextEditModel;
+import com.dakkra.pyxleos.util.TextEditorFilter;
 
 public class TextEditView {
 	MainModel m;
 	TextEditModel tem;
-	public void createAndShowGUI(MainModel m,TextEditModel tem){
+	TextEditController tec;
+	public void createAndShowGUI(MainModel m,TextEditModel tem, TextEditController tec){
 		this.m = m;
 		this.tem = tem;
+		this.tec = tec;
 		
 		//Menu bar
 		tem.menuBar = new JMenuBar();
 		//file menu
 		tem.fileMenu = new JMenu(" File ");
+		tem.fileNew = new JMenuItem("New");
+		tem.fileNew.addActionListener(new NewListener());
 		tem.fileOpen = new JMenuItem("Open");
 		tem.fileOpen.addActionListener(new OpenListener());
 		tem.fileReopen = new JMenuItem("Reopen");
@@ -43,6 +45,7 @@ public class TextEditView {
 		tem.fileSave.addActionListener(new SaveListener());
 		tem.fileExit = new JMenuItem("Exit");
 		tem.fileExit.addActionListener(new ExitListener());
+		tem.fileMenu.add(tem.fileNew);
 		tem.fileMenu.add(tem.fileOpen);
 		tem.fileMenu.add(tem.fileReopen);
 		tem.fileReopen.setEnabled(false);
@@ -76,41 +79,29 @@ public class TextEditView {
 		
 		
 	}
+	private class NewListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	tem.textArea.setText(null);
+	    	tem.fileURI = null;
+	    	tem.fileName = null;
+	    	tem.fileReopen.setEnabled(false);
+	    	
+	    }
+	}
 	private class OpenListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	JFileChooser openJFC = new JFileChooser();
-	    	int returnval = openJFC.showOpenDialog(openJFC);
+	    	tem.openJFC = new JFileChooser();
+	    	tem.openJFC.setFileFilter(new TextEditorFilter());
+	    	int returnval = tem.openJFC.showOpenDialog(tem.openJFC);
 	    	if (returnval == JFileChooser.APPROVE_OPTION){
-	    		File textFile = openJFC.getSelectedFile();
+	    		if (!TextEditorFilter.supportedType(tem.openJFC.getSelectedFile())){
+	    			JOptionPane.showMessageDialog(null, "Invalid file!");
+	    			return;
+	    		}
+	    		File textFile = tem.openJFC.getSelectedFile();
 	    		tem.fileName = textFile.getName();
 	    		tem.fileURI = textFile.getAbsolutePath();
-	    		System.out.println("Opening "+tem.fileName);
-	    		FileReader reader = null;
-	    		try {reader = new FileReader(textFile);} 
-	    		catch (FileNotFoundException e1) {e1.printStackTrace();}
-	    		BufferedReader bufferedReader = new BufferedReader(reader);
-	    		String fullText = "";
-	    		String line;
-	    		
-	    		try {
-	    			if (bufferedReader.readLine() != null){
-						while((line = bufferedReader.readLine()) != null){
-							fullText += (line+"\n");
-							tem.textArea.setText(fullText);
-						}
-	    			}else{
-	    				tem.textArea.setText(null);
-	    			}
-	    		}
-	    		catch (IOException e1) {e1.printStackTrace();}
-	    		finally{
-	    		try {reader.close();}
-	    		catch (IOException e1) {e1.printStackTrace();}
-	    		try {bufferedReader.close();}
-	    		catch (IOException e1) {e1.printStackTrace();}
-	    		}
-	    		tem.textEditFrame.setTitle(tem.fileName);
-	    		tem.fileReopen.setEnabled(true);
+	    		tec.readTextFile();
 	    		
 	    	}
 	    	
@@ -121,9 +112,28 @@ public class TextEditView {
 	    	if (tem.fileURI != null){
 	    		File saveFile = new File(tem.fileURI);
 	    		String fullText = tem.textArea.getText();
-	    		
-	    		
+	    		try {FileWriter writer = new FileWriter(saveFile);
+	    			writer.write(""+fullText);
+	    			writer.close();
+	    		}
+	    		catch (IOException e1) {e1.printStackTrace();}
+	    		tem.fileReopen.setEnabled(true);
 	    	}else{
+	    		String fullText = tem.textArea.getText();
+	    		tem.saveJFC = new JFileChooser();
+	    		tem.saveJFC.setFileFilter(new TextEditorFilter());
+	    		int returnval = tem.saveJFC.showSaveDialog(null);
+	    		if (returnval == JFileChooser.APPROVE_OPTION){
+	    			try(FileWriter fw = new FileWriter(tem.saveJFC.getSelectedFile()+".txt")){
+	    				fw.write(""+fullText);
+	    				tem.fileURI = tem.saveJFC.getSelectedFile().getAbsolutePath()+".txt";
+	    				tem.fileName = tem.saveJFC.getSelectedFile().getName()+".txt";
+	    				tem.textEditFrame.setTitle(tem.fileName);
+	    				tem.fileReopen.setEnabled(true);
+	    			} 
+	    			catch (IOException e1) {e1.printStackTrace();}
+	    			
+	    		}else{return;}
 	    		
 	    	}
 	    }
@@ -136,35 +146,7 @@ public class TextEditView {
 	}
 	private class ReopenListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-    		File textFile = new File(tem.fileURI);
-    		tem.fileName = textFile.getName();
-    		tem.fileURI = textFile.getAbsolutePath();
-    		System.out.println("Opening "+tem.fileName);
-    		FileReader reader = null;
-    		try {reader = new FileReader(textFile);} 
-    		catch (FileNotFoundException e1) {e1.printStackTrace();}
-    		BufferedReader bufferedReader = new BufferedReader(reader);
-    		String fullText = "";
-    		String line;
-    		
-    		try {
-    			if (bufferedReader.readLine() != null){
-					while((line = bufferedReader.readLine()) != null){
-						fullText += (line+"\n");
-						tem.textArea.setText(fullText);
-					}
-    			}else{
-    				tem.textArea.setText(null);
-    			}
-    		}
-    		catch (IOException e1) {e1.printStackTrace();}
-    		finally{
-    		try {reader.close();}
-    		catch (IOException e1) {e1.printStackTrace();}
-    		try {bufferedReader.close();}
-    		catch (IOException e1) {e1.printStackTrace();}
-    		}
-    		tem.textEditFrame.setTitle(tem.fileName);
+	    	tec.readTextFile();
 	    	
 	    }
 	}
