@@ -1,8 +1,11 @@
 package com.dakkra.pyxleos;
 
+import java.io.InputStream;
+
 import com.dakkra.pyxleos.controller.MainController;
 import com.dakkra.pyxleos.model.MainModel;
 import com.dakkra.pyxleos.modules.TextEdit;
+import com.dakkra.pyxleos.util.Util;
 import com.dakkra.pyxleos.view.MainView;
 
 public class Main {
@@ -15,7 +18,7 @@ public class Main {
 		MainModel m = new MainModel();
 		MainController c = new MainController();
 		
-		//Assign the sub-main classes to point to the mains objects
+		//Assign the classes to point to the main class objects
 		v.c = c;
 		v.m = m;
 		c.m = m;
@@ -25,7 +28,9 @@ public class Main {
 		System.out.println("Displaying GUI");
 		v.createAndShowGUI();
 		TextEdit openingNotes = new TextEdit(m);
-		openingNotes.setText("Welcome to PyxleOS!\n\nIn this version, a text editor was added\n\nMade with love and Java,\n	Chris Soderquist");
+		InputStream input = Main.class.getResourceAsStream("/greeting.txt");
+		String content = Util.read(input);
+		openingNotes.setText(content);
 	}
 
 }

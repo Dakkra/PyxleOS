@@ -56,7 +56,7 @@ public class MainView {
 		// Icon code
 		Image icon;
 		InputStream input = getClass().getResourceAsStream(
-				"/Icon.png");
+				"/icon.png");
 		try {
 			icon = ImageIO.read(input);
 			m.mainFrame.setIconImage(icon);

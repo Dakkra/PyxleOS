@@ -1,0 +1,8 @@
+Welcome to PyxleOS!
+
+What's new in this version:
+
+Text Editor now reads txt files
+
+Made with love and Java,
+	Chris Soderquist
