@@ -67,7 +67,6 @@ public class MainView {
 		m.mainJDPane = new JDesktopPane();
 		m.mainScrollPane = new JScrollPane(m.mainJDPane);
 		
-		m.mainScrollPane.add(m.mainJDPane);
 		m.mainFrame.add(m.mainScrollPane);
 		m.mainFrame.setVisible(true);
 		
