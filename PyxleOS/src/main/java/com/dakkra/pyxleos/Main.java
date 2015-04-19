@@ -1,5 +1,6 @@
 package com.dakkra.pyxleos;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import com.dakkra.pyxleos.controller.MainController;
@@ -30,6 +31,8 @@ public class Main {
 		TextEdit openingNotes = new TextEdit(m);
 		InputStream input = Main.class.getResourceAsStream("/greeting.txt");
 		String content = Util.read(input);
+		try {input.close();}
+		catch (IOException e) {e.printStackTrace();}
 		openingNotes.setText(content);
 	}
 
