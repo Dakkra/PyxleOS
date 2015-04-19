@@ -96,6 +96,8 @@ public class MainView {
 		
 		//about menu
 		m.aboutMenu = new JMenu(" About ");
+		m.aboutTrello = new JMenuItem("Trello");
+		m.aboutTrello.addActionListener(new AboutTrelloListener());
 		m.aboutGithub = new JMenuItem("Github");
 		m.aboutGithub.addActionListener(new AboutGithubListener());
 		m.aboutSourceForge = new JMenuItem("SourceForge");
@@ -105,6 +107,7 @@ public class MainView {
 		m.aboutAbout = new JMenuItem("About "+m.applicationNameVersion);
 		m.aboutAbout.addActionListener(new AboutListener(m));
 		m.aboutMenu.add(m.aboutWebsite);
+		m.aboutMenu.add(m.aboutTrello);
 		m.aboutMenu.add(m.aboutGithub);
 		m.aboutMenu.add(m.aboutSourceForge);
 		m.aboutMenu.add(m.aboutAbout);
@@ -156,6 +159,16 @@ public class MainView {
 	    public void actionPerformed(ActionEvent e) {
 	    	AboutView aboutView = new AboutView();
 	    	aboutView.showAboutView(m);
+	    }
+	}
+	private class AboutTrelloListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	
+	    	URI trelloURI = null;
+			try {trelloURI = new URI("https://trello.com/b/uhTWzdfO/pyxleos");
+			} catch (URISyntaxException e1){e1.printStackTrace();}
+	    	
+			openURI(trelloURI);
 	    }
 	}
 	private class AboutGithubListener implements ActionListener{

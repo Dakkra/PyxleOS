@@ -10,7 +10,7 @@ import javax.swing.JMenuItem;
 
 
 public class MainModel {
-	public final String version = "0.1.8";
+	public final String version = "0.1.9";
 	public String applicationName = "PyxleOS";
 	public String applicationNameVersion = applicationName+" "+version;
 	//main frame
@@ -40,6 +40,7 @@ public class MainModel {
 	public JMenu aboutMenu;
 	//about menu item
 	public JMenuItem aboutAbout;
+	public JMenuItem aboutTrello;
 	public JMenuItem aboutGithub;
 	public JMenuItem aboutSourceForge;
 	public JMenuItem aboutWebsite;
