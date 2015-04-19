@@ -2,13 +2,13 @@ package com.dakkra.pyxleos.util;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
@@ -18,6 +18,8 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 	private static final long serialVersionUID = -6600842930646363073L;
 
 	private ComponentListener childComponentHandler = new ChildComponentHandler();
+	
+	private boolean ready;
 
 	@Override
 	protected void addImpl(Component comp, Object constraints, int index) {
@@ -38,7 +40,9 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 			Rectangle cBounds = component.getBounds();
 			SwingUtilities.computeUnion(cBounds.x, cBounds.y, cBounds.width, cBounds.height, newBounds);
 		}
-
+		
+		//viewport.scrollRectToVisible(contentRect);
+		
 //		if (!newBounds.getLocation().equals(oldBounds.getLocation())) {
 //			int deltaX = newBounds.x - oldBounds.x;
 //			int deltaY = newBounds.y - oldBounds.y;
@@ -54,6 +58,8 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 //			setLocation(newBounds.getLocation());
 //		}
 		setPreferredSize(newBounds.getSize());
+		
+		ready = true;
 	}
 
 	// public Dimension getPreferredSize() {
@@ -159,7 +165,7 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 	 *         its own.
 	 */
 	public boolean getScrollableTracksViewportWidth() {
-		return false;
+		return ready == false;
 	}
 
 	/**
@@ -175,7 +181,7 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 	 *         its own.
 	 */
 	public boolean getScrollableTracksViewportHeight() {
-		return false;
+		return ready == false;
 	}
 
 	private class ChildComponentHandler implements ComponentListener {

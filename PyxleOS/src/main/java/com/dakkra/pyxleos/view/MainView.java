@@ -23,6 +23,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.dakkra.pyxleos.controller.MainController;
 import com.dakkra.pyxleos.model.MainModel;
 import com.dakkra.pyxleos.modules.TextEdit;
+import com.dakkra.pyxleos.util.DesktopPainter;
 import com.dakkra.pyxleos.util.PxDesktopPane;
 
 public class MainView {
@@ -139,6 +140,7 @@ public class MainView {
 		UIManager.put("text", Color.WHITE);
 		UIManager.put("nimbusDisabledText", Color.WHITE);
 		
+		UIManager.put("DesktopPane[Enabled].backgroundPainter", new DesktopPainter());
 	}
     private static void openURI(URI uri) {
         if (Desktop.isDesktopSupported()) {
