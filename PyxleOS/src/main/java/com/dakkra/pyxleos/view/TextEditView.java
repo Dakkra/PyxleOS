@@ -117,22 +117,9 @@ public class TextEditView {
 	private class SaveListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
 	    	if (tem.fileURI != null){
-	    		System.out.println(tem.fileURI);
-	    		File writeFile = new File(tem.fileURI);
-	    		System.out.println("Saving "+tem.fileName);
-	    		FileWriter writer = null;
-	    		try {writer = new FileWriter(writeFile);}
-	    		catch (IOException e1) {e1.printStackTrace();}
-	    		BufferedWriter bufferedWriter = new BufferedWriter(writer);
+	    		File saveFile = new File(tem.fileURI);
 	    		String fullText = tem.textArea.getText();
-	    		try {bufferedWriter.write(fullText);}
-	    		catch (IOException e1) {e1.printStackTrace();}
-	    		finally{
-	    			try {writer.close();}
-	    			catch (IOException e1) {e1.printStackTrace();}
-	    			try {bufferedWriter.close();}
-	    			catch (IOException e1) {e1.printStackTrace();}
-	    		}
+	    		
 	    		
 	    	}else{
 	    		
