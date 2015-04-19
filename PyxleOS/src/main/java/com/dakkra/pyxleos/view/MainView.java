@@ -12,7 +12,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -24,6 +23,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.dakkra.pyxleos.controller.MainController;
 import com.dakkra.pyxleos.model.MainModel;
 import com.dakkra.pyxleos.modules.TextEdit;
+import com.dakkra.pyxleos.util.PxDesktopPane;
 
 public class MainView {
 	public MainController c;
@@ -64,8 +64,10 @@ public class MainView {
 		} catch (IOException e) {
 			// Intentionally ignore exception (because it should never happen)
 		}
-		m.mainJDPane = new JDesktopPane();
+
+		m.mainJDPane = new PxDesktopPane();
 		m.mainScrollPane = new JScrollPane(m.mainJDPane);
+		m.mainScrollPane.getViewport().setBackground(Color.RED.darker());
 		
 		m.mainFrame.add(m.mainScrollPane);
 		m.mainFrame.setVisible(true);
