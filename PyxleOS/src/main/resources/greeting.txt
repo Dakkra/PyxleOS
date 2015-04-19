@@ -4,7 +4,7 @@ What's new in this version
 --------------------------
 
 Text Editor is now complete!
-You can now crate new files, open, reopen, and save text files.
+You can now create new files, open, reopen, and save text files.
 Also, you can change the text size on screen under the options menu.
 
 Made with love and Java,
