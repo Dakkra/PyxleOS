@@ -2,6 +2,7 @@ package com.dakkra.pyxleos;
 
 import com.dakkra.pyxleos.controller.MainController;
 import com.dakkra.pyxleos.model.MainModel;
+import com.dakkra.pyxleos.modules.TextEdit;
 import com.dakkra.pyxleos.view.MainView;
 
 public class Main {
@@ -23,6 +24,8 @@ public class Main {
 		//Start GUI
 		System.out.println("Displaying GUI");
 		v.createAndShowGUI();
+		TextEdit openingNotes = new TextEdit(m);
+		openingNotes.setText("Welcome to PyxleOS!\n\nIn this version, a text editor was added\n\nMade with love and Java,\n	Chris Soderquist");
 	}
 
 }

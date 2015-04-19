@@ -1,8 +1,13 @@
 package com.dakkra.pyxleos.view;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -10,6 +15,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -53,6 +59,7 @@ public class TextEditView {
 		
 		//Setup text area (inside scrollpane so it can scroll)
 		tem.textArea = new JTextArea();
+		tem.textArea.setFont(tem.textAreaFont);
 		tem.textAreaPane = new JScrollPane(tem.textArea);
 		
 		tem.textEditFrame.add(tem.textAreaPane);
@@ -65,14 +72,28 @@ public class TextEditView {
 	}
 	private class OpenListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	System.out.println("Will open a text file");
 	    	JFileChooser openJFC = new JFileChooser();
 	    	int returnval = openJFC.showOpenDialog(openJFC);
 	    	if (returnval == JFileChooser.APPROVE_OPTION){
-	    		File textFile;
-	    		textFile = openJFC.getSelectedFile();
+	    		File textFile = openJFC.getSelectedFile();
 	    		String name = textFile.getName();
-	    		System.out.println(name);
+	    		System.out.println("Opening "+name);
+	    		FileReader reader = null;
+	    		try {reader = new FileReader(textFile);} 
+	    		catch (FileNotFoundException e1) {e1.printStackTrace();}
+	    		BufferedReader bufferedReader = new BufferedReader(reader);
+	    		String fullText = "";
+	    		String line;
+	    		
+	    		try {
+					while((line = bufferedReader.readLine()) != null){
+						fullText += (line+"\n");
+						tem.textArea.setText(fullText);
+					}}
+	    		catch (IOException e1) {e1.printStackTrace();}
+	    		
+	    		
+	    		
 	    	}
 	    	
 	    }
@@ -85,14 +106,15 @@ public class TextEditView {
 	}
 	private class ExitListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	
+	    	tem.textEditFrame.dispose();
 	    	
 	    }
 	}
 	private class OptionsTextSizeListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	System.out.println("Will change text size");
-	    	//TODO open an image here
+	    	//TODO error handling
+	    	tem.textAreaFont = new Font("Arial",Font.PLAIN,Integer.parseInt(JOptionPane.showInputDialog("Input a new font size:",tem.textAreaFont.getSize())));
+	    	tem.textArea.setFont(tem.textAreaFont);
 	    }
 	}
 }

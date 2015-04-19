@@ -190,19 +190,19 @@ public class MainView {
 	}
 	private class NewProjectListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	System.out.println("Will create an image");
+	    	System.out.println("Will create a project");
 	    	//TODO create an image here
 	    }
 	}
 	private class OpenListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	System.out.println("Will open an image");
+	    	System.out.println("Will open a project");
 	    	//TODO open an image here
 	    }
 	}
 	private class SaveListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	System.out.println("Will save an image");
+	    	System.out.println("Will save a project");
 	    	//TODO save an image here
 	    }
 	}
