@@ -12,12 +12,14 @@ import javax.swing.JTextArea;
 public class TextEditModel {
 	public JInternalFrame textEditFrame;
 	public String fileURI = null;
+	public String fileName;
 	public Font textAreaFont = new Font("Arial",Font.PLAIN,16);
 	public JTextArea textArea;
 	public JScrollPane textAreaPane;
 	public JMenuBar menuBar;
 	public JMenu fileMenu;
 	public JMenuItem fileOpen;
+	public JMenuItem fileReopen;
 	public JMenuItem fileSave;
 	public JMenuItem fileExit;
 	public JMenu optionsMenu;

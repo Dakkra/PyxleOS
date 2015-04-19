@@ -4,9 +4,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
@@ -35,6 +37,8 @@ public class TextEditView {
 		tem.fileMenu = new JMenu(" File ");
 		tem.fileOpen = new JMenuItem("Open");
 		tem.fileOpen.addActionListener(new OpenListener());
+		tem.fileReopen = new JMenuItem("Reopen");
+		tem.fileReopen.addActionListener(new ReopenListener());
 		tem.fileSave = new JMenuItem("Save");
 		tem.fileSave.addActionListener(new SaveListener());
 		tem.fileExit = new JMenuItem("Exit");
@@ -76,8 +80,9 @@ public class TextEditView {
 	    	int returnval = openJFC.showOpenDialog(openJFC);
 	    	if (returnval == JFileChooser.APPROVE_OPTION){
 	    		File textFile = openJFC.getSelectedFile();
-	    		String name = textFile.getName();
-	    		System.out.println("Opening "+name);
+	    		tem.fileName = textFile.getName();
+	    		tem.fileURI = textFile.getAbsolutePath();
+	    		System.out.println("Opening "+tem.fileName);
 	    		FileReader reader = null;
 	    		try {reader = new FileReader(textFile);} 
 	    		catch (FileNotFoundException e1) {e1.printStackTrace();}
@@ -86,12 +91,23 @@ public class TextEditView {
 	    		String line;
 	    		
 	    		try {
-					while((line = bufferedReader.readLine()) != null){
-						fullText += (line+"\n");
-						tem.textArea.setText(fullText);
-					}}
+	    			if (bufferedReader.readLine() != null){
+						while((line = bufferedReader.readLine()) != null){
+							fullText += (line+"\n");
+							tem.textArea.setText(fullText);
+						}
+	    			}else{
+	    				tem.textArea.setText(null);
+	    			}
+	    		}
 	    		catch (IOException e1) {e1.printStackTrace();}
-	    		
+	    		finally{
+	    		try {reader.close();}
+	    		catch (IOException e1) {e1.printStackTrace();}
+	    		try {bufferedReader.close();}
+	    		catch (IOException e1) {e1.printStackTrace();}
+	    		}
+	    		tem.textEditFrame.setTitle(tem.fileName);
 	    		
 	    		
 	    	}
@@ -100,13 +116,39 @@ public class TextEditView {
 	}
 	private class SaveListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	System.out.println("Will save a text file");
-	    	//TODO save a text file
+	    	if (tem.fileURI != null){
+	    		System.out.println(tem.fileURI);
+	    		File writeFile = new File(tem.fileURI);
+	    		System.out.println("Saving "+tem.fileName);
+	    		FileWriter writer = null;
+	    		try {writer = new FileWriter(writeFile);}
+	    		catch (IOException e1) {e1.printStackTrace();}
+	    		BufferedWriter bufferedWriter = new BufferedWriter(writer);
+	    		String fullText = tem.textArea.getText();
+	    		try {bufferedWriter.write(fullText);}
+	    		catch (IOException e1) {e1.printStackTrace();}
+	    		finally{
+	    			try {writer.close();}
+	    			catch (IOException e1) {e1.printStackTrace();}
+	    			try {bufferedWriter.close();}
+	    			catch (IOException e1) {e1.printStackTrace();}
+	    		}
+	    		
+	    	}else{
+	    		
+	    	}
 	    }
 	}
 	private class ExitListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
 	    	tem.textEditFrame.dispose();
+	    	
+	    }
+	}
+	private class ReopenListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	System.out.println("Yet to be implemented");
+	    	//TODO implement reopen
 	    	
 	    }
 	}
