@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import com.dakkra.pyxleos.controller.MainController;
 import com.dakkra.pyxleos.model.MainModel;
+import com.dakkra.pyxleos.modules.Canvas;
 import com.dakkra.pyxleos.modules.TextEdit;
 import com.dakkra.pyxleos.util.Util;
 import com.dakkra.pyxleos.view.MainView;
@@ -34,6 +35,7 @@ public class Main {
 		try {input.close();}
 		catch (IOException e) {e.printStackTrace();}
 		openingNotes.setText(content);
+		Canvas canvas = new Canvas(m);
 	}
 
 }

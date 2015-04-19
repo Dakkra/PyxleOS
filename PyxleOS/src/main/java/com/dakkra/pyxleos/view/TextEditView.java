@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -64,7 +63,7 @@ public class TextEditView {
 		tem.textEditFrame = new JInternalFrame("TextEdit",true,true,true,true);
 		tem.textEditFrame.setBounds(10, 10, 500, 400);
 		tem.textEditFrame.setJMenuBar(tem.menuBar);
-		tem.textEditFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		tem.textEditFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		
 		//Setup text area (inside scrollpane so it can scroll)
 		tem.textArea = new JTextArea();
@@ -112,6 +111,7 @@ public class TextEditView {
 	    	if (tem.fileURI != null){
 	    		File saveFile = new File(tem.fileURI);
 	    		String fullText = tem.textArea.getText();
+	    		System.out.println("Saving "+tem.fileName);
 	    		try {FileWriter writer = new FileWriter(saveFile);
 	    			writer.write(""+fullText);
 	    			writer.close();
@@ -124,6 +124,7 @@ public class TextEditView {
 	    		tem.saveJFC.setFileFilter(new TextEditorFilter());
 	    		int returnval = tem.saveJFC.showSaveDialog(null);
 	    		if (returnval == JFileChooser.APPROVE_OPTION){
+	    			System.out.println("Saving "+tem.saveJFC.getSelectedFile().getName()+".txt");
 	    			try(FileWriter fw = new FileWriter(tem.saveJFC.getSelectedFile()+".txt")){
 	    				fw.write(""+fullText);
 	    				tem.fileURI = tem.saveJFC.getSelectedFile().getAbsolutePath()+".txt";

@@ -10,6 +10,7 @@ public class TextEdit {
 	TextEditModel tem;
 	TextEditController tec;
 	public TextEdit(MainModel m){
+		System.out.println("A new TextEdit was created");
 		this.m = m;
 		TextEditView v = new TextEditView();
 		tec = new TextEditController();
