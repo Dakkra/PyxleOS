@@ -25,6 +25,7 @@ public class TextEditModel {
 	public JMenuItem fileOpen;
 	public JMenuItem fileReopen;
 	public JMenuItem fileSave;
+	public JMenuItem fileSaveAs;
 	public JMenuItem fileExit;
 	public JMenu optionsMenu;
 	public JMenuItem optionsTextSize;

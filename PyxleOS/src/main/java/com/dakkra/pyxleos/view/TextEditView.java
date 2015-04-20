@@ -4,8 +4,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
@@ -42,6 +40,8 @@ public class TextEditView {
 		tem.fileReopen.addActionListener(new ReopenListener());
 		tem.fileSave = new JMenuItem("Save");
 		tem.fileSave.addActionListener(new SaveListener());
+		tem.fileSaveAs = new JMenuItem("Save As");
+		tem.fileSaveAs.addActionListener(new SaveAsListener());
 		tem.fileExit = new JMenuItem("Exit");
 		tem.fileExit.addActionListener(new ExitListener());
 		tem.fileMenu.add(tem.fileNew);
@@ -49,6 +49,7 @@ public class TextEditView {
 		tem.fileMenu.add(tem.fileReopen);
 		tem.fileReopen.setEnabled(false);
 		tem.fileMenu.add(tem.fileSave);
+		tem.fileMenu.add(tem.fileSaveAs);
 		tem.fileMenu.add(tem.fileExit);
 		//options menu
 		tem.optionsMenu = new JMenu(" Options ");
@@ -84,6 +85,7 @@ public class TextEditView {
 	    	tem.fileURI = null;
 	    	tem.fileName = null;
 	    	tem.fileReopen.setEnabled(false);
+	    	tem.textEditFrame.setTitle("TextEdit");
 	    	
 	    }
 	}
@@ -108,37 +110,21 @@ public class TextEditView {
 	}
 	private class SaveListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
-	    	if (tem.fileURI != null){
-	    		File saveFile = new File(tem.fileURI);
-	    		String fullText = tem.textArea.getText();
-	    		System.out.println("Saving "+tem.fileName);
-	    		try {FileWriter writer = new FileWriter(saveFile);
-	    			writer.write(""+fullText);
-	    			writer.close();
-	    		}
-	    		catch (IOException e1) {e1.printStackTrace();}
-	    		tem.fileReopen.setEnabled(true);
-	    	}else{
-	    		String fullText = tem.textArea.getText();
-	    		tem.saveJFC = new JFileChooser();
-	    		tem.saveJFC.setFileFilter(new TextEditorFilter());
-	    		int returnval = tem.saveJFC.showSaveDialog(null);
-	    		if (returnval == JFileChooser.APPROVE_OPTION){
-	    			System.out.println("Saving "+tem.saveJFC.getSelectedFile().getName()+".txt");
-	    			try(FileWriter fw = new FileWriter(tem.saveJFC.getSelectedFile()+".txt")){
-	    				fw.write(""+fullText);
-	    				tem.fileURI = tem.saveJFC.getSelectedFile().getAbsolutePath()+".txt";
-	    				tem.fileName = tem.saveJFC.getSelectedFile().getName()+".txt";
-	    				tem.textEditFrame.setTitle(tem.fileName);
-	    				tem.fileReopen.setEnabled(true);
-	    			} 
-	    			catch (IOException e1) {e1.printStackTrace();}
-	    			
-	    		}else{return;}
-	    		
+	    	tec.saveTextFile();
 	    	}
 	    }
-	}
+	private class SaveAsListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	tem.saveJFC = new JFileChooser();
+	    	int returnval = tem.saveJFC.showSaveDialog(null);
+	    	if (returnval == JFileChooser.APPROVE_OPTION){
+	    		tem.fileURI = tem.saveJFC.getSelectedFile().getAbsolutePath()+".txt";
+	    		tem.fileName = tem.saveJFC.getSelectedFile().getName()+".txt";
+	    	}else{return;}
+	    	
+	    	tec.saveTextFile();
+	    	}
+	    }
 	private class ExitListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
 	    	tem.textEditFrame.dispose();

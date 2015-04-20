@@ -8,7 +8,6 @@ import java.awt.event.ComponentListener;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;

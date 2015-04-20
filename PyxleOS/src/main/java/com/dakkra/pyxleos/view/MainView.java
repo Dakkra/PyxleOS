@@ -144,6 +144,7 @@ public class MainView {
 		UIManager.put("text", Color.WHITE);
 		UIManager.put("nimbusDisabledText", Color.WHITE);
 		
+		UIManager.put("FileChooser.background", Color.WHITE);
 		UIManager.put("DesktopPane[Enabled].backgroundPainter", new DesktopPainter());
 	}
     private static void openURI(URI uri) {
