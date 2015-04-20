@@ -1,5 +1,8 @@
 package com.dakkra.pyxleos.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -26,6 +29,7 @@ public class CanvasView {
 		cvm.fileOpen = new JMenuItem("Open");
 		cvm.fileSave = new JMenuItem("Save");
 		cvm.fileExit = new JMenuItem("Exit");
+		cvm.fileExit.addActionListener(new ExitListener());
 		cvm.fileMenu.add(cvm.fileNew);
 		cvm.fileMenu.add(cvm.fileOpen);
 		cvm.fileMenu.add(cvm.fileSave);
@@ -41,5 +45,11 @@ public class CanvasView {
 		
 		cvm.canvasFrame.setVisible(true);
 		m.mainJDPane.add(cvm.canvasFrame);
+	}
+	private class ExitListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	cvm.canvasFrame.dispose();
+	    	
+	    }
 	}
 }

@@ -5,7 +5,7 @@ apply plugin: 'application'
 mainClassName = 'com.dakkra.pyxleos.Main'
 
 sourceCompatibility = 1.8
-version = '0.1.9'
+version = '0.1.10'
 
 jar {
     manifest {
