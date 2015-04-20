@@ -1,11 +1,12 @@
 Welcome to PyxleOS!
 
 What's new in this version
---------------------------
+------------------------------------
 
-Text Editor is now complete!
-You can now create new files, open, reopen, and save text files.
-Also, you can change the text size on screen under the options menu.
+TextEdit Tool now has the "Save As" option.
+The GUI can now support windows going out of frame (Still buggy).
+Started work on Canvas tool.
+
 
 Made with love and Java,
 	Chris Soderquist
