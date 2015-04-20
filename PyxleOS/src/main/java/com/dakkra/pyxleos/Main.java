@@ -35,7 +35,6 @@ public class Main {
 		try {input.close();}
 		catch (IOException e) {e.printStackTrace();}
 		openingNotes.setText(content);
-		Canvas canvas = new Canvas(m);
 	}
 
 }

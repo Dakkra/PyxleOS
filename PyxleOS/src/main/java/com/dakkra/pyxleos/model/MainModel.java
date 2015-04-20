@@ -38,6 +38,7 @@ public class MainModel {
 	public JMenu toolsMenu;
 	//tools menu items
 	public JMenuItem toolTextEditor;
+	public JMenuItem toolCanvas;
 	
 	//about menu
 	public JMenu aboutMenu;

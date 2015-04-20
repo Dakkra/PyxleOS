@@ -22,6 +22,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.dakkra.pyxleos.controller.MainController;
 import com.dakkra.pyxleos.model.MainModel;
+import com.dakkra.pyxleos.modules.Canvas;
 import com.dakkra.pyxleos.modules.TextEdit;
 import com.dakkra.pyxleos.util.DesktopPainter;
 import com.dakkra.pyxleos.util.PxDesktopPane;
@@ -96,6 +97,9 @@ public class MainView {
 		m.toolsMenu = new JMenu(" Tools ");
 		m.toolTextEditor = new JMenuItem("New Text Editor");
 		m.toolTextEditor.addActionListener(new ToolTextEditorListener(m));
+		m.toolCanvas = new JMenuItem("New Canvas");
+		m.toolCanvas.addActionListener(new ToolCanvasListener(m));
+		m.toolsMenu.add(m.toolCanvas);
 		m.toolsMenu.add(m.toolTextEditor);
 		
 		//about menu
@@ -233,6 +237,17 @@ public class MainView {
 		public void actionPerformed(ActionEvent e) {
 	    	@SuppressWarnings("unused")
 			TextEdit textEdit = new TextEdit(m);
+	    }
+	}
+	private class ToolCanvasListener implements ActionListener{
+		MainModel m;
+		
+		public ToolCanvasListener(MainModel m){
+			this.m = m;
+		}
+	    public void actionPerformed(ActionEvent e) {
+	    	@SuppressWarnings("unused")
+			Canvas canvas = new Canvas(m);
 	    }
 	}
 }
