@@ -24,8 +24,8 @@ import com.dakkra.pyxleos.controller.MainController;
 import com.dakkra.pyxleos.model.MainModel;
 import com.dakkra.pyxleos.modules.Canvas;
 import com.dakkra.pyxleos.modules.TextEdit;
-import com.dakkra.pyxleos.util.DesktopPainter;
-import com.dakkra.pyxleos.util.PxDesktopPane;
+import com.dakkra.pyxleos.specialcomponents.DesktopPainter;
+import com.dakkra.pyxleos.specialcomponents.PxDesktopPane;
 
 public class MainView {
 	public MainController c;

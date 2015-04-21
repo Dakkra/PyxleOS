@@ -1,4 +1,4 @@
-package com.dakkra.pyxleos.util;
+package com.dakkra.pyxleos.specialcomponents;
 
 import java.awt.Component;
 import java.awt.Dimension;

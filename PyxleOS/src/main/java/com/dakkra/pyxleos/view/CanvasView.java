@@ -11,11 +11,11 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 import com.dakkra.pyxleos.controller.CanvasController;
 import com.dakkra.pyxleos.model.CanvasModel;
 import com.dakkra.pyxleos.model.MainModel;
+import com.dakkra.pyxleos.specialcomponents.CanvasPanel;
 
 public class CanvasView {
 	MainModel m;
@@ -53,11 +53,11 @@ public class CanvasView {
 		cvm.canvasFrame.setJMenuBar(cvm.menuBar);
 		cvm.canvasFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		
-		cvm.canvasPanel = new JPanel();
+		cvm.canvasPanel = new CanvasPanel(cvm.canvasImage);
 		cvm.canvasPanel.setBackground(canvasBG);
 		cvm.canvasPanel.setSize(new Dimension(cvm.canvasFrame.getWidth(),cvm.canvasFrame.getHeight()));
 		
-		cvm.canvasImage = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
+		
 		
 		cvm.canvasFrame.add(cvm.canvasPanel);
 		

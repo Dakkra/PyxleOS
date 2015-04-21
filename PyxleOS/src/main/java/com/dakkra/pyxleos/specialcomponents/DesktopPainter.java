@@ -1,4 +1,4 @@
-package com.dakkra.pyxleos.util;
+package com.dakkra.pyxleos.specialcomponents;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;

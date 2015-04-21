@@ -13,7 +13,8 @@ public class CanvasController {
 		this.cvm = cvm;
 	}
 	public void saveImage() throws IOException{
-		System.out.println("Sacing image");
+		//TODO customize saving
+		System.out.println("Saving image");
 		File oFile = new File("render.png");
 		System.out.println(oFile.getAbsolutePath());
 		ImageIO.write(cvm.canvasImage, "png", oFile);
