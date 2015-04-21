@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
@@ -11,22 +13,24 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import com.dakkra.pyxleos.controller.CanvasController;
 import com.dakkra.pyxleos.model.CanvasModel;
 import com.dakkra.pyxleos.model.MainModel;
 
 public class CanvasView {
 	MainModel m;
 	CanvasModel cvm;
+	CanvasController cvc;
 	
 	public static final Color canvasBG = new Color(80,80,80);
 	
-	public CanvasView(MainModel m){
-		this.m = m;
-	}
-	
-	public void createAndShowGUI(MainModel m,CanvasModel cvm){
+	public CanvasView(MainModel m,CanvasModel cvm, CanvasController cvc){
 		this.m = m;
 		this.cvm = cvm;
+		this.cvc = cvc;
+	}
+	
+	public void createAndShowGUI(){
 		
 		cvm.menuBar = new JMenuBar();
 		//file menu
@@ -34,6 +38,7 @@ public class CanvasView {
 		cvm.fileNew = new JMenuItem("New");
 		cvm.fileOpen = new JMenuItem("Open");
 		cvm.fileSave = new JMenuItem("Save");
+		cvm.fileSave.addActionListener(new SaveListener());
 		cvm.fileExit = new JMenuItem("Exit");
 		cvm.fileExit.addActionListener(new ExitListener());
 		cvm.fileMenu.add(cvm.fileNew);
@@ -52,6 +57,8 @@ public class CanvasView {
 		cvm.canvasPanel.setBackground(canvasBG);
 		cvm.canvasPanel.setSize(new Dimension(cvm.canvasFrame.getWidth(),cvm.canvasFrame.getHeight()));
 		
+		cvm.canvasImage = new BufferedImage(16,16, BufferedImage.TYPE_INT_ARGB);
+		
 		cvm.canvasFrame.add(cvm.canvasPanel);
 		
 		cvm.canvasFrame.setVisible(true);
@@ -60,6 +67,13 @@ public class CanvasView {
 	private class ExitListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
 	    	cvm.canvasFrame.dispose();
+	    	
+	    }
+	}
+	private class SaveListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	try {cvc.saveImage();}
+	    	catch (IOException e1) {e1.printStackTrace();}
 	    	
 	    }
 	}
