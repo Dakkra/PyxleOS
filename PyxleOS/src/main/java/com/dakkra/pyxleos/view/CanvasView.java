@@ -1,5 +1,7 @@
 package com.dakkra.pyxleos.view;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,6 +9,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import com.dakkra.pyxleos.model.CanvasModel;
 import com.dakkra.pyxleos.model.MainModel;
@@ -14,6 +17,9 @@ import com.dakkra.pyxleos.model.MainModel;
 public class CanvasView {
 	MainModel m;
 	CanvasModel cvm;
+	
+	public static final Color canvasBG = new Color(80,80,80);
+	
 	public CanvasView(MainModel m){
 		this.m = m;
 	}
@@ -42,6 +48,11 @@ public class CanvasView {
 		cvm.canvasFrame.setJMenuBar(cvm.menuBar);
 		cvm.canvasFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		
+		cvm.canvasPanel = new JPanel();
+		cvm.canvasPanel.setBackground(canvasBG);
+		cvm.canvasPanel.setSize(new Dimension(cvm.canvasFrame.getWidth(),cvm.canvasFrame.getHeight()));
+		
+		cvm.canvasFrame.add(cvm.canvasPanel);
 		
 		cvm.canvasFrame.setVisible(true);
 		m.mainJDPane.add(cvm.canvasFrame);

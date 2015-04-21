@@ -6,6 +6,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 public class CanvasModel {
 	public JInternalFrame canvasFrame;
@@ -18,6 +19,8 @@ public class CanvasModel {
 	public JMenuItem fileSave;
 	public JMenuItem fileExit;
 	
+	//canvas panel
+	public JPanel canvasPanel;
 	//canvas image
 	public BufferedImage canvasImage;
 	
