@@ -6,8 +6,9 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
-import com.dakkra.pyxleos.specialcomponents.CanvasPanel;
+import com.dakkra.pyxleos.specialcomponents.CanvasPad;
 
 public class CanvasModel {
 	public JInternalFrame canvasFrame;
@@ -21,7 +22,9 @@ public class CanvasModel {
 	public JMenuItem fileExit;
 	
 	//canvas panel
-	public CanvasPanel canvasPanel;
+	public JPanel containerPanel;
+	//canvas canvas
+	public CanvasPad canvasPad;
 	//canvas image
 	public BufferedImage canvasImage = new BufferedImage(200,200,BufferedImage.TYPE_INT_ARGB);
 	

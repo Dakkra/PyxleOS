@@ -1,21 +1,21 @@
 package com.dakkra.pyxleos.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import com.dakkra.pyxleos.controller.CanvasController;
 import com.dakkra.pyxleos.model.CanvasModel;
 import com.dakkra.pyxleos.model.MainModel;
-import com.dakkra.pyxleos.specialcomponents.CanvasPanel;
+import com.dakkra.pyxleos.specialcomponents.CanvasPad;
 
 public class CanvasView {
 	MainModel m;
@@ -53,13 +53,12 @@ public class CanvasView {
 		cvm.canvasFrame.setJMenuBar(cvm.menuBar);
 		cvm.canvasFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		
-		cvm.canvasPanel = new CanvasPanel(cvm.canvasImage);
-		cvm.canvasPanel.setBackground(canvasBG);
-		cvm.canvasPanel.setSize(new Dimension(cvm.canvasFrame.getWidth(),cvm.canvasFrame.getHeight()));
+		cvm.containerPanel = new JPanel();
+		cvm.canvasPad = new CanvasPad();
+		cvm.containerPanel.add(cvm.canvasPad, BorderLayout.CENTER);
 		
 		
-		
-		cvm.canvasFrame.add(cvm.canvasPanel);
+		cvm.canvasFrame.add(cvm.containerPanel);
 		
 		cvm.canvasFrame.setVisible(true);
 		m.mainJDPane.add(cvm.canvasFrame);
