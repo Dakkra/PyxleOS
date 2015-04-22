@@ -53,10 +53,11 @@ public class CanvasView {
 		cvm.canvasFrame.setJMenuBar(cvm.menuBar);
 		cvm.canvasFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		
-		cvm.containerPanel = new JPanel();
 		cvm.canvasPad = new CanvasPad();
-		cvm.containerPanel.add(cvm.canvasPad, BorderLayout.CENTER);
 		
+		cvm.containerPanel = new JPanel();
+		cvm.containerPanel.setLayout( new BorderLayout() );
+		cvm.containerPanel.add(cvm.canvasPad, BorderLayout.CENTER);
 		
 		cvm.canvasFrame.add(cvm.containerPanel);
 		
