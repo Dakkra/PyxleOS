@@ -2,6 +2,7 @@ package com.dakkra.pyxleos.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -52,11 +53,13 @@ public class CanvasView {
 		cvm.canvasFrame.setBounds(520, 10, 400, 400);
 		cvm.canvasFrame.setJMenuBar(cvm.menuBar);
 		cvm.canvasFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
-		
-		cvm.canvasPad = new CanvasPad();
-		
+
 		cvm.containerPanel = new JPanel();
+		cvm.containerPanel.setPreferredSize(new Dimension(cvm.canvasFrame.getWidth(),cvm.canvasFrame.getHeight()));
 		cvm.containerPanel.setLayout( new BorderLayout() );
+		
+		cvm.canvasPad = new CanvasPad(cvm);
+
 		cvm.containerPanel.add(cvm.canvasPad, BorderLayout.CENTER);
 		
 		cvm.canvasFrame.add(cvm.containerPanel);
