@@ -1,5 +1,6 @@
 package com.dakkra.pyxleos.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -17,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -26,6 +28,7 @@ import com.dakkra.pyxleos.modules.Canvas;
 import com.dakkra.pyxleos.modules.TextEdit;
 import com.dakkra.pyxleos.specialcomponents.DesktopPainter;
 import com.dakkra.pyxleos.specialcomponents.PxDesktopPane;
+import com.dakkra.pyxleos.specialcomponents.ToolbarColorBox;
 
 public class MainView {
 	public MainController c;
@@ -66,6 +69,15 @@ public class MainView {
 		} catch (IOException e) {
 			// Intentionally ignore exception (because it should never happen)
 		}
+		
+		m.toolBar = new JToolBar();
+		m.fgColor = Color.BLACK;
+		m.fgColorBox = new ToolbarColorBox(m.fgColor,m);
+		m.toolBar.add(m.fgColorBox);
+		m.toolBar.setFloatable(true);
+		m.toolBar.setOrientation(JToolBar.NORTH);
+		
+		m.mainFrame.add(m.toolBar, BorderLayout.WEST);
 
 		m.mainJDPane = new PxDesktopPane();
 		m.mainScrollPane = new JScrollPane(m.mainJDPane);

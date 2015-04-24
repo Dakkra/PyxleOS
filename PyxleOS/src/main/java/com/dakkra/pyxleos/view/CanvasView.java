@@ -36,6 +36,7 @@ public class CanvasView {
 		cvm.menuBar = new JMenuBar();
 		//file menu
 		cvm.fileMenu = new JMenu(" File ");
+		cvm.fileMenu.setEnabled(false);
 		cvm.fileNew = new JMenuItem("New");
 		cvm.fileOpen = new JMenuItem("Open");
 		cvm.fileSave = new JMenuItem("Save");
@@ -54,11 +55,12 @@ public class CanvasView {
 		cvm.canvasFrame.setJMenuBar(cvm.menuBar);
 		cvm.canvasFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 
+		//TODO wrap image in container in a scrollable
 		cvm.containerPanel = new JPanel();
 		cvm.containerPanel.setPreferredSize(new Dimension(cvm.canvasFrame.getWidth(),cvm.canvasFrame.getHeight()));
 		cvm.containerPanel.setLayout( new BorderLayout() );
 		
-		cvm.canvasPad = new CanvasPad(cvm);
+		cvm.canvasPad = new CanvasPad(cvm,m);
 
 		cvm.containerPanel.add(cvm.canvasPad, BorderLayout.CENTER);
 		

@@ -3,10 +3,10 @@ Welcome to PyxleOS!
 What's new in this version
 ------------------------------------
 
-TextEdit Tool now has the "Save As" option.
-The GUI can now support windows going out of frame (Still buggy).
-Started work on Canvas tool.
-
+Canvas Module has more work done on it. 
+<-- ToolBar.
+Color picker :D (Click the color square on the tool bar).
+Please keep in mind this is still an alpha so it is VERY buggy.
 
 Made with love and Java,
 	Chris Soderquist

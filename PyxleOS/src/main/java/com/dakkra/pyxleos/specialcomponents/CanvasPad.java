@@ -14,11 +14,13 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 import com.dakkra.pyxleos.model.CanvasModel;
+import com.dakkra.pyxleos.model.MainModel;
 
 public class CanvasPad extends JComponent {
 	private static final long serialVersionUID = 6748629663390647156L;
 	
 	public CanvasModel cvm;
+	public MainModel m;
 	// this is gonna be your image that you draw on
 	private BufferedImage image;
 
@@ -29,7 +31,8 @@ public class CanvasPad extends JComponent {
 //	private int currentX, currentY, oldX, oldY;
 	private Point currentPoint , oldPoint; 
 
-	public CanvasPad(CanvasModel cvm) {
+	public CanvasPad(CanvasModel cvm, MainModel m) {
+		this.m = m;
 		this.cvm = cvm;
 		cvm.canvasImage = new BufferedImage(300,300,BufferedImage.TYPE_INT_ARGB);
 		this.image = cvm.canvasImage;
@@ -88,7 +91,7 @@ public class CanvasPad extends JComponent {
 		public void mouseDragged(MouseEvent e) {
 			currentPoint = convertToImageCoord(e.getPoint());
 			if (graphics2D != null) {
-				graphics2D.setPaint(Color.black);
+				graphics2D.setPaint(m.fgColor);
 				graphics2D.drawLine(oldPoint.x, oldPoint.y, currentPoint.x, currentPoint.y);
 			}
 			repaint();
