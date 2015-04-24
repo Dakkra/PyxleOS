@@ -17,7 +17,11 @@ public class PaletteView {
 	
 	public void createAndShowGUI(){
 		
-		ccpm.paletteFrame = new JInternalFrame("Palette");
+		ccpm.paletteFrame = new JInternalFrame("Palette",true,true,true,true);
+		ccpm.paletteFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
+		ccpm.paletteFrame.setBounds(10, 420, 400, 300);
 		
+		ccpm.paletteFrame.setVisible(true);
+		m.mainJDPane.add(ccpm.paletteFrame);
 	}
 }

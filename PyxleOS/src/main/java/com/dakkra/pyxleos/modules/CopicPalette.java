@@ -15,6 +15,7 @@ public class CopicPalette {
 	PaletteModel ccpm;
 	
 	public CopicPalette(MainModel m){
+		System.out.println("A new Copic Color Palette was created");
 		ccpm = new PaletteModel();
 		ccpv = new PaletteView(m,ccpm);
 		this.m = m;

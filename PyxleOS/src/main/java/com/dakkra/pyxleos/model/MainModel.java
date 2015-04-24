@@ -50,6 +50,7 @@ public class MainModel {
 	//tools menu items
 	public JMenuItem toolTextEditor;
 	public JMenuItem toolCanvas;
+	public JMenuItem toolCopicPalette;
 	
 	//about menu
 	public JMenu aboutMenu;
