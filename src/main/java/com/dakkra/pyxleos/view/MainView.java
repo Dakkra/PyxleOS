@@ -123,8 +123,14 @@ public class MainView {
 		m.toolsMenu = new JMenu(" Tools ");
 		m.toolTextEditor = new JMenuItem("New Text Editor");
 		m.toolTextEditor.addActionListener(new ToolTextEditorListener(m));
+		m.toolTextEditor.setMnemonic(KeyEvent.VK_T);
+		m.toolTextEditor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
+				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		m.toolCanvas = new JMenuItem("New Canvas");
 		m.toolCanvas.addActionListener(new ToolCanvasListener(m));
+		m.toolCanvas.setMnemonic(KeyEvent.VK_C);
+		m.toolCanvas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
+				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		m.toolCopicPalette = new JMenuItem("New Copic Palette");
 		m.toolCopicPalette.addActionListener(new CopicPaletteListener(m));
 		m.toolsMenu.add(m.toolCanvas);

@@ -10,7 +10,7 @@ import javax.swing.JColorChooser;
 
 import com.dakkra.pyxleos.model.MainModel;
 
-public class ToolbarColorBox extends JButton {
+public class ToolbarColorBox extends JButton{
 	/**
 	 * 
 	 */
