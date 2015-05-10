@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		System.out.println("Starting up...");
+		System.out.println("Starting...");
 
 		MainView v = new MainView();
 		MainModel m = new MainModel();
