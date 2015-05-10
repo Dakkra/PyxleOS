@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
-import javax.swing.KeyStroke;
 
 import com.dakkra.pyxleos.model.MainModel;
 
@@ -25,16 +24,6 @@ public class ToolbarColorBox extends JButton{
 		this.setText("       ");
 		this.addActionListener(new ClickListener());
 	}
-	
-	private KeyStroke accelerator;
-	
-    public void setAccelerator(KeyStroke keyStroke) {
-        KeyStroke oldAccelerator = accelerator;
-        this.accelerator = keyStroke;
-        repaint();
-        revalidate();
-        firePropertyChange("accelerator", oldAccelerator, accelerator);
-    }
 
 	@Override
 	public void paintComponent(Graphics g) {
