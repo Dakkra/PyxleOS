@@ -74,6 +74,9 @@ public class MainView {
 		m.toolBar = new JToolBar();
 		m.fgColor = Color.BLACK;
 		m.fgColorBox = new ToolbarColorBox(m.fgColor, m);
+		m.fgColorBox.setMnemonic(KeyEvent.VK_C);
+		m.fgColorBox.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
+				ActionEvent.ALT_MASK));
 		m.toolBar.add(m.fgColorBox);
 		m.toolBar.setFloatable(true);
 		m.toolBar.setOrientation(JToolBar.NORTH);
