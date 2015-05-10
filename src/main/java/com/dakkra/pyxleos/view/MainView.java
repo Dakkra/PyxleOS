@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -17,8 +18,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -93,12 +96,24 @@ public class MainView {
 		m.fileMenu = new JMenu(" File ");
 		m.fileNew = new JMenuItem("New Project");
 		m.fileNew.addActionListener(new NewProjectListener());
+		m.fileNew.setMnemonic(KeyEvent.VK_N);
+		m.fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
+				ActionEvent.CTRL_MASK));
 		m.fileOpen = new JMenuItem("Open Project");
 		m.fileOpen.addActionListener(new OpenListener());
+		m.fileOpen.setMnemonic(KeyEvent.VK_O);
+		m.fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+				ActionEvent.CTRL_MASK));
 		m.fileSave = new JMenuItem("Save Project");
 		m.fileSave.addActionListener(new SaveListener());
+		m.fileSave.setMnemonic(KeyEvent.VK_S);
+		m.fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				ActionEvent.CTRL_MASK));
 		m.fileQuit = new JMenuItem("Quit " + m.applicationName);
 		m.fileQuit.addActionListener(new CloseListener());
+		m.fileQuit.setMnemonic(KeyEvent.VK_Q);
+		m.fileQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
+				ActionEvent.CTRL_MASK));
 		m.fileMenu.add(m.fileNew);
 		m.fileMenu.add(m.fileOpen);
 		m.fileMenu.add(m.fileSave);
@@ -177,9 +192,16 @@ public class MainView {
 	// ***!From here down are listeners!***
 	private class CloseListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out
-					.println("File > Quit: Exitting Application (This is ok)");
-			System.exit(0);
+			int returnval = JOptionPane.showConfirmDialog(null,
+					"Are you sure you want to quit?");
+
+			if (returnval == JOptionPane.OK_OPTION) {
+				System.out
+						.println("File > Quit: Exitting Application (This is ok)");
+				System.exit(0);
+			} else {
+				return;
+			}
 		}
 	}
 
