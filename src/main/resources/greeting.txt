@@ -3,10 +3,12 @@ Welcome to PyxleOS!
 What's new in this version
 ------------------------------------
 
-Canvas Module has more work done on it. 
-<-- ToolBar.
-Color picker :D (Click the color square on the tool bar).
-Please keep in mind this is still an alpha so it is VERY buggy.
+1.Menu items now have Key Bindings!
+2.Improved internal window system (still buggy as ever)
+3.Bugfix on the color chooser. Hit cancel and it will now stay the same color!
+4.Exit prompt (Loosing work is bad, even in an alpha)
+5.Started work on Copic Color Palette... slow... heh
+6.Changed textEdit default font size from 16 to 17
 
 Made with love and Java,
 	Chris Soderquist
