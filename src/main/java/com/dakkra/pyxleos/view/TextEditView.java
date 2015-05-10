@@ -3,6 +3,7 @@ package com.dakkra.pyxleos.view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -13,6 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 
 import com.dakkra.pyxleos.controller.TextEditController;
 import com.dakkra.pyxleos.model.MainModel;
@@ -36,16 +38,34 @@ public class TextEditView {
 		tem.fileMenu = new JMenu(" File ");
 		tem.fileNew = new JMenuItem("New");
 		tem.fileNew.addActionListener(new NewListener());
+		tem.fileNew.setMnemonic(KeyEvent.VK_N);
+		tem.fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
+				ActionEvent.CTRL_MASK));
 		tem.fileOpen = new JMenuItem("Open");
 		tem.fileOpen.addActionListener(new OpenListener());
+		tem.fileOpen.setMnemonic(KeyEvent.VK_O);
+		tem.fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+				ActionEvent.CTRL_MASK));
 		tem.fileReopen = new JMenuItem("Reopen");
 		tem.fileReopen.addActionListener(new ReopenListener());
+		tem.fileReopen.setMnemonic(KeyEvent.VK_R);
+		tem.fileReopen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
+				ActionEvent.CTRL_MASK));
 		tem.fileSave = new JMenuItem("Save");
 		tem.fileSave.addActionListener(new SaveListener());
+		tem.fileSave.setMnemonic(KeyEvent.VK_S);
+		tem.fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				ActionEvent.CTRL_MASK));
 		tem.fileSaveAs = new JMenuItem("Save As");
 		tem.fileSaveAs.addActionListener(new SaveAsListener());
+		tem.fileSaveAs.setMnemonic(KeyEvent.VK_S);
+		tem.fileSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		tem.fileExit = new JMenuItem("Exit");
 		tem.fileExit.addActionListener(new ExitListener());
+		tem.fileExit.setMnemonic(KeyEvent.VK_Q);
+		tem.fileExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
+				ActionEvent.CTRL_MASK));
 		tem.fileMenu.add(tem.fileNew);
 		tem.fileMenu.add(tem.fileOpen);
 		tem.fileMenu.add(tem.fileReopen);
@@ -139,15 +159,20 @@ public class TextEditView {
 
 	private class ExitListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			tem.textEditFrame.dispose();
+			int returnval = JOptionPane.showConfirmDialog(null,
+					"Close text edit?");
 
+			if (returnval == JOptionPane.OK_OPTION) {
+				tem.textEditFrame.dispose();
+			} else {
+				return;
+			}
 		}
 	}
 
 	private class ReopenListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			tec.readTextFile();
-
 		}
 	}
 
