@@ -38,5 +38,4 @@ public class Main {
 		}
 		openingNotes.setText(content);
 	}
-
 }

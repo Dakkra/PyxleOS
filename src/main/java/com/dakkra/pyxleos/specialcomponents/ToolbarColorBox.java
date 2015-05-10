@@ -10,7 +10,7 @@ import javax.swing.JColorChooser;
 
 import com.dakkra.pyxleos.model.MainModel;
 
-public class ToolbarColorBox extends JButton{
+public class ToolbarColorBox extends JButton {
 	/**
 	 * 
 	 */
@@ -35,12 +35,15 @@ public class ToolbarColorBox extends JButton{
 	private class ClickListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			new JColorChooser();
 			Color newColor = JColorChooser.showDialog(null, "Paint Color",
-					Color.WHITE);
+					m.fgColor);
 
-			color = newColor;
-			m.fgColor = newColor;
+			if (!(newColor == null)) {
+				m.fgColor = newColor;
+				color = m.fgColor;
+			} else {
+				return;
+			}
 
 		}
 
