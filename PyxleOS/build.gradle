@@ -4,7 +4,7 @@ apply plugin: 'application'
 
 mainClassName = 'com.dakkra.pyxleos.Main'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.7
 version = '0.2.2'
 
 jar {
