@@ -16,7 +16,7 @@ public class TextEditModel {
 	public JFileChooser saveJFC;
 	public String fileURI = null;
 	public String fileName;
-	public Font textAreaFont = new Font("Arial",Font.PLAIN,16);
+	public Font textAreaFont = new Font("Arial", Font.PLAIN, 16);
 	public JTextArea textArea;
 	public JScrollPane textAreaPane;
 	public JMenuBar menuBar;

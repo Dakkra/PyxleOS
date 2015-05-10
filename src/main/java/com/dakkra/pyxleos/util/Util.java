@@ -32,14 +32,14 @@ public class Util {
 		} catch (IOException exception) {
 			exception.printStackTrace(System.err);
 		} finally {
-			if( stream != null ) {
+			if (stream != null) {
 				try {
 					stream.close();
 				} catch (IOException closeException) {
 					closeException.printStackTrace(System.err);
 				}
 			}
-			if( writer != null ) {
+			if (writer != null) {
 				try {
 					writer.close();
 				} catch (IOException closeException) {

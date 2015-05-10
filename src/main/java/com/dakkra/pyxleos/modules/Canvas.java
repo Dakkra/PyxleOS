@@ -10,14 +10,15 @@ public class Canvas {
 	CanvasView cvv;
 	CanvasController cvc;
 	MainModel m;
-	public Canvas(MainModel m){
+
+	public Canvas(MainModel m) {
 		System.out.println("A new canvas was created");
 		this.m = m;
 		cvm = new CanvasModel();
 		cvc = new CanvasController(cvm);
-		cvv = new CanvasView(m,cvm,cvc);
-		
+		cvv = new CanvasView(m, cvm, cvc);
+
 		cvv.createAndShowGUI();
-		
+
 	}
 }

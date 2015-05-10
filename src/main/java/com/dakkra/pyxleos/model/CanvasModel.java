@@ -12,20 +12,21 @@ import com.dakkra.pyxleos.specialcomponents.CanvasPad;
 
 public class CanvasModel {
 	public JInternalFrame canvasFrame;
-	
+
 	public JMenuBar menuBar;
-	//file menu
+	// file menu
 	public JMenu fileMenu;
 	public JMenuItem fileNew;
 	public JMenuItem fileOpen;
 	public JMenuItem fileSave;
 	public JMenuItem fileExit;
-	
-	//canvas panel
+
+	// canvas panel
 	public JPanel containerPanel;
-	//canvas canvas
+	// canvas canvas
 	public CanvasPad canvasPad;
-	//canvas image
-	public BufferedImage canvasImage = new BufferedImage(200,200,BufferedImage.TYPE_INT_ARGB);
-	
+	// canvas image
+	public BufferedImage canvasImage = new BufferedImage(200, 200,
+			BufferedImage.TYPE_INT_ARGB);
+
 }

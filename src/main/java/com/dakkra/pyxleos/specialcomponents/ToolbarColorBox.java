@@ -17,32 +17,32 @@ public class ToolbarColorBox extends JButton {
 	private static final long serialVersionUID = 3468468953407277875L;
 	Color color;
 	public MainModel m;
-	
-	public ToolbarColorBox(Color color, MainModel m){
+
+	public ToolbarColorBox(Color color, MainModel m) {
 		this.m = m;
 		this.color = color;
-		this.setText("          ");
+		this.setText("       ");
 		this.addActionListener(new ClickListener());
 	}
-	
+
 	@Override
-	public void paintComponent(Graphics g)
-    {
-        g.setColor( color);
-        g.fillRect(0, 0, getSize().width, getSize().height);
+	public void paintComponent(Graphics g) {
+		g.setColor(color);
+		g.fillRect(0, 0, getSize().width, getSize().height);
 
-    }
-	private class ClickListener implements ActionListener{
+	}
 
+	private class ClickListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			new JColorChooser();
-			Color newColor = JColorChooser.showDialog(null, "Paint Color", Color.WHITE);
-			
+			Color newColor = JColorChooser.showDialog(null, "Paint Color",
+					Color.WHITE);
+
 			color = newColor;
 			m.fgColor = newColor;
-			
+
 		}
-		
+
 	}
 }

@@ -6,5 +6,5 @@ import com.dakkra.pyxleos.view.MainView;
 
 public class MainController {
 	public MainView v;
-	public MainModel m; 
+	public MainModel m;
 }

@@ -18,7 +18,7 @@ import com.dakkra.pyxleos.model.MainModel;
 
 public class CanvasPad extends JComponent {
 	private static final long serialVersionUID = 6748629663390647156L;
-	
+
 	public CanvasModel cvm;
 	public MainModel m;
 	// this is gonna be your image that you draw on
@@ -28,20 +28,21 @@ public class CanvasPad extends JComponent {
 	private Graphics2D graphics2D;
 
 	// these are gonna hold our mouse coordinates
-//	private int currentX, currentY, oldX, oldY;
-	private Point currentPoint , oldPoint; 
+	// private int currentX, currentY, oldX, oldY;
+	private Point currentPoint, oldPoint;
 
 	public CanvasPad(CanvasModel cvm, MainModel m) {
 		this.m = m;
 		this.cvm = cvm;
-		cvm.canvasImage = new BufferedImage(300,300,BufferedImage.TYPE_INT_ARGB);
+		cvm.canvasImage = new BufferedImage(300, 300,
+				BufferedImage.TYPE_INT_ARGB);
 		this.image = cvm.canvasImage;
 		graphics2D = image.createGraphics();
 
 		MouseDragListener mouseDragListener = new MouseDragListener();
-		
+
 		addMouseListener(mouseDragListener);
-		
+
 		// if the mouse is pressed it sets the oldX & oldY
 		// coordinates as the mouses x & y coordinates
 		addMouseMotionListener(mouseDragListener);
@@ -51,18 +52,19 @@ public class CanvasPad extends JComponent {
 		// it repaints it and sets oldX and oldY as currentX and currentY
 		clear();
 	}
-	
-	public Point convertToImageCoord(Point point){
-		Rectangle bounds = getBounds();
-		int x = point.x - ((bounds.width-image.getWidth())/2);
-		int y = point.y - ((bounds.height-image.getHeight())/2);
 
-		return new Point(x,y);
+	public Point convertToImageCoord(Point point) {
+		Rectangle bounds = getBounds();
+		int x = point.x - ((bounds.width - image.getWidth()) / 2);
+		int y = point.y - ((bounds.height - image.getHeight()) / 2);
+
+		return new Point(x, y);
 	}
-	
+
 	public void paintComponent(Graphics g) {
-		Point point = convertToImageCoord(new Point (0,0));
-		g.drawImage(image, -point.x, -point.y, image.getWidth(), image.getHeight(), this);
+		Point point = convertToImageCoord(new Point(0, 0));
+		g.drawImage(image, -point.x, -point.y, image.getWidth(),
+				image.getHeight(), this);
 	}
 
 	// this is the painting bit
@@ -76,40 +78,48 @@ public class CanvasPad extends JComponent {
 	public void clear() {
 		Graphics2D graphics2D = image.createGraphics();
 
-		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2D.setPaint(Color.WHITE);
-		graphics2D.fillRect(0,0, image.getWidth(), image.getHeight());
+		graphics2D.fillRect(0, 0, image.getWidth(), image.getHeight());
 		graphics2D.dispose();
 	}
-	private class MouseDragListener extends MouseMotionAdapter implements MouseListener{
+
+	private class MouseDragListener extends MouseMotionAdapter implements
+			MouseListener {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			oldPoint = convertToImageCoord(e.getPoint());
 		}
-		
+
 		public void mouseDragged(MouseEvent e) {
 			currentPoint = convertToImageCoord(e.getPoint());
 			if (graphics2D != null) {
 				graphics2D.setPaint(m.fgColor);
-				graphics2D.drawLine(oldPoint.x, oldPoint.y, currentPoint.x, currentPoint.y);
+				graphics2D.drawLine(oldPoint.x, oldPoint.y, currentPoint.x,
+						currentPoint.y);
 			}
 			repaint();
 			oldPoint = currentPoint;
 		}
-		
-		@Override
-		public void mouseClicked(MouseEvent e) {}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {}
+		public void mouseClicked(MouseEvent e) {
+		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {
+		}
 
 		@Override
-		public void mouseExited(MouseEvent e) {}
-		
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}
+
 	}
-	
+
 }

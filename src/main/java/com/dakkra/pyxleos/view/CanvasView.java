@@ -22,19 +22,19 @@ public class CanvasView {
 	MainModel m;
 	CanvasModel cvm;
 	CanvasController cvc;
-	
-	public static final Color canvasBG = new Color(80,80,80);
-	
-	public CanvasView(MainModel m,CanvasModel cvm, CanvasController cvc){
+
+	public static final Color canvasBG = new Color(80, 80, 80);
+
+	public CanvasView(MainModel m, CanvasModel cvm, CanvasController cvc) {
 		this.m = m;
 		this.cvm = cvm;
 		this.cvc = cvc;
 	}
-	
-	public void createAndShowGUI(){
-		
+
+	public void createAndShowGUI() {
+
 		cvm.menuBar = new JMenuBar();
-		//file menu
+		// file menu
 		cvm.fileMenu = new JMenu(" File ");
 		cvm.fileMenu.setEnabled(false);
 		cvm.fileNew = new JMenuItem("New");
@@ -47,39 +47,46 @@ public class CanvasView {
 		cvm.fileMenu.add(cvm.fileOpen);
 		cvm.fileMenu.add(cvm.fileSave);
 		cvm.fileMenu.add(cvm.fileExit);
-		//all together
+		// all together
 		cvm.menuBar.add(cvm.fileMenu);
-		
-		cvm.canvasFrame = new JInternalFrame("Canvas",true,true,true,true);
+
+		cvm.canvasFrame = new JInternalFrame("Canvas", true, true, true, true);
 		cvm.canvasFrame.setBounds(520, 10, 400, 400);
 		cvm.canvasFrame.setJMenuBar(cvm.menuBar);
-		cvm.canvasFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
+		cvm.canvasFrame
+				.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 
-		//TODO wrap image in container in a scrollable
+		// TODO wrap image in container in a scrollable
 		cvm.containerPanel = new JPanel();
-		cvm.containerPanel.setPreferredSize(new Dimension(cvm.canvasFrame.getWidth(),cvm.canvasFrame.getHeight()));
-		cvm.containerPanel.setLayout( new BorderLayout() );
-		
-		cvm.canvasPad = new CanvasPad(cvm,m);
+		cvm.containerPanel.setPreferredSize(new Dimension(cvm.canvasFrame
+				.getWidth(), cvm.canvasFrame.getHeight()));
+		cvm.containerPanel.setLayout(new BorderLayout());
+
+		cvm.canvasPad = new CanvasPad(cvm, m);
 
 		cvm.containerPanel.add(cvm.canvasPad, BorderLayout.CENTER);
-		
+
 		cvm.canvasFrame.add(cvm.containerPanel);
-		
+
 		cvm.canvasFrame.setVisible(true);
 		m.mainJDPane.add(cvm.canvasFrame);
 	}
-	private class ExitListener implements ActionListener{
-	    public void actionPerformed(ActionEvent e) {
-	    	cvm.canvasFrame.dispose();
-	    	
-	    }
+
+	private class ExitListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			cvm.canvasFrame.dispose();
+
+		}
 	}
-	private class SaveListener implements ActionListener{
-	    public void actionPerformed(ActionEvent e) {
-	    	try {cvc.saveImage();}
-	    	catch (IOException e1) {e1.printStackTrace();}
-	    	
-	    }
+
+	private class SaveListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			try {
+				cvc.saveImage();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		}
 	}
 }

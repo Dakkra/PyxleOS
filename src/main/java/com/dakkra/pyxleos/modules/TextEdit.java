@@ -9,18 +9,20 @@ public class TextEdit {
 	MainModel m;
 	TextEditModel tem;
 	TextEditController tec;
-	public TextEdit(MainModel m){
+
+	public TextEdit(MainModel m) {
 		System.out.println("A new TextEdit was created");
 		this.m = m;
 		TextEditView v = new TextEditView();
 		tec = new TextEditController();
 		tem = new TextEditModel();
 		tec.tem = tem;
-		
-		v.createAndShowGUI(m,tem,tec);
-		
+
+		v.createAndShowGUI(m, tem, tec);
+
 	}
-	public void setText(String text){
+
+	public void setText(String text) {
 		tem.textArea.setText(text);
 	}
 

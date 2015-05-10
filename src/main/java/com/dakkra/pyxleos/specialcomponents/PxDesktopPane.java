@@ -17,7 +17,7 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 	private static final long serialVersionUID = -6600842930646363073L;
 
 	private ComponentListener childComponentHandler = new ChildComponentHandler();
-	
+
 	private boolean ready;
 
 	@Override
@@ -25,39 +25,43 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 		super.addImpl(comp, constraints, index);
 		comp.addComponentListener(childComponentHandler);
 	}
-	
+
 	public void updateDesktopSize() {
-		JViewport viewport = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, this);
-		if (viewport == null) return;
+		JViewport viewport = (JViewport) SwingUtilities.getAncestorOfClass(
+				JViewport.class, this);
+		if (viewport == null)
+			return;
 
 		Rectangle oldBounds = getBounds();
 		Rectangle newBounds = new Rectangle();
 		Rectangle viewBounds = viewport.getBounds();
-		SwingUtilities.computeUnion(oldBounds.x, oldBounds.y, viewBounds.width, viewBounds.height, newBounds);
+		SwingUtilities.computeUnion(oldBounds.x, oldBounds.y, viewBounds.width,
+				viewBounds.height, newBounds);
 
 		for (Component component : getComponents()) {
 			Rectangle cBounds = component.getBounds();
-			SwingUtilities.computeUnion(cBounds.x, cBounds.y, cBounds.width, cBounds.height, newBounds);
+			SwingUtilities.computeUnion(cBounds.x, cBounds.y, cBounds.width,
+					cBounds.height, newBounds);
 		}
-		
-		//viewport.scrollRectToVisible(contentRect);
-		
-//		if (!newBounds.getLocation().equals(oldBounds.getLocation())) {
-//			int deltaX = newBounds.x - oldBounds.x;
-//			int deltaY = newBounds.y - oldBounds.y;
-//			for (Component component : getComponents()) {
-//				component.removeComponentListener(childComponentHandler);
-//				
-//				Point location = new Point(component.getLocation());
-//				location.move(location.x + deltaX, location.y + deltaY);
-//				component.setLocation(location);
-//				
-//				component.addComponentListener(childComponentHandler);
-//			}
-//			setLocation(newBounds.getLocation());
-//		}
+
+		// viewport.scrollRectToVisible(contentRect);
+
+		// if (!newBounds.getLocation().equals(oldBounds.getLocation())) {
+		// int deltaX = newBounds.x - oldBounds.x;
+		// int deltaY = newBounds.y - oldBounds.y;
+		// for (Component component : getComponents()) {
+		// component.removeComponentListener(childComponentHandler);
+		//
+		// Point location = new Point(component.getLocation());
+		// location.move(location.x + deltaX, location.y + deltaY);
+		// component.setLocation(location);
+		//
+		// component.addComponentListener(childComponentHandler);
+		// }
+		// setLocation(newBounds.getLocation());
+		// }
 		setPreferredSize(newBounds.getSize());
-		
+
 		ready = true;
 	}
 
@@ -121,8 +125,9 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 	 *         This value should always be positive.
 	 * @see JScrollBar#setUnitIncrement
 	 */
-	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
-		return 1;
+	public int getScrollableUnitIncrement(Rectangle visibleRect,
+			int orientation, int direction) {
+		return 10;
 	}
 
 	/**
@@ -144,7 +149,8 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 	 *         This value should always be positive.
 	 * @see JScrollBar#setBlockIncrement
 	 */
-	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+	public int getScrollableBlockIncrement(Rectangle visibleRect,
+			int orientation, int direction) {
 		return 10;
 	}
 
@@ -187,6 +193,7 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 
 		@Override
 		public void componentResized(ComponentEvent event) {
+			updateDesktopSize();
 		}
 
 		@Override
@@ -196,10 +203,12 @@ public class PxDesktopPane extends JDesktopPane implements Scrollable {
 
 		@Override
 		public void componentShown(ComponentEvent event) {
+			updateDesktopSize();
 		}
 
 		@Override
 		public void componentHidden(ComponentEvent event) {
+			updateDesktopSize();
 		}
 
 	}
