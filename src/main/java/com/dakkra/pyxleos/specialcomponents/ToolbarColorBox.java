@@ -24,12 +24,15 @@ public class ToolbarColorBox extends JButton {
 		this.setText("       ");
 		this.addActionListener(new ClickListener());
 	}
+	
+	public void updateColor(){
+		color = m.fgColor;
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		g.setColor(color);
 		g.fillRect(0, 0, getSize().width, getSize().height);
-
 	}
 
 	private class ClickListener implements ActionListener {
@@ -40,7 +43,7 @@ public class ToolbarColorBox extends JButton {
 
 			if (!(newColor == null)) {
 				m.fgColor = newColor;
-				color = m.fgColor;
+				updateColor();
 			} else {
 				return;
 			}
