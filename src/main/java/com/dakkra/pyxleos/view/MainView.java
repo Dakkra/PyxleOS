@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -31,7 +32,6 @@ import com.dakkra.pyxleos.modules.Canvas;
 import com.dakkra.pyxleos.modules.CopicPalette;
 import com.dakkra.pyxleos.modules.TextEdit;
 import com.dakkra.pyxleos.specialcomponents.DesktopPainter;
-import com.dakkra.pyxleos.specialcomponents.PxDesktopPane;
 import com.dakkra.pyxleos.specialcomponents.ToolbarColorBox;
 
 public class MainView {
@@ -80,7 +80,8 @@ public class MainView {
 
 		m.mainFrame.add(m.toolBar, BorderLayout.WEST);
 
-		m.mainJDPane = new PxDesktopPane();
+//		m.mainJDPane = new PxDesktopPane();
+		m.mainJDPane = new JDesktopPane();
 		m.mainScrollPane = new JScrollPane(m.mainJDPane);
 		m.mainScrollPane.getViewport().setBackground(Color.RED.darker());
 
@@ -284,21 +285,18 @@ public class MainView {
 	private class NewProjectListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Will create a project");
-			// TODO create an image here
 		}
 	}
 
 	private class OpenListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Will open a project");
-			// TODO open an image here
 		}
 	}
 
 	private class SaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Will save a project");
-			// TODO save an image here
 		}
 	}
 
