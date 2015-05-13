@@ -204,7 +204,7 @@ public class MainView {
 
 			if (returnval == JOptionPane.OK_OPTION) {
 				System.out
-						.println("File > Quit: Exitting Application (This is ok)");
+						.println("Exitting Application (This is ok)");
 				System.exit(0);
 			} else {
 				return;
