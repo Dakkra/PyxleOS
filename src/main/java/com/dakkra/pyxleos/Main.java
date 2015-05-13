@@ -24,7 +24,6 @@ public class Main {
 		v.m = m;
 		c.m = m;
 		c.v = v;
-		System.out.println("Welcome to PyxleOS! Version: " + m.version);
 		// Start GUI
 		System.out.println("Displaying GUI");
 		v.createAndShowGUI();
