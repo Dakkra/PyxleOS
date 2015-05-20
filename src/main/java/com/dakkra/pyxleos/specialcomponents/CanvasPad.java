@@ -1,11 +1,13 @@
 package com.dakkra.pyxleos.specialcomponents;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
@@ -34,7 +36,7 @@ public class CanvasPad extends JComponent {
 	public CanvasPad(CanvasModel cvm, MainModel m) {
 		this.m = m;
 		this.cvm = cvm;
-		cvm.canvasImage = new BufferedImage(16, 16,
+		cvm.canvasImage = new BufferedImage(128, 128,
 				BufferedImage.TYPE_INT_ARGB);
 		this.image = cvm.canvasImage;
 		graphics2D = image.createGraphics();
@@ -97,9 +99,9 @@ public class CanvasPad extends JComponent {
 		public void mouseDragged(MouseEvent e) {
 			currentPoint = convertToImageCoord(e.getPoint());
 			if (graphics2D != null) {
-				graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-						RenderingHints.VALUE_ANTIALIAS_ON);
+				Stroke str = new BasicStroke(16);
 				graphics2D.setPaint(m.fgColor);
+				graphics2D.setStroke(str);
 				graphics2D.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x,
 						currentPoint.y);
 			}

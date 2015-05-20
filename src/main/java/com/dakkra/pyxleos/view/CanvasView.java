@@ -5,11 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.io.IOException;
 
 import javax.swing.JInternalFrame;
@@ -42,11 +37,13 @@ public class CanvasView {
 		cvm.menuBar = new JMenuBar();
 		// file menu
 		cvm.fileMenu = new JMenu(" File ");
-		cvm.fileMenu.setEnabled(false);
 		cvm.fileNew = new JMenuItem("New");
+		cvm.fileNew.setEnabled(false);
 		cvm.fileOpen = new JMenuItem("Open");
+		cvm.fileOpen.setEnabled(false);
 		cvm.fileSave = new JMenuItem("Save");
 		cvm.fileSave.addActionListener(new SaveListener());
+		cvm.fileSave.setEnabled(false);
 		cvm.fileExit = new JMenuItem("Exit");
 		cvm.fileExit.addActionListener(new ExitListener());
 		cvm.fileMenu.add(cvm.fileNew);
@@ -67,9 +64,9 @@ public class CanvasView {
 		cvm.containerPanel.setPreferredSize(new Dimension(cvm.canvasFrame
 				.getWidth(), cvm.canvasFrame.getHeight()));
 		cvm.containerPanel.setLayout(new BorderLayout());
-		
+
 		cvm.canvasPad = new CanvasPad(cvm, m);
-		
+
 		cvm.canvasPane = new JScrollPane(cvm.canvasPad);
 
 		cvm.containerPanel.add(cvm.canvasPane, BorderLayout.CENTER);
@@ -97,58 +94,4 @@ public class CanvasView {
 
 		}
 	}
-	 private class MouseAdapter implements MouseWheelListener, MouseListener, MouseMotionListener{
-
-		@Override
-		public void mouseDragged(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseMoved(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseWheelMoved(MouseWheelEvent e) {
-            if(e.getWheelRotation() == 1) {
-            //TODO make the canvas scale
-            }else {
-            }
-			
-		}
-		 
-	 }
 }
