@@ -134,6 +134,9 @@ public class MainView {
 				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		m.toolCopicPalette = new JMenuItem("New Copic Palette");
 		m.toolCopicPalette.addActionListener(new CopicPaletteListener(m));
+		m.toolCopicPalette.setMnemonic(KeyEvent.VK_M);
+		m.toolCopicPalette.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
+				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		m.toolsMenu.add(m.toolCanvas);
 		m.toolsMenu.add(m.toolCopicPalette);
 		m.toolsMenu.add(m.toolTextEditor);

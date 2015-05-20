@@ -7,6 +7,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import com.dakkra.pyxleos.specialcomponents.CanvasPad;
 
@@ -23,6 +24,8 @@ public class CanvasModel {
 
 	// canvas panel
 	public JPanel containerPanel;
+	//canvas scrollpane
+	public JScrollPane canvasPane;
 	// canvas canvas
 	public CanvasPad canvasPad;
 	// canvas image

@@ -29,12 +29,12 @@ public class CanvasPad extends JComponent {
 
 	// these are gonna hold our mouse coordinates
 	// private int currentX, currentY, oldX, oldY;
-	private Point currentPoint, oldPoint;
+	private Point currentPoint, primaryPoint;
 
 	public CanvasPad(CanvasModel cvm, MainModel m) {
 		this.m = m;
 		this.cvm = cvm;
-		cvm.canvasImage = new BufferedImage(300, 300,
+		cvm.canvasImage = new BufferedImage(16, 16,
 				BufferedImage.TYPE_INT_ARGB);
 		this.image = cvm.canvasImage;
 		graphics2D = image.createGraphics();
@@ -90,18 +90,21 @@ public class CanvasPad extends JComponent {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			oldPoint = convertToImageCoord(e.getPoint());
+			primaryPoint = convertToImageCoord(e.getPoint());
+			
 		}
 
 		public void mouseDragged(MouseEvent e) {
 			currentPoint = convertToImageCoord(e.getPoint());
 			if (graphics2D != null) {
+				graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+						RenderingHints.VALUE_ANTIALIAS_ON);
 				graphics2D.setPaint(m.fgColor);
-				graphics2D.drawLine(oldPoint.x, oldPoint.y, currentPoint.x,
+				graphics2D.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x,
 						currentPoint.y);
 			}
 			repaint();
-			oldPoint = currentPoint;
+			primaryPoint = currentPoint;
 		}
 
 		@Override

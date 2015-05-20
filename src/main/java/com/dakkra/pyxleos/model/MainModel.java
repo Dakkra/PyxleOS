@@ -14,9 +14,9 @@ import javax.swing.JToolBar;
 import com.dakkra.pyxleos.specialcomponents.ToolbarColorBox;
 
 public class MainModel {
-	public final String version = "0.2.3";
-	public String applicationName = "PyxleOS";
-	public String applicationNameVersion = applicationName + " " + version;
+	public final String version = "0.2.4";
+	public final String applicationName = "PyxleOS";
+	public final String applicationNameVersion = applicationName + " " + version;
 	// main frame
 	public JFrame mainFrame;
 	// main menu bar
