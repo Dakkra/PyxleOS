@@ -36,7 +36,7 @@ public class CanvasPad extends JComponent {
 	public CanvasPad(CanvasModel cvm, MainModel m) {
 		this.m = m;
 		this.cvm = cvm;
-		cvm.canvasImage = new BufferedImage(128, 128,
+		cvm.canvasImage = new BufferedImage(1280, 1280,
 				BufferedImage.TYPE_INT_ARGB);
 		this.image = cvm.canvasImage;
 		graphics2D = image.createGraphics();
