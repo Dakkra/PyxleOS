@@ -2,16 +2,16 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
 
-mainClassName = 'com.dakkra.pyxleos.Main'
+mainClassName = 'com.dakkra.pyxleos.PyxleOS'
 
 sourceCompatibility = 1.7
-version = '0.2.4'
+version = '0.0.1::E'
 
 jar {
     manifest {
         attributes 'Implementation-Title': 'Gradle Quickstart',
                    'Implementation-Version': version,
-                   'Main-Class': 'com.dakkra.pyxleos.Main'
+                   'Main-Class': 'com.dakkra.pyxleos.PyxleOS'
     }
 }
 
