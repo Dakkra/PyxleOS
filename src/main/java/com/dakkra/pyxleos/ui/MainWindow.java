@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -14,6 +15,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -65,7 +67,14 @@ public class MainWindow {
 
 		jdp = new JDesktopPane();
 
+		JToolBar toolBar = new JToolBar();
+		toolBar.add(new JButton("Button"));
+		toolBar.add(new JButton("Button"));
+		toolBar.add(new JButton("Button"));
+		toolBar.setOrientation(JToolBar.NORTH);
+		
 		mFrame.add(jdp, BorderLayout.CENTER);
+		mFrame.add(toolBar,BorderLayout.WEST);
 
 		mFrame.setVisible(true);
 
