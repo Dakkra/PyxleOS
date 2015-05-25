@@ -75,7 +75,14 @@ public class MainWindow {
 		
 		mFrame.add(jdp, BorderLayout.CENTER);
 		mFrame.add(toolBar,BorderLayout.WEST);
-
+		
+		JInternalFrame iframe = new JInternalFrame("test",true,true,true,true);
+		iframe.setBounds(0, 0, 400, 400);
+		iframe.requestFocusInWindow();
+		iframe.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
+		iframe.setVisible(true);
+		addIFrame(iframe);
+		
 		mFrame.setVisible(true);
 
 	}
