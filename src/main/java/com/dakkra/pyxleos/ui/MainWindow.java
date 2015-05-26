@@ -3,6 +3,7 @@ package com.dakkra.pyxleos.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -60,8 +62,18 @@ public class MainWindow {
 		mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mFrame.setMinimumSize(new Dimension(950, 600));
 		mFrame.setLocationRelativeTo(null);
+		Image icon;
+		InputStream input = getClass().getResourceAsStream("/Icon.png");
+		try {
+			icon = ImageIO.read(input);
+			mFrame.setIconImage(icon);
+		} catch (IOException e) {
+			// Intentionally ignore exception (because it should never happen)
+		}
+		
 		initializeMainMenu();
 
+//		Initialize jdp
 		jdp = new JDesktopPane();
 
 		JToolBar toolBar = new JToolBar();

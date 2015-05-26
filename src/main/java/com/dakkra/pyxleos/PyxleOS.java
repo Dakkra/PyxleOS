@@ -8,5 +8,7 @@ public class PyxleOS {
 		
 		MainWindow mw = new MainWindow();
 		mw.cnsUI();
+		
+		System.out.println("Ready!");
 	}
 }
