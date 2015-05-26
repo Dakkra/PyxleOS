@@ -1,0 +1,10 @@
+PyxleOS::E(dited)
+(c) By Chris Soderquist
+http://pyxleos.sourceforge.net
+
+PyxleOS is under a GNU GENERAL PUBLIC LICENSE V2.0
+https://www.gnu.org/licenses/gpl-2.0.html
+
+Pyxle(pixel) OS(open source)
+
+Check out http://dakkra.com

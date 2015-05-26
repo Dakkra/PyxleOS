@@ -6,7 +6,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -15,13 +16,13 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import com.dakkra.pyxleos.PyxleOS;
 import com.dakkra.pyxleos.util.Util;
 
 public class MainWindow {
@@ -137,13 +138,7 @@ public class MainWindow {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int confirm = JOptionPane.showConfirmDialog(null,
-					"Are you sure you wish to exit?");
-			if (confirm == JOptionPane.OK_OPTION) {
-				System.exit(0);
-			} else {
-				return;
-			}
+			Util.exitApp();
 		}
 	}
 
@@ -157,23 +152,23 @@ public class MainWindow {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JInternalFrame aboutFrame = Util.createIFrame("About");
-			aboutFrame.setBounds(0, 0, 400, 200);
-			aboutFrame
-					.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
-			aboutFrame.toFront();
+//			aboutFrame.setBounds(0, 0, 400, 200);
+
+			JTextArea textArea = new JTextArea("");
+			textArea.setEditable(false);
+
+			InputStream input = PyxleOS.class
+					.getResourceAsStream("/about.txt");
+			String content = Util.read(input);
 			try {
-				aboutFrame.setSelected(true);
-			} catch (PropertyVetoException e1) {
+				input.close();
+			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-
-			JTextArea textArea = new JTextArea(
-					"PyxleOS::E\n(c) By Chris Soderquist\n http://pyxleos.sourceforge.net \n \nPyxleOS is under a GNU GENERAL PUBLIC LICENSE V2.0\n https://www.gnu.org/licenses/gpl-2.0.html \n\nPyxle(pixel) OS(open source)\n\nCheck out http://dakkra.com");
-			textArea.setEditable(false);
+			textArea.setText(content);
 
 			aboutFrame.add(textArea);
 
-			aboutFrame.setVisible(true);
 			mw.addIFrame(aboutFrame);
 		}
 	}

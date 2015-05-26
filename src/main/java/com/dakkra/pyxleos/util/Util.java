@@ -1,6 +1,12 @@
 package com.dakkra.pyxleos.util;
 
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 public class Util {
 	private Util() {
@@ -9,6 +15,57 @@ public class Util {
 
 	public static JInternalFrame createIFrame(String name) {
 		JInternalFrame iFrame = new JInternalFrame(name, true, true, true, true);
+		iFrame.setBounds(0, 0, 400, 400);
+		iFrame.requestFocusInWindow();
+		iFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
+		iFrame.toFront();
+		try {
+			iFrame.setSelected(true);
+		} catch (PropertyVetoException e1) {
+			e1.printStackTrace();
+		}
+		iFrame.setVisible(true);
 		return iFrame;
+	}
+
+	public static void exitApp() {
+		int confirm = JOptionPane.showConfirmDialog(null,
+				"Are you sure you want to exit?");
+		if (confirm == JOptionPane.OK_OPTION) {
+			System.exit(0);
+		} else {
+			return;
+		}
+	}
+
+	public static String read(InputStream stream) {
+		StringWriter writer = new StringWriter();
+
+		int read = 0;
+		byte[] buffer = new byte[4096];
+		try {
+			while ((read = stream.read(buffer)) != -1) {
+				writer.write(new String(buffer, 0, read));
+			}
+		} catch (IOException exception) {
+			exception.printStackTrace(System.err);
+		} finally {
+			if (stream != null) {
+				try {
+					stream.close();
+				} catch (IOException closeException) {
+					closeException.printStackTrace(System.err);
+				}
+			}
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (IOException closeException) {
+					closeException.printStackTrace(System.err);
+				}
+			}
+		}
+
+		return writer.toString();
 	}
 }
