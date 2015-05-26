@@ -3,6 +3,8 @@ package com.dakkra.pyxleos.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -63,27 +65,21 @@ public class MainWindow {
 		jdp = new JDesktopPane();
 
 		JToolBar toolBar = new JToolBar();
-		toolBar.add(new JButton("Button"));
-		toolBar.add(new JButton("Button"));
-		toolBar.add(new JButton("Button"));
+		toolBar.add(new JButton("Color"));
 		toolBar.setOrientation(JToolBar.NORTH);
 
 		mFrame.add(jdp, BorderLayout.CENTER);
 		mFrame.add(toolBar, BorderLayout.WEST);
-
-		JInternalFrame ifrrame = new JInternalFrame("test", true, true, true,
-				true);
-		ifrrame.setBounds(0, 0, 400, 400);
-		ifrrame.requestFocusInWindow();
-		ifrrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
-		ifrrame.setVisible(true);
-		addIFrame(ifrrame);
 
 		mFrame.setVisible(true);
 
 	}
 
 	public void addIFrame(JInternalFrame iFrame) {
+		Rectangle bounds = jdp.getBounds();
+		Point center = new Point((bounds.width / 2) - (iFrame.getWidth() / 2),
+				(bounds.height / 2) - (iFrame.getHeight() / 2));
+		iFrame.setLocation(center);
 		jdp.add(iFrame);
 		jdp.setComponentZOrder(iFrame, 0);
 	}
@@ -152,13 +148,12 @@ public class MainWindow {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JInternalFrame aboutFrame = Util.createIFrame("About");
-//			aboutFrame.setBounds(0, 0, 400, 200);
+			aboutFrame.setBounds(0, 0, 400, 200);
 
 			JTextArea textArea = new JTextArea("");
 			textArea.setEditable(false);
 
-			InputStream input = PyxleOS.class
-					.getResourceAsStream("/about.txt");
+			InputStream input = PyxleOS.class.getResourceAsStream("/about.txt");
 			String content = Util.read(input);
 			try {
 				input.close();
