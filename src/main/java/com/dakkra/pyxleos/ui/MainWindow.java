@@ -20,6 +20,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
@@ -94,6 +95,7 @@ public class MainWindow {
 		iFrame.setLocation(center);
 		jdp.add(iFrame);
 		jdp.setComponentZOrder(iFrame, 0);
+		jdp.setSelectedFrame(iFrame);
 	}
 
 	private void initializeMainMenu() {
@@ -178,8 +180,10 @@ public class MainWindow {
 				e1.printStackTrace();
 			}
 			textArea.setText(content);
+			
+			JScrollPane textPane = new JScrollPane(textArea);
 
-			aboutFrame.add(textArea);
+			aboutFrame.add(textPane);
 
 			mw.addIFrame(aboutFrame);
 		}
@@ -195,7 +199,6 @@ public class MainWindow {
 		public void actionPerformed(ActionEvent e) {
 			@SuppressWarnings("unused")
 			TextEdit te = new TextEdit(mw);
-		}
-		
+		}	
 	}
 }

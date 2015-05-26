@@ -37,6 +37,16 @@ public class Util {
 			return;
 		}
 	}
+	
+	public static void exitIFrame(JInternalFrame iFrame){
+		int confirm = JOptionPane.showConfirmDialog(null,
+				"Are you sure you want to close?");
+		if (confirm == JOptionPane.OK_OPTION) {
+			iFrame.dispose();
+		} else {
+			return;
+		}
+	}
 
 	public static String read(InputStream stream) {
 		StringWriter writer = new StringWriter();
