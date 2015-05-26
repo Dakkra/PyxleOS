@@ -78,10 +78,9 @@ public class MainWindow {
 
 		JToolBar toolBar = new JToolBar();
 		toolBar.add(new JButton("Color"));
-		toolBar.setOrientation(JToolBar.NORTH);
 
 		mFrame.add(jdp, BorderLayout.CENTER);
-		mFrame.add(toolBar, BorderLayout.WEST);
+		mFrame.add(toolBar, BorderLayout.NORTH);
 
 		mFrame.setVisible(true);
 
