@@ -27,6 +27,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.dakkra.pyxleos.PyxleOS;
+import com.dakkra.pyxleos.modules.textedit.TextEdit;
 import com.dakkra.pyxleos.util.Util;
 
 public class MainWindow {
@@ -70,10 +71,10 @@ public class MainWindow {
 		} catch (IOException e) {
 			// Intentionally ignore exception (because it should never happen)
 		}
-		
+
 		initializeMainMenu();
 
-//		Initialize jdp
+		// Initialize jdp
 		jdp = new JDesktopPane();
 
 		JToolBar toolBar = new JToolBar();
@@ -109,7 +110,12 @@ public class MainWindow {
 		fileMenu.add(fileMQuit);
 		// Tools menu
 		JMenu toolsMenu = new JMenu(" Tools ");
-		toolsMenu.setEnabled(false);
+		JMenuItem toolsMTE = new JMenuItem("TextEdit");
+		toolsMTE.addActionListener(new TextEditListener(this));
+		toolsMTE.setMnemonic(KeyEvent.VK_T);
+		toolsMTE.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
+				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+		toolsMenu.add(toolsMTE);
 		// About menu
 		JMenu aboutMenu = new JMenu(" About ");
 		JMenuItem aboutAbout = new JMenuItem("About");
@@ -177,5 +183,19 @@ public class MainWindow {
 
 			mw.addIFrame(aboutFrame);
 		}
+	}
+	
+	private class TextEditListener implements ActionListener{
+		MainWindow mw;
+		public TextEditListener(MainWindow mw){
+			this.mw = mw;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			@SuppressWarnings("unused")
+			TextEdit te = new TextEdit(mw);
+		}
+		
 	}
 }
