@@ -32,6 +32,10 @@ public class TextEdit {
 		textFile = null;
 		makeUI();
 	}
+	
+	public void setText(String text){
+		textArea.setText(text);
+	}
 
 	public String getText() {
 		String text = textArea.getText();
