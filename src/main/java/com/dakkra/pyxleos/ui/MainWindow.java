@@ -29,6 +29,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.dakkra.pyxleos.PyxleOS;
 import com.dakkra.pyxleos.modules.textedit.TextEdit;
+import com.dakkra.pyxleos.ui.painters.DesktopPainter;
 import com.dakkra.pyxleos.util.Util;
 
 public class MainWindow {
@@ -118,7 +119,7 @@ public class MainWindow {
 		toolsMTE.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
 				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		toolsMenu.add(toolsMTE);
-		//Options menu
+		// Options menu
 		JMenu optionsMenu = new JMenu(" Options ");
 		JMenuItem optionColor = new JMenuItem(" UI Customization ");
 		optionsMenu.add(optionColor);
@@ -151,6 +152,9 @@ public class MainWindow {
 		UIManager.put("nimbusLightBackground", baseColor);
 		UIManager.put("text", Color.WHITE);
 		UIManager.put("nimbusDisabledText", Color.WHITE);
+
+		UIManager.put("DesktopPane[Enabled].backgroundPainter",
+				new DesktopPainter());
 	}
 
 	// Action Listeners
@@ -185,7 +189,7 @@ public class MainWindow {
 				e1.printStackTrace();
 			}
 			textArea.setText(content);
-			
+
 			JScrollPane textPane = new JScrollPane(textArea);
 
 			aboutFrame.add(textPane);
@@ -193,10 +197,11 @@ public class MainWindow {
 			mw.addIFrame(aboutFrame);
 		}
 	}
-	
-	private class TextEditListener implements ActionListener{
+
+	private class TextEditListener implements ActionListener {
 		MainWindow mw;
-		public TextEditListener(MainWindow mw){
+
+		public TextEditListener(MainWindow mw) {
 			this.mw = mw;
 		}
 
@@ -204,6 +209,6 @@ public class MainWindow {
 		public void actionPerformed(ActionEvent e) {
 			@SuppressWarnings("unused")
 			TextEdit te = new TextEdit(mw);
-		}	
+		}
 	}
 }
