@@ -37,10 +37,16 @@ public class MainWindow {
 	private JDesktopPane jdp;
 
 	private JFrame mFrame;
+	
+	private UISettings uis;
 
 	// Constructor
 	public MainWindow() {
 
+	}
+	
+	public void setUIS(UISettings uis){
+		this.uis = uis;
 	}
 
 	public void cnsUI() {
@@ -142,9 +148,10 @@ public class MainWindow {
 	}
 
 	private void customizeNimbus() {
-		Color bgColor = new Color(43, 57, 71);
-		Color baseColor = new Color(43, 57, 71);
-		Color baseRedColor = new Color(60, 57, 71);
+		Color bgColor = uis.getbgColor();
+		Color baseColor = uis.getbaseColor();
+		Color baseRedColor = uis.getbaseRedColor();
+		Color textColor = uis.gettextColor();
 
 		// General Changes
 		UIManager.put("control", bgColor);
@@ -153,11 +160,11 @@ public class MainWindow {
 		UIManager.put("nimbusGreen", baseColor);
 		UIManager.put("nimbusRed", baseRedColor);
 		UIManager.put("nimbusLightBackground", baseColor);
-		UIManager.put("text", Color.WHITE);
-		UIManager.put("nimbusDisabledText", Color.WHITE);
+		UIManager.put("text", textColor);
+		UIManager.put("nimbusDisabledText", textColor);
 
 		UIManager.put("DesktopPane[Enabled].backgroundPainter",
-				new DesktopPainter());
+				new DesktopPainter(uis));
 	}
 
 	// Action Listeners

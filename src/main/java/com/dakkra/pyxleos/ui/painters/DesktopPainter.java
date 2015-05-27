@@ -10,17 +10,13 @@ import javax.swing.JDesktopPane;
 import javax.swing.Painter;
 
 import com.dakkra.pyxleos.PyxleOS;
+import com.dakkra.pyxleos.ui.UISettings;
 
 public class DesktopPainter implements Painter<JDesktopPane> {
     private Image image;
 
-    public DesktopPainter() {
-        try {
-            image = ImageIO.read(PyxleOS.class.getResource("/PyxleOS-Default.jpg"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public DesktopPainter(UISettings uis) {
+    	image = uis.getbgImage();
     }
 
 	@Override

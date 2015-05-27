@@ -164,9 +164,14 @@ public class TextEdit {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			textFile = TextEditControl.saveText(textFile, textArea, frame);
-			fileReopen.setEnabled(true);
-			System.out.println("Name: " + textFile.getName() + "||URI: "
-					+ textFile.getAbsolutePath());
+			
+			if (textFile != null) {
+				fileReopen.setEnabled(true);
+				System.out.println("Name: " + textFile.getName() + "||URI: "
+						+ textFile.getAbsolutePath());
+			}else{
+				return;
+			}
 		}
 	}
 
