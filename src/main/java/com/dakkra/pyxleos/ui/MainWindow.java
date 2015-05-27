@@ -122,6 +122,9 @@ public class MainWindow {
 		// Options menu
 		JMenu optionsMenu = new JMenu(" Options ");
 		JMenuItem optionColor = new JMenuItem(" UI Customization ");
+		optionColor.setMnemonic(KeyEvent.VK_V);
+		optionColor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
+				ActionEvent.ALT_MASK));
 		optionsMenu.add(optionColor);
 		// About menu
 		JMenu aboutMenu = new JMenu(" About ");
