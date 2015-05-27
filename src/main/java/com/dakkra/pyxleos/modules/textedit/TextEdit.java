@@ -108,6 +108,8 @@ public class TextEdit {
 		JScrollPane textPane = new JScrollPane(textArea);
 
 		frame.add(textPane);
+		
+		frame.setSize(550, 350);
 
 		mw.addIFrame(frame);
 	}

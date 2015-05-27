@@ -118,6 +118,10 @@ public class MainWindow {
 		toolsMTE.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
 				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		toolsMenu.add(toolsMTE);
+		//Options menu
+		JMenu optionsMenu = new JMenu(" Options ");
+		JMenuItem optionColor = new JMenuItem(" UI Customization ");
+		optionsMenu.add(optionColor);
 		// About menu
 		JMenu aboutMenu = new JMenu(" About ");
 		JMenuItem aboutAbout = new JMenuItem("About");
@@ -127,6 +131,7 @@ public class MainWindow {
 		// Add menus to bar
 		menuBar.add(fileMenu);
 		menuBar.add(toolsMenu);
+		menuBar.add(optionsMenu);
 		menuBar.add(aboutMenu);
 
 		mFrame.setJMenuBar(menuBar);
