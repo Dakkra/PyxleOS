@@ -7,6 +7,7 @@ What's new in this version
 2.Better Key Bindings for TextEdit module
 3.Protection on font size for text edit (keep users from killing the program)
 4.Branded Background Image ^-^
+5.Awesome splash screen!
 
 Made with love and Java,
 	Chris Soderquist
