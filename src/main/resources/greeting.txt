@@ -6,6 +6,7 @@ What's new in this version
 1.Better functioning UI (non-visible)
 2.Better Key Bindings for TextEdit module
 3.Protection on font size for text edit (keep users from killing the program)
+4.Branded Background Image ^-^
 
 Made with love and Java,
 	Chris Soderquist
