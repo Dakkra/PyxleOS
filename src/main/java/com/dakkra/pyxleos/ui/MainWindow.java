@@ -37,16 +37,19 @@ public class MainWindow {
 	private JDesktopPane jdp;
 
 	private JFrame mFrame;
-	
+
 	private UISettings uis;
+	
+	private UISettingsView uisv;
 
 	// Constructor
 	public MainWindow() {
 
 	}
-	
-	public void setUIS(UISettings uis){
+
+	public void setUIS(UISettings uis) {
 		this.uis = uis;
+		uisv = new UISettingsView(this);
 	}
 
 	public void cnsUI() {
@@ -100,6 +103,7 @@ public class MainWindow {
 		Point center = new Point((bounds.width / 2) - (iFrame.getWidth() / 2),
 				(bounds.height / 2) - (iFrame.getHeight() / 2));
 		iFrame.setLocation(center);
+		iFrame.setVisible(true);
 		jdp.add(iFrame);
 		jdp.setComponentZOrder(iFrame, 0);
 		jdp.setSelectedFrame(iFrame);
@@ -128,6 +132,7 @@ public class MainWindow {
 		// Options menu
 		JMenu optionsMenu = new JMenu(" Options ");
 		JMenuItem optionColor = new JMenuItem(" UI Customization ");
+		optionColor.addActionListener(new CustomizeUIEar());
 		optionColor.setMnemonic(KeyEvent.VK_V);
 		optionColor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
 				ActionEvent.ALT_MASK));
@@ -219,6 +224,14 @@ public class MainWindow {
 		public void actionPerformed(ActionEvent e) {
 			@SuppressWarnings("unused")
 			TextEdit te = new TextEdit(mw);
+		}
+	}
+
+	private class CustomizeUIEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			uisv.makeUI();
 		}
 	}
 }
