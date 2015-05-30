@@ -32,8 +32,8 @@ public class TextEdit {
 		textFile = null;
 		makeUI();
 	}
-	
-	public void setText(String text){
+
+	public void setText(String text) {
 		textArea.setText(text);
 	}
 
@@ -43,6 +43,7 @@ public class TextEdit {
 	}
 
 	private void makeUI() {
+
 		frame = Util.createIFrame("TextEdit");
 
 		JMenuBar menuBar = new JMenuBar();
@@ -108,7 +109,7 @@ public class TextEdit {
 		JScrollPane textPane = new JScrollPane(textArea);
 
 		frame.add(textPane);
-		
+
 		frame.setSize(550, 350);
 
 		mw.addIFrame(frame);
@@ -164,12 +165,12 @@ public class TextEdit {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			textFile = TextEditControl.saveText(textFile, textArea, frame);
-			
+
 			if (textFile != null) {
 				fileReopen.setEnabled(true);
 				System.out.println("Name: " + textFile.getName() + "||URI: "
 						+ textFile.getAbsolutePath());
-			}else{
+			} else {
 				return;
 			}
 		}
@@ -197,9 +198,10 @@ public class TextEdit {
 		public void actionPerformed(ActionEvent e) {
 			int size = Integer.parseInt(JOptionPane.showInputDialog(
 					"Input a new font size:", textAreaFont.getSize()));
-			if (size <= 0 || size >100){
-				JOptionPane.showMessageDialog(null, "Invalid size! (1-100 only)");
-			}else{
+			if (size <= 0 || size > 100) {
+				JOptionPane.showMessageDialog(null,
+						"Invalid size! (1-100 only)");
+			} else {
 				textAreaFont = new Font("Arial", Font.PLAIN, size);
 				textArea.setFont(textAreaFont);
 			}
