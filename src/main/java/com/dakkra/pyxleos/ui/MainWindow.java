@@ -49,7 +49,7 @@ public class MainWindow {
 
 	public void setUIS(UISettings uis) {
 		this.uis = uis;
-		uisv = new UISettingsView(this);
+		uisv = new UISettingsView(this, uis);
 	}
 
 	public void cnsUI() {

@@ -12,54 +12,55 @@ public class UISettings {
 	private Color bgColor = new Color(43, 57, 71);
 	private Color baseColor = new Color(43, 57, 71);
 	private Color baseRedColor = new Color(60, 57, 71);
-	private Color textColor = new Color(255,255,255);
+	private Color textColor = new Color(255, 255, 255);
 	private Image bg;
-	
-	public UISettings(){
+
+	public UISettings() {
 		try {
-			bg = ImageIO.read(PyxleOS.class.getResource("/PyxleOS-Default.jpg"));
+			bg = ImageIO
+					.read(PyxleOS.class.getResource("/PyxleOS-Default.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public Color getbgColor(){
+
+	public Color getbgColor() {
 		return bgColor;
 	}
-	
-	public void setbgColor (Color color){
+
+	public void setbgColor(Color color) {
 		bgColor = color;
 	}
-	
-	public Color getbaseColor(){
+
+	public Color getbaseColor() {
 		return baseColor;
 	}
-	
-	public void setbaseColor (Color color){
+
+	public void setbaseColor(Color color) {
 		baseColor = color;
 	}
-	
-	public Color getbaseRedColor(){
+
+	public Color getbaseRedColor() {
 		return baseRedColor;
 	}
-	
-	public void setbaseRedColor (Color color){
+
+	public void setbaseRedColor(Color color) {
 		baseRedColor = color;
 	}
-	
-	public Color gettextColor(){
+
+	public Color gettextColor() {
 		return textColor;
 	}
-	
-	public void settextColor (Color color){
+
+	public void settextColor(Color color) {
 		textColor = color;
 	}
-	
-	public Image getbgImage(){
+
+	public Image getbgImage() {
 		return bg;
 	}
-	
-	public void setbgImage(Image image){
+
+	public void setbgImage(Image image) {
 		bg = image;
 	}
 }
