@@ -37,8 +37,8 @@ public class Util {
 			return;
 		}
 	}
-	
-	public static void exitIFrame(JInternalFrame iFrame){
+
+	public static void exitIFrame(JInternalFrame iFrame) {
 		int confirm = JOptionPane.showConfirmDialog(null,
 				"Are you sure you want to close this module?");
 		if (confirm == JOptionPane.OK_OPTION) {

@@ -2,6 +2,7 @@ package com.dakkra.pyxleos.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
@@ -39,7 +40,7 @@ public class MainWindow {
 	private JFrame mFrame;
 
 	private UISettings uis;
-	
+
 	private UISettingsView uisv;
 
 	// Constructor
@@ -108,6 +109,14 @@ public class MainWindow {
 		jdp.setComponentZOrder(iFrame, 0);
 		jdp.setSelectedFrame(iFrame);
 	}
+	
+	public void updateGUI(){
+		Component[] components = mFrame.getComponents();
+		
+		for (int i = 0; i < components.length; i++){
+			components[i].repaint();
+		}
+	}
 
 	private void initializeMainMenu() {
 
@@ -152,7 +161,7 @@ public class MainWindow {
 		mFrame.setJMenuBar(menuBar);
 	}
 
-	private void updateNimbus() {
+	public void updateNimbus() {
 		Color bgColor = uis.getbgColor();
 		Color baseColor = uis.getbaseColor();
 		Color baseRedColor = uis.getbaseRedColor();
