@@ -30,7 +30,7 @@ public class Util {
 
 	public static void exitApp() {
 		int confirm = JOptionPane.showConfirmDialog(null,
-				"Are you sure you want to exit?");
+				"Are you sure you want to exit the application?");
 		if (confirm == JOptionPane.OK_OPTION) {
 			System.exit(0);
 		} else {
@@ -40,7 +40,7 @@ public class Util {
 	
 	public static void exitIFrame(JInternalFrame iFrame){
 		int confirm = JOptionPane.showConfirmDialog(null,
-				"Are you sure you want to close?");
+				"Are you sure you want to close this module?");
 		if (confirm == JOptionPane.OK_OPTION) {
 			iFrame.dispose();
 		} else {

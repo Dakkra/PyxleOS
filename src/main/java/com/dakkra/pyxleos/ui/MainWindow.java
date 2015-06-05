@@ -59,7 +59,7 @@ public class MainWindow {
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
-					customizeNimbus();
+					updateNimbus();
 					UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}
@@ -152,7 +152,7 @@ public class MainWindow {
 		mFrame.setJMenuBar(menuBar);
 	}
 
-	private void customizeNimbus() {
+	private void updateNimbus() {
 		Color bgColor = uis.getbgColor();
 		Color baseColor = uis.getbaseColor();
 		Color baseRedColor = uis.getbaseRedColor();
