@@ -83,10 +83,14 @@ public class UISettingsView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Color newColor = JColorChooser.showDialog(null, "Color", uis.getbgColor());
-			uis.setbgColor(newColor);
-			mw.updateNimbus();
-			mw.updateGUI();
-			button.setColor(newColor);
+			if (newColor != null) {
+				uis.setbgColor(newColor);
+				mw.updateNimbus();
+				mw.updateGUI();
+				button.setColor(newColor);
+			}else{
+				return;
+			}
 		}
 
 	}
@@ -101,10 +105,14 @@ public class UISettingsView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Color newColor = JColorChooser.showDialog(null, "Color", uis.getbaseColor());
-			uis.setbaseColor(newColor);
-			mw.updateNimbus();
-			mw.updateGUI();
-			button.setColor(newColor);
+			if (newColor != null) {
+				uis.setbaseColor(newColor);
+				mw.updateNimbus();
+				mw.updateGUI();
+				button.setColor(newColor);
+			}else{
+				return;
+			}
 		}
 
 	}
@@ -119,10 +127,14 @@ public class UISettingsView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Color newColor = JColorChooser.showDialog(null, "Color", uis.getbaseRedColor());
-			uis.setbaseRedColor(newColor);
-			mw.updateNimbus();
-			mw.updateGUI();
-			button.setColor(newColor);
+			if (newColor != null) {
+				uis.setbaseRedColor(newColor);
+				mw.updateNimbus();
+				mw.updateGUI();
+				button.setColor(newColor);
+			}else{
+				return;
+			}
 		}
 
 	}
@@ -137,10 +149,14 @@ public class UISettingsView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Color newColor = JColorChooser.showDialog(null, "Color", uis.gettextColor());
-			uis.settextColor(newColor);
-			mw.updateNimbus();
-			mw.updateGUI();
-			button.setColor(newColor);
+			if (newColor != null) {
+				uis.settextColor(newColor);
+				mw.updateNimbus();
+				mw.updateGUI();
+				button.setColor(newColor);
+			}else{
+				return;
+			}
 		}
 
 	}
