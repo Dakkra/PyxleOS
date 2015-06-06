@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.undo.UndoManager;
 
 import com.dakkra.pyxleos.ui.MainWindow;
 import com.dakkra.pyxleos.util.Util;
@@ -28,6 +29,8 @@ public class TextEdit {
 	private File textFile;
 	private JMenuItem fileReopen;
 	private Font textAreaFont;
+
+	private UndoManager undoManager = new UndoManager();
 
 	public TextEdit(MainWindow mw) {
 		this.mw = mw;
@@ -97,6 +100,21 @@ public class TextEdit {
 		fileMenu.add(fileSaveAs);
 		fileMenu.add(fileExit);
 
+		JMenu edit = new JMenu(" Edit ");
+		JMenuItem undo = new JMenuItem("Undo");
+		undo.addActionListener(new UndoEar());
+		undo.setMnemonic(KeyEvent.VK_Z);
+		undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+				ActionEvent.CTRL_MASK));
+		JMenuItem redo = new JMenuItem("Redo");
+		redo.addActionListener(new RedoEar());
+		redo.setMnemonic(KeyEvent.VK_Z);
+		redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+
+		edit.add(undo);
+		edit.add(redo);
+
 		JMenu options = new JMenu(" Options ");
 		JMenuItem textSize = new JMenuItem("Text Size");
 		textSize.addActionListener(new TextSizeEar());
@@ -106,9 +124,12 @@ public class TextEdit {
 		options.add(textSize);
 
 		menuBar.add(fileMenu);
+		menuBar.add(edit);
 		menuBar.add(options);
 
 		textArea = new JTextArea("");
+
+		textArea.getDocument().addUndoableEditListener(undoManager);
 
 		textAreaFont = Util.makeFont(17, Font.PLAIN);
 
@@ -202,6 +223,28 @@ public class TextEdit {
 				return;
 			}
 		}
+	}
+
+	private class RedoEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (undoManager.canRedo()) {
+				undoManager.redo();
+			}
+		}
+
+	}
+
+	private class UndoEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (undoManager.canUndo()) {
+				undoManager.undo();
+			}
+		}
+
 	}
 
 	private class TextSizeEar implements ActionListener {
