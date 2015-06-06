@@ -61,6 +61,8 @@ public class MainWindow {
 
 	private File appDir;
 
+	private boolean firstRun;
+
 	// Constructor
 	public MainWindow(UISettings uis) {
 		this.uis = uis;
@@ -69,11 +71,13 @@ public class MainWindow {
 		colorPropertiesFile = new File(appDir, "colors.pyxos");
 		if (colorPropertiesFile.exists()) {
 			loadSettings();
+			firstRun = false;
 		} else {
+			firstRun = true;
 			if (appDir.mkdirs()) {
 				System.out.println("application directory created");
 			} else {
-				System.out.println("failed to make application directory");
+				System.out.println("failed to create application directory");
 			}
 			saveSettings();
 			loadSettings();
@@ -267,8 +271,10 @@ public class MainWindow {
 
 			oStream.close();
 
-			JOptionPane.showMessageDialog(mFrame,
-					"Theme saved! Please restart for full effect");
+			if (!firstRun) {
+				JOptionPane.showMessageDialog(mFrame,
+						"Theme saved! Please restart for full effect");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(mFrame, "Error while saving theme");
