@@ -1,6 +1,8 @@
 package com.dakkra.pyxleos.modules.textedit;
 
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -40,6 +42,14 @@ public class TextEdit {
 	public String getText() {
 		String text = textArea.getText();
 		return text;
+	}
+
+	public void packFrame() {
+		frame.pack();
+		Rectangle bounds = mw.getDesktopPaneBounds();
+		Point center = new Point((bounds.width / 2) - (frame.getWidth() / 2),
+				(bounds.height / 2) - (frame.getHeight() / 2));
+		frame.setLocation(center);
 	}
 
 	private void makeUI() {

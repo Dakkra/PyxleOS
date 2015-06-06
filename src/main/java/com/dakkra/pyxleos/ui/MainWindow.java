@@ -130,8 +130,13 @@ public class MainWindow {
 
 	}
 
-	public void addIFrame(JInternalFrame iFrame) {
+	public Rectangle getDesktopPaneBounds() {
 		Rectangle bounds = jdp.getBounds();
+		return bounds;
+	}
+
+	public void addIFrame(JInternalFrame iFrame) {
+		Rectangle bounds = getDesktopPaneBounds();
 		Point center = new Point((bounds.width / 2) - (iFrame.getWidth() / 2),
 				(bounds.height / 2) - (iFrame.getHeight() / 2));
 		iFrame.setLocation(center);

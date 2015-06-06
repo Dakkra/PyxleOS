@@ -28,6 +28,7 @@ public class PyxleOS {
 			e1.printStackTrace();
 		}
 		te.setText(content);
+		te.packFrame();
 
 		System.out.println("Ready!");
 	}
