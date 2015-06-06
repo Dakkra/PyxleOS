@@ -9,6 +9,7 @@ What's new in this version
 4.Branded Background Image ^-^
 5.Awesome splash screen!
 6.Custom UI Colors!
+7.New font for textEdit module!
 
 Made with love and Java,
 	Chris Soderquist

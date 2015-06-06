@@ -1,5 +1,7 @@
 package com.dakkra.pyxleos.util;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +9,8 @@ import java.io.StringWriter;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+
+import com.dakkra.pyxleos.PyxleOS;
 
 public class Util {
 
@@ -79,4 +83,25 @@ public class Util {
 
 		return writer.toString();
 	}
+
+	public static Font makeFont(int size, int style) {
+		InputStream in = PyxleOS.class
+				.getResourceAsStream("/SourceSansPro-Regular.ttf");
+		Font myFont = null;
+		try {
+			myFont = Font.createFont(Font.TRUETYPE_FONT, in).deriveFont(style,
+					size);
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (myFont == null) {
+			myFont = new Font("Plain", style, 12);
+		}
+		return myFont;
+	}
+
 }

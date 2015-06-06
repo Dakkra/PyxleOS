@@ -100,7 +100,7 @@ public class TextEdit {
 
 		textArea = new JTextArea("");
 
-		textAreaFont = new Font("Arial", Font.PLAIN, 17);
+		textAreaFont = Util.makeFont(17, Font.PLAIN);
 
 		textArea.setFont(textAreaFont);
 
@@ -202,7 +202,7 @@ public class TextEdit {
 				JOptionPane.showMessageDialog(null,
 						"Invalid size! (1-100 only)");
 			} else {
-				textAreaFont = new Font("Arial", Font.PLAIN, size);
+				textAreaFont = Util.makeFont(size, Font.PLAIN);
 				textArea.setFont(textAreaFont);
 			}
 		}

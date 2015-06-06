@@ -264,8 +264,11 @@ public class MainWindow {
 			properties.store(oStream, "Colors");
 
 			oStream.close();
+
+			JOptionPane.showMessageDialog(mFrame, "Theme saved!");
 		} catch (IOException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(mFrame, "Error while saving theme");
 		}
 	}
 
