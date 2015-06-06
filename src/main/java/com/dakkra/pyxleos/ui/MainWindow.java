@@ -175,7 +175,7 @@ public class MainWindow {
 		toolsMenu.add(toolsMTE);
 		// Options menu
 		JMenu optionsMenu = new JMenu(" Options ");
-		JMenuItem optionColor = new JMenuItem(" UI Customization ");
+		JMenuItem optionColor = new JMenuItem(" Appearance ");
 		optionColor.addActionListener(new CustomizeUIEar());
 		optionColor.setMnemonic(KeyEvent.VK_V);
 		optionColor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
