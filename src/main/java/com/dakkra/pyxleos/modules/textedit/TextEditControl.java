@@ -20,7 +20,7 @@ public class TextEditControl {
 	public static String readText(File textFile, JInternalFrame frame) {
 		String name = textFile.getName();
 		frame.setTitle(name);
-		
+
 		System.out.println("Opening " + textFile);
 		FileReader reader = null;
 		try {
@@ -50,12 +50,13 @@ public class TextEditControl {
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return fullText;
 	}
 
-	public static File saveText(File textFile, JTextArea textArea, JInternalFrame frame) {
-		
+	public static File saveText(File textFile, JTextArea textArea,
+			JInternalFrame frame) {
+
 		if (textFile != null) {
 			File saveFile = new File(textFile.getAbsolutePath());
 			String fullText = textArea.getText();
@@ -76,10 +77,8 @@ public class TextEditControl {
 			int returnval = saveJFC.showSaveDialog(null);
 			if (returnval == JFileChooser.APPROVE_OPTION) {
 				textFile = saveJFC.getSelectedFile();
-				System.out.println("Saving "
-						+ textFile.getName());
-				try (FileWriter fw = new FileWriter(
-						textFile)) {
+				System.out.println("Saving " + textFile.getName());
+				try (FileWriter fw = new FileWriter(textFile)) {
 					fw.write("" + fullText);
 					System.out.println("Got here");
 					frame.setTitle(textFile.getName());
@@ -91,7 +90,7 @@ public class TextEditControl {
 			}
 		}
 		return textFile;
-		
+
 	}
 
 	public static void reset(JInternalFrame frame, JTextArea textArea) {

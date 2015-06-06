@@ -85,10 +85,10 @@ public class UISettings {
 		baseRedColor = new Color(81, 81, 81);
 		textColor = new Color(255, 255, 255);
 	}
-	
+
 	public void setSciFi() {
 		bgColor = new Color(51, 43, 71);
-		baseColor = new Color(53,88,57);
+		baseColor = new Color(53, 88, 57);
 		baseRedColor = new Color(14, 133, 34);
 		textColor = new Color(255, 255, 255);
 	}

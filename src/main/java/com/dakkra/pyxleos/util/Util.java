@@ -9,7 +9,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 public class Util {
-	
+
 	private Util() {
 
 	}

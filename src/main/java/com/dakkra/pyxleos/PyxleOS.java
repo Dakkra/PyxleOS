@@ -9,16 +9,16 @@ import com.dakkra.pyxleos.ui.UISettings;
 import com.dakkra.pyxleos.util.Util;
 
 public class PyxleOS {
-	public static void main(String[]args){
+	public static void main(String[] args) {
 		System.out.println("Initializing PyxleOS::E");
-		
+
 		UISettings uis = new UISettings();
-		
+
 		MainWindow mw = new MainWindow(uis);
-		
+
 		mw.setUIS();
 		mw.cnsUI();
-		
+
 		TextEdit te = new TextEdit(mw);
 		InputStream input = PyxleOS.class.getResourceAsStream("/greeting.txt");
 		String content = Util.read(input);
@@ -28,7 +28,7 @@ public class PyxleOS {
 			e1.printStackTrace();
 		}
 		te.setText(content);
-		
+
 		System.out.println("Ready!");
 	}
 }
