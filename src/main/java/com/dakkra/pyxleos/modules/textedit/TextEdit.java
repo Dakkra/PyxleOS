@@ -213,9 +213,9 @@ public class TextEdit {
 			} catch (NumberFormatException e1) {
 				System.out.println("Invalid Size or user cancelled");
 			}
-			if (size <= 0 || size > 100) {
-				JOptionPane.showMessageDialog(null,
-						"Invalid size! (1-100 only)");
+			if (size <= 0 || size > 70) {
+				JOptionPane
+						.showMessageDialog(null, "Invalid size! (1-70 only)");
 			} else {
 				textAreaFont = Util.makeFont(size, Font.PLAIN);
 				textArea.setFont(textAreaFont);
