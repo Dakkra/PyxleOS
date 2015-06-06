@@ -12,9 +12,11 @@ public class PyxleOS {
 	public static void main(String[] args) {
 		System.out.println("Initializing PyxleOS::E");
 
+		ColorReference cr = new ColorReference();
+
 		UISettings uis = new UISettings();
 
-		MainWindow mw = new MainWindow(uis);
+		MainWindow mw = new MainWindow(uis, cr);
 
 		mw.setUIS();
 		mw.cnsUI();

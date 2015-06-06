@@ -72,7 +72,8 @@ public class UISettingsView {
 		mPanel.add(baseColorButton, "wrap");
 
 		mPanel.add(new JLabel("Selection:"));
-		UIColorButton redColorButton = new UIColorButton(uis.getselectionRedColor());
+		UIColorButton redColorButton = new UIColorButton(
+				uis.getselectionRedColor());
 		redColorButton.addActionListener(new RedColorButtonEar(redColorButton));
 		mPanel.add(redColorButton, "wrap");
 

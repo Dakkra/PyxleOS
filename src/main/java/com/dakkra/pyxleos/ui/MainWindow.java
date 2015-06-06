@@ -36,6 +36,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
 import com.dakkra.pyxleos.modules.textedit.TextEdit;
 import com.dakkra.pyxleos.ui.painters.DesktopPainter;
@@ -43,6 +44,8 @@ import com.dakkra.pyxleos.util.Util;
 
 public class MainWindow {
 	// Create class fields
+	private ColorReference cr;
+
 	private JDesktopPane jdp;
 
 	private JFrame mFrame;
@@ -64,7 +67,8 @@ public class MainWindow {
 	private boolean firstRun;
 
 	// Constructor
-	public MainWindow(UISettings uis) {
+	public MainWindow(UISettings uis, ColorReference cr) {
+		this.cr = cr;
 		this.uis = uis;
 		// If settings don't exist yet, make them
 		appDir = new File(System.getProperty("user.home"), "PyxleOS");
@@ -125,10 +129,12 @@ public class MainWindow {
 		jdp = new JDesktopPane();
 
 		JToolBar toolBar = new JToolBar();
-		toolBar.add(new JButton("Color"));
+		toolBar.add(new JButton("Button"));
 
 		mFrame.add(jdp, BorderLayout.CENTER);
 		mFrame.add(toolBar, BorderLayout.NORTH);
+
+		updateGUI();
 
 		mFrame.setVisible(true);
 
@@ -279,6 +285,22 @@ public class MainWindow {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(mFrame, "Error while saving theme");
 		}
+	}
+
+	public Color getfgPaintColor() {
+		return cr.getfgColor();
+	}
+
+	public void setCfgPaintColor(Color color) {
+		cr.setfgColor(color);
+	}
+
+	public Color getCbgPaintColor() {
+		return cr.getbgColor();
+	}
+
+	public void setCbgPaintColor(Color color) {
+		cr.setbgColor(color);
 	}
 
 	// Action Listeners
