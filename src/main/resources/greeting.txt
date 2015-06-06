@@ -8,6 +8,7 @@ What's new in this version
 3.Protection on font size for text edit (keep users from killing the program)
 4.Branded Background Image ^-^
 5.Awesome splash screen!
+6.Custom UI Colors!
 
 Made with love and Java,
 	Chris Soderquist

@@ -11,7 +11,7 @@ import com.dakkra.pyxleos.PyxleOS;
 public class UISettings {
 	private Color bgColor = new Color(43, 57, 71);
 	private Color baseColor = new Color(43, 57, 71);
-	private Color baseRedColor = new Color(60, 57, 71);
+	private Color baseRedColor = new Color(7, 75, 125);
 	private Color textColor = new Color(255, 255, 255);
 	private Image bg;
 
@@ -62,5 +62,13 @@ public class UISettings {
 
 	public void setbgImage(Image image) {
 		bg = image;
+	}
+	
+//	Default Options
+	public void setDefault(){
+		bgColor = new Color(43, 57, 71);
+		baseColor = new Color(43, 57, 71);
+		baseRedColor = new Color(7, 75, 125);
+		textColor = new Color(255, 255, 255);
 	}
 }

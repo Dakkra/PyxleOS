@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -21,10 +22,12 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -111,11 +114,17 @@ public class MainWindow {
 	}
 	
 	public void updateGUI(){
-		Component[] components = mFrame.getComponents();
+		updateNimbus();
 		
-		for (int i = 0; i < components.length; i++){
-			components[i].repaint();
+		for (Component component : mFrame.getComponents()){
+			component.repaint();
 		}
+		
+		for (Window window : Window.getWindows()) {
+			SwingUtilities.updateComponentTreeUI(window);
+		}
+		
+		JOptionPane.showMessageDialog(mFrame, "Some items may require a restart");
 	}
 
 	private void initializeMainMenu() {
@@ -176,6 +185,8 @@ public class MainWindow {
 		UIManager.put("nimbusLightBackground", baseColor);
 		UIManager.put("text", textColor);
 		UIManager.put("nimbusDisabledText", textColor);
+		UIManager.put("nimbusFocus", baseColor.brighter());
+		UIManager.put("nimbusSelectionBackground", baseRedColor);
 
 		UIManager.put("DesktopPane[Enabled].backgroundPainter",
 				new DesktopPainter(uis));

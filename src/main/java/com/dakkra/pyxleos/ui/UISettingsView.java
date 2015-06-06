@@ -1,7 +1,6 @@
 package com.dakkra.pyxleos.ui;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +8,8 @@ import javax.swing.JColorChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
 
 import com.dakkra.pyxleos.ui.components.ColorButton;
 import com.dakkra.pyxleos.util.Util;
@@ -26,48 +27,36 @@ public class UISettingsView {
 
 		JInternalFrame frame = Util.createIFrame("Appearance");
 
-		FlowLayout layout = new FlowLayout();
-		layout.setAlignment(FlowLayout.RIGHT);
+		MigLayout layout = new MigLayout();
+		
+		JPanel mPanel = new JPanel(layout);
+		mPanel.setBackground(Color.DARK_GRAY);
 
-		JPanel bgColorPanel = new JPanel();
-		bgColorPanel.setLayout(layout);
-		bgColorPanel.setBackground(Color.DARK_GRAY.darker());
-		bgColorPanel.add(new JLabel("BG Color: "));
+		mPanel.add(new JLabel("Background: "));
 		ColorButton bgColorButton = new ColorButton(uis.getbgColor());
 		bgColorButton.addActionListener(new BGColorButtonEar(bgColorButton));
-		bgColorPanel.add(bgColorButton);
+		mPanel.add(bgColorButton,"wrap");
 
-		JPanel baseColorPanel = new JPanel();
-		baseColorPanel.setLayout(layout);
-		baseColorPanel.setBackground(Color.DARK_GRAY.darker());
-		baseColorPanel.add(new JLabel("Base Color: "));
+		mPanel.add(new JLabel("Base: "));
 		ColorButton baseColorButton = new ColorButton(uis.getbaseColor());
-		baseColorButton.addActionListener(new BaseColorButtonEar(baseColorButton));
-		baseColorPanel.add(baseColorButton);
+		baseColorButton.addActionListener(new BaseColorButtonEar(
+				baseColorButton));
+		mPanel.add(baseColorButton,"wrap");
 
-		JPanel baseRedColorPanel = new JPanel();
-		baseRedColorPanel.setLayout(layout);
-		baseRedColorPanel.setBackground(Color.DARK_GRAY.darker());
-		baseRedColorPanel.add(new JLabel("Red Color: "));
+		mPanel.add(new JLabel("Selection: "));
 		ColorButton redColorButton = new ColorButton(uis.getbaseRedColor());
 		redColorButton.addActionListener(new RedColorButtonEar(redColorButton));
-		baseRedColorPanel.add(redColorButton);
+		mPanel.add(redColorButton,"wrap");
 
-		JPanel textColorPanel = new JPanel();
-		textColorPanel.setLayout(layout);
-		textColorPanel.setBackground(Color.DARK_GRAY.darker());
-		textColorPanel.add(new JLabel("TextColor: "));
+		mPanel.add(new JLabel("Text: "));
 		ColorButton textColorButton = new ColorButton(uis.gettextColor());
-		textColorButton.addActionListener(new TextColorButtonEar(textColorButton));
-		textColorPanel.add(textColorButton);
+		textColorButton.addActionListener(new TextColorButtonEar(
+				textColorButton));
+		mPanel.add(textColorButton,"wrap");
 
-		frame.setLayout(layout);
-		frame.add(bgColorPanel);
-		frame.add(baseColorPanel);
-		frame.add(baseRedColorPanel);
-		frame.add(textColorPanel);
-
+		frame.add(mPanel);
 		frame.setSize(425, 205);
+		frame.setMaximizable(false);
 		frame.setResizable(false);
 
 		mw.addIFrame(frame);
@@ -75,86 +64,86 @@ public class UISettingsView {
 
 	private class BGColorButtonEar implements ActionListener {
 		ColorButton button;
-		
-		public BGColorButtonEar(ColorButton button){
+
+		public BGColorButtonEar(ColorButton button) {
 			this.button = button;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(null, "Color", uis.getbgColor());
+			Color newColor = JColorChooser.showDialog(null, "Color",
+					uis.getbgColor());
 			if (newColor != null) {
 				uis.setbgColor(newColor);
-				mw.updateNimbus();
 				mw.updateGUI();
 				button.setColor(newColor);
-			}else{
+			} else {
 				return;
 			}
 		}
 
 	}
-	
+
 	private class BaseColorButtonEar implements ActionListener {
 		ColorButton button;
-		
-		public BaseColorButtonEar(ColorButton button){
+
+		public BaseColorButtonEar(ColorButton button) {
 			this.button = button;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(null, "Color", uis.getbaseColor());
+			Color newColor = JColorChooser.showDialog(null, "Color",
+					uis.getbaseColor());
 			if (newColor != null) {
 				uis.setbaseColor(newColor);
-				mw.updateNimbus();
 				mw.updateGUI();
 				button.setColor(newColor);
-			}else{
+			} else {
 				return;
 			}
 		}
 
 	}
-	
+
 	private class RedColorButtonEar implements ActionListener {
 		ColorButton button;
-		
-		public RedColorButtonEar(ColorButton button){
+
+		public RedColorButtonEar(ColorButton button) {
 			this.button = button;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(null, "Color", uis.getbaseRedColor());
+			Color newColor = JColorChooser.showDialog(null, "Color",
+					uis.getbaseRedColor());
 			if (newColor != null) {
 				uis.setbaseRedColor(newColor);
-				mw.updateNimbus();
 				mw.updateGUI();
 				button.setColor(newColor);
-			}else{
+			} else {
 				return;
 			}
 		}
 
 	}
-	
+
 	private class TextColorButtonEar implements ActionListener {
 		ColorButton button;
-		
-		public TextColorButtonEar(ColorButton button){
+
+		public TextColorButtonEar(ColorButton button) {
 			this.button = button;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(null, "Color", uis.gettextColor());
+			Color newColor = JColorChooser.showDialog(null, "Color",
+					uis.gettextColor());
 			if (newColor != null) {
 				uis.settextColor(newColor);
-				mw.updateNimbus();
 				mw.updateGUI();
 				button.setColor(newColor);
-			}else{
+			} else {
 				return;
 			}
 		}

@@ -1,6 +1,16 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "com.github.jengelman.gradle.plugins:shadow:1.2.0"
+  }
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 mainClassName = 'com.dakkra.pyxleos.PyxleOS'
 
@@ -22,6 +32,7 @@ repositories {
 
 dependencies {
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile 'com.miglayout:miglayout-swing:4.2'
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
