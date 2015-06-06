@@ -11,8 +11,13 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -46,13 +51,36 @@ public class MainWindow {
 
 	private UISettingsView uisv;
 
-	// Constructor
-	public MainWindow() {
+	private Properties properties;
 
+	private OutputStream oStream;
+
+	private InputStream iStream;
+	
+	private File colorPropertiesFile;
+	
+	private File appDir;
+
+	// Constructor
+	public MainWindow(UISettings uis) {
+		this.uis = uis;
+//		If settings don't exist yet, make them
+		appDir = new File(System.getProperty("user.home"),"PyxleOS");
+		colorPropertiesFile = new File(appDir, "colors.pyxos");
+		if (colorPropertiesFile.exists()) {
+			loadSettings();
+		}else{
+			if(appDir.mkdirs()){
+				System.out.println("application directory created");
+			}else{
+				System.out.println("failed to make application directory");
+			}
+			saveSettings();
+			loadSettings();
+		}
 	}
 
-	public void setUIS(UISettings uis) {
-		this.uis = uis;
+	public void setUIS() {
 		uisv = new UISettingsView(this, uis);
 	}
 
@@ -112,19 +140,20 @@ public class MainWindow {
 		jdp.setComponentZOrder(iFrame, 0);
 		jdp.setSelectedFrame(iFrame);
 	}
-	
-	public void updateGUI(){
+
+	public void updateGUI() {
 		updateNimbus();
-		
-		for (Component component : mFrame.getComponents()){
+
+		for (Component component : mFrame.getComponents()) {
 			component.repaint();
 		}
-		
+
 		for (Window window : Window.getWindows()) {
 			SwingUtilities.updateComponentTreeUI(window);
 		}
-		
-		JOptionPane.showMessageDialog(mFrame, "Some items may require a restart");
+
+		JOptionPane.showMessageDialog(mFrame,
+				"Some items may require a restart");
 	}
 
 	private void initializeMainMenu() {
@@ -190,6 +219,53 @@ public class MainWindow {
 
 		UIManager.put("DesktopPane[Enabled].backgroundPainter",
 				new DesktopPainter(uis));
+	}
+	
+	private void loadSettings(){
+		try {
+			System.out.println("Loading color settings");
+			
+			iStream = new FileInputStream(colorPropertiesFile);
+
+			properties = new Properties();
+			properties.load(iStream);
+
+			uis.setbgColor(new Color(Integer.parseInt(properties
+					.getProperty("bgColor"))));
+			uis.setbaseColor(new Color(Integer.parseInt(properties
+					.getProperty("baseColor"))));
+			uis.setbaseRedColor(new Color(Integer.parseInt(properties
+					.getProperty("baseRedColor"))));
+			uis.settextColor(new Color(Integer.parseInt(properties
+					.getProperty("textColor"))));
+
+			iStream.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public void saveSettings(){
+		System.out.println("Saving color settings");
+		
+		properties = new Properties();
+
+		try {
+			oStream = new FileOutputStream(colorPropertiesFile);
+
+			properties.setProperty("bgColor", ""+uis.getbgColor().getRGB());
+			properties
+					.setProperty("baseColor", ""+uis.getbaseColor().getRGB());
+			properties.setProperty("baseRedColor", ""+uis.getbaseRedColor().getRGB());
+			properties
+					.setProperty("textColor", ""+uis.gettextColor().getRGB());
+
+			properties.store(oStream, "Colors");
+			
+			oStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Action Listeners

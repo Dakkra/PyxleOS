@@ -63,12 +63,33 @@ public class UISettings {
 	public void setbgImage(Image image) {
 		bg = image;
 	}
-	
-//	Default Options
-	public void setDefault(){
+
+	// Default Options
+	public void setDefault() {
 		bgColor = new Color(43, 57, 71);
-		baseColor = new Color(43, 57, 71);
+		baseColor = bgColor;
 		baseRedColor = new Color(7, 75, 125);
+		textColor = new Color(255, 255, 255);
+	}
+
+	public void setCrimson() {
+		bgColor = new Color(71, 43, 43);
+		baseColor = bgColor;
+		baseRedColor = new Color(125, 6, 6);
+		textColor = new Color(255, 255, 255);
+	}
+
+	public void setSleek() {
+		bgColor = new Color(57, 57, 57);
+		baseColor = bgColor;
+		baseRedColor = new Color(81, 81, 81);
+		textColor = new Color(255, 255, 255);
+	}
+	
+	public void setSciFi() {
+		bgColor = new Color(51, 43, 71);
+		baseColor = new Color(53,88,57);
+		baseRedColor = new Color(14, 133, 34);
 		textColor = new Color(255, 255, 255);
 	}
 }

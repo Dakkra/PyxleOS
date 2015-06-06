@@ -34,7 +34,8 @@ public class ColorButton extends JButton {
 		g.setColor(Color.BLACK);
 		g.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 20, 20);
 		g.setColor(color);
-		g.fillRect(6, 6, this.getWidth() - 12, this.getHeight() - 12);
+		g.fillRoundRect(6, 6, this.getWidth() - 12, this.getHeight() - 12, 10,
+				10);
 
 	}
 

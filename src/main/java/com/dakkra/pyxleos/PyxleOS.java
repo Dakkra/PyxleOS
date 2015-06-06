@@ -12,11 +12,11 @@ public class PyxleOS {
 	public static void main(String[]args){
 		System.out.println("Initializing PyxleOS::E");
 		
-		MainWindow mw = new MainWindow();
-		
 		UISettings uis = new UISettings();
 		
-		mw.setUIS(uis);
+		MainWindow mw = new MainWindow(uis);
+		
+		mw.setUIS();
 		mw.cnsUI();
 		
 		TextEdit te = new TextEdit(mw);

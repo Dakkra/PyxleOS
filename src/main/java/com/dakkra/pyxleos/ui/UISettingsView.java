@@ -3,9 +3,12 @@ package com.dakkra.pyxleos.ui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -21,6 +24,7 @@ import com.dakkra.pyxleos.util.Util;
 public class UISettingsView {
 	public UISettings uis;
 	private MainWindow mw;
+	private JComboBox<String> comboBox;
 
 	public UISettingsView(MainWindow mw, UISettings uis) {
 		this.mw = mw;
@@ -48,32 +52,37 @@ public class UISettingsView {
 		JPanel mPanel = new JPanel(layout);
 		mPanel.setBackground(Color.DARK_GRAY);
 
-		mPanel.add(new JLabel("Background: "));
+		mPanel.add(new JLabel("Background:"));
 		ColorButton bgColorButton = new ColorButton(uis.getbgColor());
 		bgColorButton.addActionListener(new BGColorButtonEar(bgColorButton));
 		mPanel.add(bgColorButton, "wrap");
 
-		mPanel.add(new JLabel("Base: "));
+		mPanel.add(new JLabel("Base:"));
 		ColorButton baseColorButton = new ColorButton(uis.getbaseColor());
 		baseColorButton.addActionListener(new BaseColorButtonEar(
 				baseColorButton));
 		mPanel.add(baseColorButton, "wrap");
 
-		mPanel.add(new JLabel("Selection: "));
+		mPanel.add(new JLabel("Selection:"));
 		ColorButton redColorButton = new ColorButton(uis.getbaseRedColor());
 		redColorButton.addActionListener(new RedColorButtonEar(redColorButton));
 		mPanel.add(redColorButton, "wrap");
 
-		mPanel.add(new JLabel("Text: "));
+		mPanel.add(new JLabel("Text:"));
 		ColorButton textColorButton = new ColorButton(uis.gettextColor());
 		textColorButton.addActionListener(new TextColorButtonEar(
 				textColorButton));
 		mPanel.add(textColorButton, "wrap");
 
-		JButton loadButton = new JButton("Load");
-		mPanel.add(loadButton);
+		mPanel.add(new JLabel("Built in:"));
+		String[] defaults = { "None Selected", "Default", "Crimson", "Sleek",
+				"SciFi" };
+		comboBox = new JComboBox<String>(defaults);
+		comboBox.addItemListener(new SelectionHandler(frame));
+		mPanel.add(comboBox, "wrap");
 
 		JButton saveButton = new JButton("Save");
+		saveButton.addActionListener(new SaveButtonEar());
 		mPanel.add(saveButton);
 
 		frame.add(mPanel);
@@ -82,6 +91,35 @@ public class UISettingsView {
 		frame.setResizable(false);
 
 		mw.addIFrame(frame);
+	}
+
+	public void changeSetting() {
+		String theme = (String) comboBox.getSelectedItem();
+
+		switch (theme) {
+		case "Default": {
+			uis.setDefault();
+			mw.updateGUI();
+			break;
+		}
+		case "Crimson": {
+			uis.setCrimson();
+			mw.updateGUI();
+			break;
+		}
+		case "Sleek": {
+			uis.setSleek();
+			mw.updateGUI();
+			break;
+		}
+		case "SciFi": {
+			uis.setSciFi();
+			mw.updateGUI();
+			break;
+		}
+		default:
+			return;
+		}
 	}
 
 	private class BGColorButtonEar implements ActionListener {
@@ -167,6 +205,33 @@ public class UISettingsView {
 				button.setColor(newColor);
 			} else {
 				return;
+			}
+		}
+
+	}
+
+	private class SaveButtonEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			mw.saveSettings();
+		}
+
+	}
+
+	private class SelectionHandler implements ItemListener {
+		JInternalFrame frame;
+
+		public SelectionHandler(JInternalFrame frame) {
+			this.frame = frame;
+		}
+
+		@Override
+		public void itemStateChanged(ItemEvent event) {
+			if (event.getStateChange() == ItemEvent.SELECTED) {
+				changeSetting();
+				frame.dispose();
+				makeUI();
 			}
 		}
 
