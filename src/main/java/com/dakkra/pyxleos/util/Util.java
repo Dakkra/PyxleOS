@@ -21,9 +21,9 @@ public class Util {
 	public static JInternalFrame createIFrame(String name) {
 		JInternalFrame iFrame = new JInternalFrame(name, true, true, true, true);
 		iFrame.setBounds(0, 0, 400, 400);
-		iFrame.requestFocusInWindow();
+		// iFrame.requestFocusInWindow();
 		iFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
-		iFrame.toFront();
+		// iFrame.toFront();
 		try {
 			iFrame.setSelected(true);
 		} catch (PropertyVetoException e1) {

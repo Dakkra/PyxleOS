@@ -15,11 +15,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import net.miginfocom.swing.MigLayout;
 
 import com.dakkra.pyxleos.ui.components.ColorButton;
 import com.dakkra.pyxleos.util.Util;
+import com.sun.glass.events.KeyEvent;
 
 public class UISettingsView {
 	public UISettings uis;
@@ -38,9 +40,15 @@ public class UISettingsView {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu(" File ");
 		JMenuItem fileSave = new JMenuItem("Save");
-		JMenuItem fileLoad = new JMenuItem("Load");
+		fileSave.addActionListener(new SaveButtonEar());
+		fileSave.setMnemonic(KeyEvent.VK_S);
+		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				ActionEvent.CTRL_MASK));
 		JMenuItem fileQuit = new JMenuItem("Quit");
-		fileMenu.add(fileLoad);
+		fileQuit.addActionListener(new QuitEar(frame));
+		fileQuit.setMnemonic(KeyEvent.VK_Q);
+		fileQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
+				ActionEvent.CTRL_MASK));
 		fileMenu.add(fileSave);
 		fileMenu.add(fileQuit);
 		menuBar.add(fileMenu);
@@ -215,6 +223,20 @@ public class UISettingsView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mw.saveSettings();
+		}
+
+	}
+
+	private class QuitEar implements ActionListener {
+		JInternalFrame frame;
+
+		public QuitEar(JInternalFrame frame) {
+			this.frame = frame;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			frame.dispose();
 		}
 
 	}
