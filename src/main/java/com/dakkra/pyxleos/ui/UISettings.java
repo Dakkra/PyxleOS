@@ -75,7 +75,7 @@ public class UISettings {
 	public void setThemeCrimson() {
 		bgColor = new Color(71, 43, 43);
 		baseColor = bgColor;
-		selectionColor = new Color(125, 6, 6);
+		selectionColor = new Color(142, 61, 61);
 		textColor = new Color(255, 255, 255);
 	}
 
@@ -98,5 +98,19 @@ public class UISettings {
 		baseColor = new Color(52, 95, 105);
 		selectionColor = new Color(4, 57, 77);
 		textColor = new Color(255, 255, 255);
+	}
+
+	public void setThemeNight() {
+		bgColor = new Color(0, 0, 0);
+		baseColor = new Color(36, 36, 51);
+		selectionColor = new Color(74, 74, 98);
+		textColor = new Color(255, 255, 255);
+	}
+
+	public void setThemeDaylight() {
+		bgColor = new Color(88, 141, 181);
+		baseColor = new Color(82, 151, 167);
+		selectionColor = new Color(40, 103, 128);
+		textColor = new Color(0, 0, 0);
 	}
 }

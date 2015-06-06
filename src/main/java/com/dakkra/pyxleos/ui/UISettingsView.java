@@ -85,7 +85,7 @@ public class UISettingsView {
 
 		mPanel.add(new JLabel("Built in:"));
 		String[] defaults = { "None Selected", "Default", "Crimson", "Sleek",
-				"Frozen", "SciFi" };
+				"Frozen", "SciFi", "Night", "Daylight" };
 		comboBox = new JComboBox<String>(defaults);
 		comboBox.addItemListener(new SelectionHandler(frame));
 		mPanel.add(comboBox, "wrap");
@@ -128,6 +128,16 @@ public class UISettingsView {
 		}
 		case "Frozen": {
 			uis.setThemeFrozen();
+			mw.updateGUI();
+			break;
+		}
+		case "Night": {
+			uis.setThemeNight();
+			mw.updateGUI();
+			break;
+		}
+		case "Daylight": {
+			uis.setThemeDaylight();
 			mw.updateGUI();
 			break;
 		}
