@@ -206,8 +206,13 @@ public class TextEdit {
 
 	private class TextSizeEar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			int size = Integer.parseInt(JOptionPane.showInputDialog(
-					"Input a new font size:", textAreaFont.getSize()));
+			int size = textAreaFont.getSize();
+			try {
+				size = Integer.parseInt(JOptionPane.showInputDialog(
+						"Input a new font size:", textAreaFont.getSize()));
+			} catch (NumberFormatException e1) {
+				System.out.println("Invalid Size or user cancelled");
+			}
 			if (size <= 0 || size > 100) {
 				JOptionPane.showMessageDialog(null,
 						"Invalid size! (1-100 only)");
