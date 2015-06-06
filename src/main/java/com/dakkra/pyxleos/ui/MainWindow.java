@@ -151,9 +151,6 @@ public class MainWindow {
 		for (Window window : Window.getWindows()) {
 			SwingUtilities.updateComponentTreeUI(window);
 		}
-
-		JOptionPane.showMessageDialog(mFrame,
-				"Some items may require a restart");
 	}
 
 	private void initializeMainMenu() {
