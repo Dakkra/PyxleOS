@@ -19,7 +19,7 @@ import javax.swing.KeyStroke;
 
 import net.miginfocom.swing.MigLayout;
 
-import com.dakkra.pyxleos.ui.components.ColorButton;
+import com.dakkra.pyxleos.ui.components.UIColorButton;
 import com.dakkra.pyxleos.util.Util;
 import com.sun.glass.events.KeyEvent;
 
@@ -61,23 +61,23 @@ public class UISettingsView {
 		mPanel.setBackground(Color.DARK_GRAY);
 
 		mPanel.add(new JLabel("Background:"));
-		ColorButton bgColorButton = new ColorButton(uis.getbgColor());
+		UIColorButton bgColorButton = new UIColorButton(uis.getbgColor());
 		bgColorButton.addActionListener(new BGColorButtonEar(bgColorButton));
 		mPanel.add(bgColorButton, "wrap");
 
 		mPanel.add(new JLabel("Base:"));
-		ColorButton baseColorButton = new ColorButton(uis.getbaseColor());
+		UIColorButton baseColorButton = new UIColorButton(uis.getbaseColor());
 		baseColorButton.addActionListener(new BaseColorButtonEar(
 				baseColorButton));
 		mPanel.add(baseColorButton, "wrap");
 
 		mPanel.add(new JLabel("Selection:"));
-		ColorButton redColorButton = new ColorButton(uis.getselectionRedColor());
+		UIColorButton redColorButton = new UIColorButton(uis.getselectionRedColor());
 		redColorButton.addActionListener(new RedColorButtonEar(redColorButton));
 		mPanel.add(redColorButton, "wrap");
 
 		mPanel.add(new JLabel("Text:"));
-		ColorButton textColorButton = new ColorButton(uis.gettextColor());
+		UIColorButton textColorButton = new UIColorButton(uis.gettextColor());
 		textColorButton.addActionListener(new TextColorButtonEar(
 				textColorButton));
 		mPanel.add(textColorButton, "wrap");
@@ -136,9 +136,9 @@ public class UISettingsView {
 	}
 
 	private class BGColorButtonEar implements ActionListener {
-		ColorButton button;
+		UIColorButton button;
 
-		public BGColorButtonEar(ColorButton button) {
+		public BGColorButtonEar(UIColorButton button) {
 			this.button = button;
 		}
 
@@ -158,9 +158,9 @@ public class UISettingsView {
 	}
 
 	private class BaseColorButtonEar implements ActionListener {
-		ColorButton button;
+		UIColorButton button;
 
-		public BaseColorButtonEar(ColorButton button) {
+		public BaseColorButtonEar(UIColorButton button) {
 			this.button = button;
 		}
 
@@ -180,9 +180,9 @@ public class UISettingsView {
 	}
 
 	private class RedColorButtonEar implements ActionListener {
-		ColorButton button;
+		UIColorButton button;
 
-		public RedColorButtonEar(ColorButton button) {
+		public RedColorButtonEar(UIColorButton button) {
 			this.button = button;
 		}
 
@@ -202,9 +202,9 @@ public class UISettingsView {
 	}
 
 	private class TextColorButtonEar implements ActionListener {
-		ColorButton button;
+		UIColorButton button;
 
-		public TextColorButtonEar(ColorButton button) {
+		public TextColorButtonEar(UIColorButton button) {
 			this.button = button;
 		}
 

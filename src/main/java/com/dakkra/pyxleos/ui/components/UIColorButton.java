@@ -7,12 +7,12 @@ import java.awt.RenderingHints;
 
 import javax.swing.JButton;
 
-public class ColorButton extends JButton {
+public class UIColorButton extends JButton {
 	private static final long serialVersionUID = -6634922597932677896L;
 
 	Color color;
 
-	public ColorButton(Color color) {
+	public UIColorButton(Color color) {
 		this.setText("                                                                        ");
 		this.color = color;
 		updateUI();
