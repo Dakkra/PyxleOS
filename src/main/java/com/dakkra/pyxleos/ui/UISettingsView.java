@@ -72,7 +72,7 @@ public class UISettingsView {
 		mPanel.add(baseColorButton, "wrap");
 
 		mPanel.add(new JLabel("Selection:"));
-		ColorButton redColorButton = new ColorButton(uis.getbaseRedColor());
+		ColorButton redColorButton = new ColorButton(uis.getselectionRedColor());
 		redColorButton.addActionListener(new RedColorButtonEar(redColorButton));
 		mPanel.add(redColorButton, "wrap");
 
@@ -84,7 +84,7 @@ public class UISettingsView {
 
 		mPanel.add(new JLabel("Built in:"));
 		String[] defaults = { "None Selected", "Default", "Crimson", "Sleek",
-				"SciFi" };
+				"Frozen", "SciFi" };
 		comboBox = new JComboBox<String>(defaults);
 		comboBox.addItemListener(new SelectionHandler(frame));
 		mPanel.add(comboBox, "wrap");
@@ -106,22 +106,27 @@ public class UISettingsView {
 
 		switch (theme) {
 		case "Default": {
-			uis.setDefault();
+			uis.setThemeDefault();
 			mw.updateGUI();
 			break;
 		}
 		case "Crimson": {
-			uis.setCrimson();
+			uis.setThemeCrimson();
 			mw.updateGUI();
 			break;
 		}
 		case "Sleek": {
-			uis.setSleek();
+			uis.setThemeSleek();
 			mw.updateGUI();
 			break;
 		}
 		case "SciFi": {
-			uis.setSciFi();
+			uis.setThemeSciFi();
+			mw.updateGUI();
+			break;
+		}
+		case "Frozen": {
+			uis.setThemeFrozen();
 			mw.updateGUI();
 			break;
 		}
@@ -184,9 +189,9 @@ public class UISettingsView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Color newColor = JColorChooser.showDialog(null, "Color",
-					uis.getbaseRedColor());
+					uis.getselectionRedColor());
 			if (newColor != null) {
-				uis.setbaseRedColor(newColor);
+				uis.setselectionRedColor(newColor);
 				mw.updateGUI();
 				button.setColor(newColor);
 			} else {

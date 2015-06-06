@@ -204,7 +204,7 @@ public class MainWindow {
 	public void updateNimbus() {
 		Color bgColor = uis.getbgColor();
 		Color baseColor = uis.getbaseColor();
-		Color baseRedColor = uis.getbaseRedColor();
+		Color baseRedColor = uis.getselectionRedColor();
 		Color textColor = uis.gettextColor();
 
 		// General Changes
@@ -236,7 +236,7 @@ public class MainWindow {
 					.getProperty("bgColor"))));
 			uis.setbaseColor(new Color(Integer.parseInt(properties
 					.getProperty("baseColor"))));
-			uis.setbaseRedColor(new Color(Integer.parseInt(properties
+			uis.setselectionRedColor(new Color(Integer.parseInt(properties
 					.getProperty("baseRedColor"))));
 			uis.settextColor(new Color(Integer.parseInt(properties
 					.getProperty("textColor"))));
@@ -259,7 +259,7 @@ public class MainWindow {
 			properties.setProperty("baseColor", ""
 					+ uis.getbaseColor().getRGB());
 			properties.setProperty("baseRedColor", ""
-					+ uis.getbaseRedColor().getRGB());
+					+ uis.getselectionRedColor().getRGB());
 			properties.setProperty("textColor", ""
 					+ uis.gettextColor().getRGB());
 

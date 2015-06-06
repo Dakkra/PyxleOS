@@ -11,7 +11,7 @@ import com.dakkra.pyxleos.PyxleOS;
 public class UISettings {
 	private Color bgColor = new Color(43, 57, 71);
 	private Color baseColor = new Color(43, 57, 71);
-	private Color baseRedColor = new Color(7, 75, 125);
+	private Color selectionColor = new Color(7, 75, 125);
 	private Color textColor = new Color(255, 255, 255);
 	private Image bg;
 
@@ -40,12 +40,12 @@ public class UISettings {
 		baseColor = color;
 	}
 
-	public Color getbaseRedColor() {
-		return baseRedColor;
+	public Color getselectionRedColor() {
+		return selectionColor;
 	}
 
-	public void setbaseRedColor(Color color) {
-		baseRedColor = color;
+	public void setselectionRedColor(Color color) {
+		selectionColor = color;
 	}
 
 	public Color gettextColor() {
@@ -65,31 +65,38 @@ public class UISettings {
 	}
 
 	// Default Options
-	public void setDefault() {
+	public void setThemeDefault() {
 		bgColor = new Color(43, 57, 71);
 		baseColor = bgColor;
-		baseRedColor = new Color(7, 75, 125);
+		selectionColor = new Color(7, 75, 125);
 		textColor = new Color(255, 255, 255);
 	}
 
-	public void setCrimson() {
+	public void setThemeCrimson() {
 		bgColor = new Color(71, 43, 43);
 		baseColor = bgColor;
-		baseRedColor = new Color(125, 6, 6);
+		selectionColor = new Color(125, 6, 6);
 		textColor = new Color(255, 255, 255);
 	}
 
-	public void setSleek() {
+	public void setThemeSleek() {
 		bgColor = new Color(57, 57, 57);
 		baseColor = bgColor;
-		baseRedColor = new Color(81, 81, 81);
+		selectionColor = new Color(81, 81, 81);
 		textColor = new Color(255, 255, 255);
 	}
 
-	public void setSciFi() {
+	public void setThemeSciFi() {
 		bgColor = new Color(51, 43, 71);
 		baseColor = new Color(53, 88, 57);
-		baseRedColor = new Color(14, 133, 34);
+		selectionColor = new Color(14, 133, 34);
+		textColor = new Color(255, 255, 255);
+	}
+
+	public void setThemeFrozen() {
+		bgColor = new Color(56, 96, 126);
+		baseColor = new Color(52, 95, 105);
+		selectionColor = new Color(4, 57, 77);
 		textColor = new Color(255, 255, 255);
 	}
 }
