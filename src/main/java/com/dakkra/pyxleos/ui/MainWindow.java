@@ -262,7 +262,8 @@ public class MainWindow {
 
 			oStream.close();
 
-			JOptionPane.showMessageDialog(mFrame, "Theme saved!");
+			JOptionPane.showMessageDialog(mFrame,
+					"Theme saved! Please restart for full effect");
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(mFrame, "Error while saving theme");
