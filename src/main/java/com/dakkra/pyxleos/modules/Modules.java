@@ -5,8 +5,8 @@ public class Modules {
 
 	}
 
-	public static String[] listModules() {
-		String[] modules = { "textEdit" };
+	public static String[] getListOfModules() {
+		String[] modules = { "textEdit", "Canvas" };
 		return modules;
 	}
 }
