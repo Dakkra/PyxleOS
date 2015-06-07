@@ -84,11 +84,6 @@ public class TextEdit extends Module {
 		fileSaveAs.setMnemonic(KeyEvent.VK_S);
 		fileSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
-		JMenuItem fileExit = new JMenuItem("Exit");
-		fileExit.addActionListener(new ExitEar());
-		fileExit.setMnemonic(KeyEvent.VK_Q);
-		fileExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-				ActionEvent.CTRL_MASK));
 
 		fileMenu.add(fileNew);
 		fileMenu.add(fileOpen);
@@ -141,15 +136,6 @@ public class TextEdit extends Module {
 		frame.setSize(550, 350);
 
 		mw.addIFrame(frame);
-	}
-
-	private class ExitEar implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			Util.exitIFrame(frame);
-		}
-
 	}
 
 	private class NewEar implements ActionListener {
