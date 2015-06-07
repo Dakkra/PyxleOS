@@ -113,4 +113,11 @@ public class UISettings {
 		selectionColor = new Color(40, 103, 128);
 		textColor = new Color(0, 0, 0);
 	}
+
+	public void setThemeForest() {
+		bgColor = new Color(43, 71, 43);
+		baseColor = new Color(47, 71, 43);
+		selectionColor = new Color(6, 125, 48);
+		textColor = new Color(255, 255, 255);
+	}
 }

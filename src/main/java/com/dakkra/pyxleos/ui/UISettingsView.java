@@ -85,7 +85,7 @@ public class UISettingsView {
 
 		mPanel.add(new JLabel("Built in:"));
 		String[] defaults = { "None Selected", "Default", "Crimson", "Sleek",
-				"Frozen", "SciFi", "Night", "Daylight" };
+				"Frozen", "SciFi", "Night", "Daylight", "Forest" };
 		comboBox = new JComboBox<String>(defaults);
 		comboBox.addItemListener(new SelectionHandler(frame));
 		mPanel.add(comboBox, "wrap");
@@ -138,6 +138,11 @@ public class UISettingsView {
 		}
 		case "Daylight": {
 			uis.setThemeDaylight();
+			mw.updateGUI();
+			break;
+		}
+		case "Forest": {
+			uis.setThemeForest();
 			mw.updateGUI();
 			break;
 		}
