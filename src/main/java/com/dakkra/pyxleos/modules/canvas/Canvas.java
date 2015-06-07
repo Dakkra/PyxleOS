@@ -14,7 +14,9 @@ public class Canvas extends Module {
 
 	private void makeUI() {
 		frame.setTitle("Canvas");
+
 		fileMenu.add(fileExit);
+
 		mw.addIFrame(frame);
 	}
 
