@@ -38,6 +38,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
+import com.dakkra.pyxleos.modules.canvas.Canvas;
 import com.dakkra.pyxleos.modules.textedit.TextEdit;
 import com.dakkra.pyxleos.ui.painters.DesktopPainter;
 import com.dakkra.pyxleos.util.Util;
@@ -182,12 +183,18 @@ public class MainWindow {
 		fileMenu.add(fileMQuit);
 		// Tools menu
 		JMenu toolsMenu = new JMenu(" Tools ");
-		JMenuItem toolsMTE = new JMenuItem("TextEdit");
+		JMenuItem toolsMTE = new JMenuItem("New TextEdit");
 		toolsMTE.addActionListener(new TextEditListener(this));
 		toolsMTE.setMnemonic(KeyEvent.VK_T);
 		toolsMTE.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
 				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		toolsMenu.add(toolsMTE);
+		JMenuItem toolsMC = new JMenuItem("New Canvas");
+		toolsMC.addActionListener(new CanvasEar(this));
+		toolsMC.setMnemonic(KeyEvent.VK_C);
+		toolsMC.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
+				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+		toolsMenu.add(toolsMC);
 		// Options menu
 		JMenu optionsMenu = new JMenu(" Options ");
 		JMenuItem optionColor = new JMenuItem(" Appearance ");
@@ -355,6 +362,20 @@ public class MainWindow {
 		public void actionPerformed(ActionEvent e) {
 			@SuppressWarnings("unused")
 			TextEdit te = new TextEdit(mw);
+		}
+	}
+
+	private class CanvasEar implements ActionListener {
+		MainWindow mw;
+
+		public CanvasEar(MainWindow mw) {
+			this.mw = mw;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			@SuppressWarnings("unused")
+			Canvas canv = new Canvas(mw);
 		}
 	}
 

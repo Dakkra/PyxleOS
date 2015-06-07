@@ -8,9 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -18,14 +16,15 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.undo.UndoManager;
 
+import com.dakkra.pyxleos.modules.Module;
 import com.dakkra.pyxleos.ui.MainWindow;
 import com.dakkra.pyxleos.util.Util;
 import com.sun.glass.events.KeyEvent;
 
-public class TextEdit {
+public class TextEdit extends Module {
 	private MainWindow mw;
 	private JTextArea textArea;
-	private JInternalFrame frame;
+	// private JInternalFrame frame;
 	private File textFile;
 	private JMenuItem fileReopen;
 	private Font textAreaFont;
@@ -57,10 +56,8 @@ public class TextEdit {
 
 	private void makeUI() {
 
-		frame = Util.createIFrame("TextEdit");
+		frame.setTitle("TextEdit");
 
-		JMenuBar menuBar = new JMenuBar();
-		JMenu fileMenu = new JMenu(" File ");
 		JMenuItem fileNew = new JMenuItem("New");
 		fileNew.addActionListener(new NewEar());
 		fileNew.setMnemonic(KeyEvent.VK_N);
