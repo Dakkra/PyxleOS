@@ -1,10 +1,13 @@
 package com.dakkra.pyxleos.modules.canvas;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
@@ -14,21 +17,49 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
+import com.dakkra.pyxleos.ColorReference;
+
 public class DrawPane extends JComponent {
 	private static final long serialVersionUID = 6748629663390647156L;
 
 	private BufferedImage image;
 
+	private BufferedImage prevLayer;
+
 	private Graphics2D g2;
 
-	private Point currentPoint;
+	private Graphics2D gPrev;
+
+	private Point currentPoint, primaryPoint;
 
 	private int scale;
 
-	public DrawPane() {
-		image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+	private Color transparentColor;
+
+	private Color fgColor = ColorReference.getFgColor();
+
+	private Color bgColor = ColorReference.getBgColor();
+
+	private int width;
+
+	private int height;
+
+	public DrawPane(Dimension d) {
+
+		width = d.width;
+
+		height = d.height;
+
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+		prevLayer = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_ARGB);
 
 		g2 = image.createGraphics();
+
+		gPrev = prevLayer.createGraphics();
+
+		transparentColor = Color.GRAY;
 
 		scale = 10;
 
@@ -39,6 +70,14 @@ public class DrawPane extends JComponent {
 		addMouseMotionListener(mouseDragListener);
 
 		addMouseWheelListener(mouseDragListener);
+
+		addKeyListener(mouseDragListener);
+
+		setFocusable(true);
+
+		requestFocus();
+
+		requestFocusInWindow();
 
 		clear();
 	}
@@ -52,6 +91,16 @@ public class DrawPane extends JComponent {
 		if (scale - 1 > 0) {
 			scale -= 1;
 		}
+		repaint();
+	}
+
+	private void updateColors() {
+		fgColor = ColorReference.getFgColor();
+		bgColor = ColorReference.getBgColor();
+	}
+
+	public void setTransparentColor(Color transparentColor) {
+		this.transparentColor = transparentColor;
 		repaint();
 	}
 
@@ -75,32 +124,71 @@ public class DrawPane extends JComponent {
 	public void paintComponent(Graphics g1) {
 		Graphics2D g = (Graphics2D) g1;
 		Point point = centerImageCoord(new Point(0, 0));
-		g.setColor(Color.GRAY);
+		g.setColor(transparentColor);
 		g.fillRect(-point.x, -point.y, image.getWidth() * scale,
 				image.getHeight() * scale);
 		g.drawImage(image, -point.x, -point.y, image.getWidth() * scale,
 				image.getHeight() * scale, this);
+		g.drawImage(prevLayer, -point.x, -point.y, image.getWidth() * scale,
+				image.getHeight() * scale, this);
+		updateColors();
 	}
 
 	public void clear() {
-		image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
 		g2 = image.createGraphics();
+
+		updateColors();
 
 		repaint();
 
 	}
 
+	public void resetPrevLayer() {
+		prevLayer = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_ARGB);
+
+		gPrev = prevLayer.createGraphics();
+
+		updateColors();
+
+		repaint();
+
+	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public BufferedImage getScaledImage(int amt) {
+		BufferedImage img = image;
+
+		Graphics2D gScale = img.createGraphics();
+
+		gScale.drawImage(img, null, 0, 0);
+
+		return img;
+	}
+
 	private class MouseDragListener extends MouseMotionAdapter implements
-			MouseListener, MouseWheelListener {
+			MouseListener, MouseWheelListener, KeyListener {
+
+		private boolean shift;
+
+		private Color paintColor = fgColor;
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			currentPoint = convertToCanvasCoord(e.getPoint());
-			if (g2 != null) {
-				g2.setPaint(Color.BLACK);
-				g2.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
-						currentPoint.y);
+			primaryPoint = currentPoint;
+			updateColors();
+			if (!shift) {
+				if (g2 != null) {
+					g2.setPaint(paintColor);
+					g2.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
+							currentPoint.y);
+				}
 			}
 			repaint();
 		}
@@ -108,11 +196,30 @@ public class DrawPane extends JComponent {
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			currentPoint = convertToCanvasCoord(e.getPoint());
-			if (g2 != null) {
-				g2.setPaint(Color.BLACK);
-				g2.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
+			updateColors();
+			if (shift) {
+				resetPrevLayer();
+				gPrev.setPaint(paintColor);
+				gPrev.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x,
 						currentPoint.y);
+				repaint();
+			} else {
+				g2.setPaint(paintColor);
+				g2.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x,
+						currentPoint.y);
+				repaint();
+				primaryPoint = currentPoint;
 			}
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			currentPoint = convertToCanvasCoord(e.getPoint());
+			resetPrevLayer();
+			updateColors();
+			gPrev.setPaint(paintColor);
+			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
+					currentPoint.y);
 			repaint();
 		}
 
@@ -122,24 +229,89 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
+			currentPoint = convertToCanvasCoord(e.getPoint());
+			g2.setPaint(paintColor);
+			if (shift) {
+				g2.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x,
+						currentPoint.y);
+			} else {
+				return;
+			}
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
+			updateColors();
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			resetPrevLayer();
+			paintColor = fgColor;
+			shift = false;
+			gPrev.setPaint(paintColor);
 		}
 
 		@Override
 		public void mouseWheelMoved(MouseWheelEvent e) {
 			if (e.getWheelRotation() < 0) {
 				scaleUp();
+				resetPrevLayer();
 			} else if (e.getWheelRotation() > 0) {
 				scaleDown();
+				resetPrevLayer();
 			}
 
+			currentPoint = convertToCanvasCoord(e.getPoint());
+			resetPrevLayer();
+			if (gPrev != null) {
+				gPrev.setPaint(paintColor);
+				gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
+						currentPoint.y);
+			}
+			repaint();
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			resetPrevLayer();
+			updateColors();
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_SHIFT: {
+				shift = true;
+				gPrev.setPaint(paintColor);
+				break;
+			}
+			case KeyEvent.VK_CONTROL: {
+				paintColor = bgColor;
+				gPrev.setPaint(paintColor);
+				break;
+			}
+			default: {
+				paintColor = fgColor;
+				shift = false;
+				gPrev.setPaint(paintColor);
+				break;
+			}
+			}
+			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
+					currentPoint.y);
+			repaint();
+
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			paintColor = fgColor;
+			shift = false;
+			gPrev.setPaint(paintColor);
+			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
+					currentPoint.y);
+			repaint();
 		}
 
 	}

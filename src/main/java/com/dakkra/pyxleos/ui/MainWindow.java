@@ -36,7 +36,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
 import com.dakkra.pyxleos.modules.canvas.Canvas;
 import com.dakkra.pyxleos.modules.textedit.TextEdit;
@@ -45,7 +44,6 @@ import com.dakkra.pyxleos.util.Util;
 
 public class MainWindow {
 	// Create class fields
-	private ColorReference cr;
 
 	private JDesktopPane jdp;
 
@@ -68,8 +66,7 @@ public class MainWindow {
 	private boolean firstRun;
 
 	// Constructor
-	public MainWindow(UISettings uis, ColorReference cr) {
-		this.cr = cr;
+	public MainWindow(UISettings uis) {
 		this.uis = uis;
 		// If settings don't exist yet, make them
 		appDir = new File(System.getProperty("user.home"), "PyxleOS");
@@ -111,7 +108,7 @@ public class MainWindow {
 			e.printStackTrace();
 		}
 		// Initialize Main Frame
-		mFrame = new JFrame("PyxleOS::E");
+		mFrame = new JFrame("PyxleOS");
 		mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mFrame.setMinimumSize(new Dimension(950, 600));
 		mFrame.setLocationRelativeTo(null);
@@ -129,11 +126,15 @@ public class MainWindow {
 		// Initialize jdp
 		jdp = new JDesktopPane();
 
-		JToolBar toolBar = new JToolBar();
-		toolBar.add(new JButton("Button"));
-
 		mFrame.add(jdp, BorderLayout.CENTER);
-		mFrame.add(toolBar, BorderLayout.NORTH);
+
+		JToolBar toolBar = new JToolBar("ToolBar");
+
+		toolBar.add(new JButton("FGColor"));
+		toolBar.add(new JButton("BGColor"));
+		toolBar.add(new JButton("Switch"));
+
+		mFrame.add(toolBar, BorderLayout.PAGE_START);
 
 		updateGUI();
 
@@ -292,22 +293,6 @@ public class MainWindow {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(mFrame, "Error while saving theme");
 		}
-	}
-
-	public Color getfgPaintColor() {
-		return cr.getfgColor();
-	}
-
-	public void setCfgPaintColor(Color color) {
-		cr.setfgColor(color);
-	}
-
-	public Color getCbgPaintColor() {
-		return cr.getbgColor();
-	}
-
-	public void setCbgPaintColor(Color color) {
-		cr.setbgColor(color);
 	}
 
 	// Action Listeners

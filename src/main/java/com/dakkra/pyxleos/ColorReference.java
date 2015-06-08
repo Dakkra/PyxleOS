@@ -3,22 +3,22 @@ package com.dakkra.pyxleos;
 import java.awt.Color;
 
 public class ColorReference {
-	private Color fgColor = new Color(0, 0, 0);
-	private Color bgColor = new Color(255, 255, 255);
+	private static Color fgColor = new Color(0, 0, 0);
+	private static Color bgColor = Color.BLUE;
 
-	public Color getfgColor() {
+	public static Color getFgColor() {
 		return fgColor;
 	}
 
-	public void setfgColor(Color color) {
-		fgColor = color;
+	public static void setFgColor(Color fgColor) {
+		ColorReference.fgColor = fgColor;
 	}
 
-	public Color getbgColor() {
+	public static Color getBgColor() {
 		return bgColor;
 	}
 
-	public void setbgColor(Color color) {
-		bgColor = color;
+	public static void setBgColor(Color bgColor) {
+		ColorReference.bgColor = bgColor;
 	}
 }

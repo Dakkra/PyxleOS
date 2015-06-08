@@ -10,13 +10,11 @@ import com.dakkra.pyxleos.util.Util;
 
 public class PyxleOS {
 	public static void main(String[] args) {
-		System.out.println("Initializing PyxleOS::E");
-
-		ColorReference cr = new ColorReference();
+		System.out.println("Initializing PyxleOS");
 
 		UISettings uis = new UISettings();
 
-		MainWindow mw = new MainWindow(uis, cr);
+		MainWindow mw = new MainWindow(uis);
 
 		mw.setUIS();
 		mw.cnsUI();

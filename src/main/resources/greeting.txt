@@ -1,16 +1,11 @@
-Welcome to PyxleOS::E!
+Welcome to PyxleOS!
 
 What's new in this version
 ------------------------------------
 
-1.Better functioning UI (non-visible)
-2.Better Key Bindings for TextEdit module
-3.Protection on font size for text edit (keep users from killing the program)
-4.Branded Background Image ^-^
-5.Awesome splash screen!
-6.Custom UI Colors!
-7.New font for textEdit module!
-8.Basic Undo/Redo for textEdit module
+1. CANVAS -- FINALLY!!!
+2. More themes! <3
+3. New Icon!
 
 Made with love and Java,
 	Chris Soderquist
