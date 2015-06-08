@@ -1,4 +1,4 @@
-PyxleOS::E(dited)
+PyxleOS
 (c) By Chris Soderquist
 http://pyxleos.sourceforge.net
 

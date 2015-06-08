@@ -165,16 +165,6 @@ public class DrawPane extends JComponent {
 		return image;
 	}
 
-	public BufferedImage getScaledImage(int amt) {
-		BufferedImage img = image;
-
-		Graphics2D gScale = img.createGraphics();
-
-		gScale.drawImage(img, null, 0, 0);
-
-		return img;
-	}
-
 	private class DefaultToolListener extends MouseMotionAdapter implements
 			MouseListener, MouseWheelListener, KeyListener, FocusListener {
 

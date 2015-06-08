@@ -11,11 +11,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+
+import net.miginfocom.swing.MigLayout;
 
 import com.dakkra.pyxleos.modules.Module;
 import com.dakkra.pyxleos.ui.MainWindow;
@@ -27,8 +32,17 @@ public class Canvas extends Module {
 
 	private DrawPane drawPane;
 
+	private JTextField wField;
+
+	private JTextField hField;
+
 	public Canvas(MainWindow mw) {
 		this.mw = mw;
+
+		JOptionPane.showConfirmDialog(null, dialogPanel(),
+				"JOptionPane Example : ", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.PLAIN_MESSAGE);
+
 		makeUI();
 	}
 
@@ -65,7 +79,9 @@ public class Canvas extends Module {
 		container.setLayout(new BorderLayout());
 		container.setBackground(Color.DARK_GRAY);
 
-		drawPane = new DrawPane(new Dimension(16, 16));
+		drawPane = new DrawPane(new Dimension(
+				Integer.parseInt(wField.getText()), Integer.parseInt(hField
+						.getText())));
 
 		JScrollPane pane = new JScrollPane(drawPane);
 
@@ -74,6 +90,22 @@ public class Canvas extends Module {
 		frame.add(container);
 
 		mw.addIFrame(frame);
+	}
+
+	private JPanel dialogPanel() {
+		JPanel panel = new JPanel();
+
+		panel.setLayout(new MigLayout());
+
+		panel.add(new JLabel("Width: "));
+		wField = new JTextField("16");
+		panel.add(wField, "wrap");
+
+		panel.add(new JLabel("Height: "));
+		hField = new JTextField("16");
+		panel.add(hField, "wrap");
+
+		return panel;
 	}
 
 	private class ClearEar implements ActionListener {
@@ -117,7 +149,7 @@ public class Canvas extends Module {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File oFile = oChooser.getSelectedFile();
 				System.out.println(oFile.getAbsolutePath());
-				BufferedImage img = drawPane.getScaledImage(10);
+				BufferedImage img = drawPane.getImage();
 
 				try {
 					ImageIO.write(img, "png", oFile);
