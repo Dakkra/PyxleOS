@@ -36,9 +36,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
 import com.dakkra.pyxleos.modules.canvas.Canvas;
 import com.dakkra.pyxleos.modules.textedit.TextEdit;
+import com.dakkra.pyxleos.ui.components.BGColorButton;
+import com.dakkra.pyxleos.ui.components.FGColorButton;
 import com.dakkra.pyxleos.ui.painters.DesktopPainter;
 import com.dakkra.pyxleos.util.Util;
 
@@ -64,6 +67,10 @@ public class MainWindow {
 	private File appDir;
 
 	private boolean firstRun;
+
+	private FGColorButton fgColorButton;
+
+	private BGColorButton bgColorButton;
 
 	// Constructor
 	public MainWindow(UISettings uis) {
@@ -130,9 +137,14 @@ public class MainWindow {
 
 		JToolBar toolBar = new JToolBar("ToolBar");
 
-		toolBar.add(new JButton("FGColor"));
-		toolBar.add(new JButton("BGColor"));
-		toolBar.add(new JButton("Switch"));
+		fgColorButton = new FGColorButton();
+		bgColorButton = new BGColorButton();
+
+		toolBar.add(fgColorButton);
+		toolBar.add(bgColorButton);
+		JButton switchColorsButton = new JButton("Switch Colors");
+		switchColorsButton.addActionListener(new SwitchColorsEar());
+		toolBar.add(switchColorsButton);
 
 		mFrame.add(toolBar, BorderLayout.PAGE_START);
 
@@ -168,6 +180,7 @@ public class MainWindow {
 		for (Window window : Window.getWindows()) {
 			SwingUtilities.updateComponentTreeUI(window);
 		}
+		updateColorButtons();
 	}
 
 	private void initializeMainMenu() {
@@ -295,6 +308,11 @@ public class MainWindow {
 		}
 	}
 
+	public void updateColorButtons() {
+		fgColorButton.updateButton();
+		bgColorButton.updateButton();
+	}
+
 	// Action Listeners
 	private class QuitListener implements ActionListener {
 
@@ -370,5 +388,20 @@ public class MainWindow {
 		public void actionPerformed(ActionEvent e) {
 			uisv.makeUI();
 		}
+	}
+
+	private class SwitchColorsEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Color oldFG = ColorReference.getFgColor();
+			Color oldBG = ColorReference.getBgColor();
+
+			ColorReference.setFgColor(oldBG);
+			ColorReference.setBgColor(oldFG);
+
+			updateColorButtons();
+		}
+
 	}
 }

@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class ColorReference {
 	private static Color fgColor = new Color(0, 0, 0);
-	private static Color bgColor = Color.BLUE;
+	private static Color bgColor = new Color(255, 255, 255);
 
 	public static Color getFgColor() {
 		return fgColor;

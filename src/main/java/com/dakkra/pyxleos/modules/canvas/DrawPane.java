@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -21,6 +23,8 @@ import com.dakkra.pyxleos.ColorReference;
 
 public class DrawPane extends JComponent {
 	private static final long serialVersionUID = 6748629663390647156L;
+
+	private Color paintColor;
 
 	private BufferedImage image;
 
@@ -63,7 +67,7 @@ public class DrawPane extends JComponent {
 
 		scale = 10;
 
-		MouseDragListener mouseDragListener = new MouseDragListener();
+		DefaultToolListener mouseDragListener = new DefaultToolListener();
 
 		addMouseListener(mouseDragListener);
 
@@ -171,12 +175,10 @@ public class DrawPane extends JComponent {
 		return img;
 	}
 
-	private class MouseDragListener extends MouseMotionAdapter implements
-			MouseListener, MouseWheelListener, KeyListener {
+	private class DefaultToolListener extends MouseMotionAdapter implements
+			MouseListener, MouseWheelListener, KeyListener, FocusListener {
 
 		private boolean shift;
-
-		private Color paintColor = fgColor;
 
 		@Override
 		public void mousePressed(MouseEvent e) {
@@ -225,10 +227,12 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			updateColors();
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
+			updateColors();
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			g2.setPaint(paintColor);
 			if (shift) {
@@ -242,10 +246,12 @@ public class DrawPane extends JComponent {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			updateColors();
+			paintColor = fgColor;
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			updateColors();
 			resetPrevLayer();
 			paintColor = fgColor;
 			shift = false;
@@ -254,6 +260,7 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void mouseWheelMoved(MouseWheelEvent e) {
+			updateColors();
 			if (e.getWheelRotation() < 0) {
 				scaleUp();
 				resetPrevLayer();
@@ -274,6 +281,8 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void keyTyped(KeyEvent e) {
+			updateColors();
+			paintColor = fgColor;
 		}
 
 		@Override
@@ -282,22 +291,26 @@ public class DrawPane extends JComponent {
 			updateColors();
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_SHIFT: {
+				updateColors();
 				shift = true;
 				gPrev.setPaint(paintColor);
 				break;
 			}
 			case KeyEvent.VK_CONTROL: {
+				updateColors();
 				paintColor = bgColor;
 				gPrev.setPaint(paintColor);
 				break;
 			}
 			default: {
+				updateColors();
 				paintColor = fgColor;
 				shift = false;
 				gPrev.setPaint(paintColor);
 				break;
 			}
 			}
+			;
 			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
 					currentPoint.y);
 			repaint();
@@ -306,12 +319,25 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+			updateColors();
 			paintColor = fgColor;
 			shift = false;
 			gPrev.setPaint(paintColor);
 			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
 					currentPoint.y);
 			repaint();
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			updateColors();
+			paintColor = fgColor;
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			updateColors();
+			paintColor = fgColor;
 		}
 
 	}

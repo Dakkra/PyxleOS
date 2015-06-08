@@ -6,6 +6,7 @@ What's new in this version
 1. CANVAS -- FINALLY!!!
 2. More themes! <3
 3. New Icon!
+4. ToolBar Color Buttons (to be used with canvas)
 
 Made with love and Java,
 	Chris Soderquist
