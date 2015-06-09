@@ -11,8 +11,9 @@ you desire to see attached with the image you submit to contact@dakkra.com
 What's new
 ------------------------------------
 1. Right Click on a pixel to get its' color
-2. Canvas title now shows the zoom amount
+2. Canvas title now shows the zoom amount and image resolution
 3. "S" indicator on color choosers for when using transparent colors to shade
+4. Mouse Position now displayed next to the Transparency button
 
 Made with love and Java,
 	Chris Soderquist
