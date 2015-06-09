@@ -21,6 +21,7 @@ public class BGColorButton extends JButton {
 
 	public BGColorButton() {
 		this.setText("        ");
+		setFocusable(false);
 		addActionListener(new ButtonEar());
 		color = ColorReference.getBgColor();
 		updateUI();

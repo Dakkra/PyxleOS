@@ -21,6 +21,7 @@ public class FGColorButton extends JButton {
 
 	public FGColorButton() {
 		this.setText("        ");
+		setFocusable(false);
 		addActionListener(new ButtonEar());
 		color = ColorReference.getFgColor();
 		updateUI();
