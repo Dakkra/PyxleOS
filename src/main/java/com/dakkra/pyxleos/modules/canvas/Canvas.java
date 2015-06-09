@@ -44,6 +44,8 @@ public class Canvas extends Module {
 	private JTextField scaleField;
 
 	public Canvas(MainWindow mw) {
+		super(mw);
+
 		this.mw = mw;
 
 		int returnval = JOptionPane.showConfirmDialog(null,

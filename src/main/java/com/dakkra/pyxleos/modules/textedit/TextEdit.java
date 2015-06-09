@@ -32,6 +32,7 @@ public class TextEdit extends Module {
 	private UndoManager undoManager = new UndoManager();
 
 	public TextEdit(MainWindow mw) {
+		super(mw);
 		this.mw = mw;
 		textFile = null;
 		makeUI();

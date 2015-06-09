@@ -170,6 +170,11 @@ public class MainWindow {
 		jdp.setSelectedFrame(iFrame);
 	}
 
+	public void bringToFront(JInternalFrame iFrame) {
+		jdp.setComponentZOrder(iFrame, 0);
+		jdp.setSelectedFrame(iFrame);
+	}
+
 	public void updateGUI() {
 		updateNimbus();
 
