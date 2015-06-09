@@ -166,10 +166,9 @@ public class Canvas extends Module {
 				File oFile = new File(oChooser.getSelectedFile()
 						.getAbsoluteFile() + ".png");
 				System.out.println(oFile.getAbsolutePath());
-				BufferedImage img = drawPane.getImage();
 
 				try {
-					ImageIO.write(img, "png", oFile);
+					ImageIO.write(drawPane.getImage(), "png", oFile);
 					JOptionPane.showMessageDialog(frame, "Saved!");
 				} catch (IOException e1) {
 					e1.printStackTrace();
