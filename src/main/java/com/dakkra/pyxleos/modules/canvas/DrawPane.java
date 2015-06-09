@@ -103,11 +103,6 @@ public class DrawPane extends JComponent {
 		bgColor = ColorReference.getBgColor();
 	}
 
-	public void setTransparentColor(Color transparentColor) {
-		this.transparentColor = transparentColor;
-		repaint();
-	}
-
 	public Point convertToCanvasCoord(Point point) {
 		point = centerImageCoord(point);
 
@@ -147,6 +142,15 @@ public class DrawPane extends JComponent {
 
 		repaint();
 
+	}
+
+	public void setTransparencyColor(Color newColor) {
+		transparentColor = newColor;
+		repaint();
+	}
+
+	public Color getTransparencyColor() {
+		return transparentColor;
 	}
 
 	public void resetPrevLayer() {

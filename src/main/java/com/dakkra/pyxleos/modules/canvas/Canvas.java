@@ -3,6 +3,7 @@ package com.dakkra.pyxleos.modules.canvas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -10,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -36,14 +39,20 @@ public class Canvas extends Module {
 
 	private JTextField hField;
 
+	private JTextField scaleField;
+
 	public Canvas(MainWindow mw) {
 		this.mw = mw;
 
-		JOptionPane.showConfirmDialog(null, dialogPanel(),
-				"JOptionPane Example : ", JOptionPane.OK_CANCEL_OPTION,
-				JOptionPane.PLAIN_MESSAGE);
+		int returnval = JOptionPane.showConfirmDialog(null,
+				dimensionDialogPanel(), "Image Dimensions : ",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-		makeUI();
+		if (returnval == JOptionPane.OK_OPTION) {
+			makeUI();
+		} else {
+			return;
+		}
 	}
 
 	private void makeUI() {
@@ -75,6 +84,11 @@ public class Canvas extends Module {
 
 		menuBar.add(editMenu);
 
+		JButton transButton = new JButton("Transparency Color");
+		transButton.setFocusable(false);
+		transButton.addActionListener(new TransButtonEar());
+		menuBar.add(transButton);
+
 		JPanel container = new JPanel();
 		container.setLayout(new BorderLayout());
 		container.setBackground(Color.DARK_GRAY);
@@ -92,18 +106,37 @@ public class Canvas extends Module {
 		mw.addIFrame(frame);
 	}
 
-	private JPanel dialogPanel() {
+	private JPanel dimensionDialogPanel() {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new MigLayout());
 
+		panel.add(new JLabel("Enter dimensions"), "span");
+
 		panel.add(new JLabel("Width: "));
 		wField = new JTextField("16");
+		wField.setColumns(4);
 		panel.add(wField, "wrap");
 
 		panel.add(new JLabel("Height: "));
 		hField = new JTextField("16");
+		hField.setColumns(4);
 		panel.add(hField, "wrap");
+
+		return panel;
+	}
+
+	private JPanel exportDialogPanel() {
+		JPanel panel = new JPanel();
+
+		panel.setLayout(new MigLayout());
+
+		panel.add(new JLabel("Pixel Scale"), "span");
+
+		panel.add(new JLabel("PX*"));
+		scaleField = new JTextField("10");
+		scaleField.setColumns(4);
+		panel.add(scaleField, "wrap");
 
 		return panel;
 	}
@@ -124,12 +157,14 @@ public class Canvas extends Module {
 			JFileChooser oChooser = new JFileChooser();
 			int returnVal = oChooser.showSaveDialog(frame);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File oFile = oChooser.getSelectedFile();
+				File oFile = new File(oChooser.getSelectedFile()
+						.getAbsoluteFile() + ".png");
 				System.out.println(oFile.getAbsolutePath());
 				BufferedImage img = drawPane.getImage();
 
 				try {
 					ImageIO.write(img, "png", oFile);
+					JOptionPane.showMessageDialog(frame, "Saved!");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -144,22 +179,52 @@ public class Canvas extends Module {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser oChooser = new JFileChooser();
-			int returnVal = oChooser.showSaveDialog(frame);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File oFile = oChooser.getSelectedFile();
-				System.out.println(oFile.getAbsolutePath());
-				BufferedImage img = drawPane.getImage();
+			int returnval = JOptionPane.showConfirmDialog(null,
+					exportDialogPanel(), "Export scale : ",
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+			if (returnval == JOptionPane.OK_OPTION) {
+				int scaleAmt = Integer.parseInt(scaleField.getText());
+				JFileChooser oChooser = new JFileChooser();
+				int returnVal = oChooser.showSaveDialog(frame);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					File oFile = new File(oChooser.getSelectedFile()
+							.getAbsoluteFile() + ".png");
+					System.out.println(oFile.getAbsolutePath());
+					BufferedImage orig = drawPane.getImage();
+					int width = orig.getWidth() * scaleAmt;
+					int height = orig.getHeight() * scaleAmt;
+					BufferedImage img = new BufferedImage(width, height,
+							BufferedImage.TYPE_INT_ARGB);
+					Graphics2D g = img.createGraphics();
+					g.drawImage(orig, 0, 0, width, height, frame);
 
-				try {
-					ImageIO.write(img, "png", oFile);
-				} catch (IOException e1) {
-					e1.printStackTrace();
+					try {
+						ImageIO.write(img, "png", oFile);
+						JOptionPane.showMessageDialog(frame, "Saved!");
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				} else {
+					return;
 				}
+			}
+		}
+	}
+
+	private class TransButtonEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Color newColor = JColorChooser.showDialog(frame,
+					"Transparancy Color", drawPane.getTransparencyColor());
+
+			if (newColor != null) {
+				drawPane.setTransparencyColor(newColor);
 			} else {
 				return;
 			}
 		}
+
 	}
 
 }
