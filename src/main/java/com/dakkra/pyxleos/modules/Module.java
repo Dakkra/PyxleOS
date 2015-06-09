@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
@@ -28,6 +30,7 @@ public class Module {
 		frame = Util.createIFrame("Module");
 
 		frame.addFocusListener(new FrameFocusEar());
+		frame.addMouseListener(new FrameMouseListener());
 
 		menuBar = new JMenuBar();
 
@@ -58,13 +61,40 @@ public class Module {
 		@Override
 		public void focusGained(FocusEvent e) {
 			frame.setEnabled(true);
-
+			mw.bringToFront(frame);
 		}
 
 		@Override
 		public void focusLost(FocusEvent e) {
 			frame.setEnabled(false);
+		}
+
+	}
+
+	protected class FrameMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			frame.setEnabled(true);
 			mw.bringToFront(frame);
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			frame.setEnabled(true);
+			mw.bringToFront(frame);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
 		}
 
 	}

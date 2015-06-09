@@ -332,6 +332,7 @@ public class DrawPane extends JComponent {
 			}
 
 			currentPoint = convertToCanvasCoord(e.getPoint());
+			canvas.updateMousePos(currentPoint.x, currentPoint.y);
 			resetPrevLayer();
 			if (gPrev != null) {
 				gPrev.setPaint(paintColor);
