@@ -142,7 +142,7 @@ public class MainWindow {
 
 		toolBar.add(fgColorButton);
 		toolBar.add(bgColorButton);
-		JButton switchColorsButton = new JButton("Switch Colors");
+		JButton switchColorsButton = new JButton("Switch");
 		switchColorsButton.addActionListener(new SwitchColorsEar());
 		toolBar.add(switchColorsButton);
 
