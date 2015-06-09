@@ -2,9 +2,7 @@ Welcome to PyxleOS!
 
 ATTENTION ARTISTS!!!!
 ------------------------------------
-
 PyxleOS is in need of artists willing to make demos for the upcoming website!
-
 As PyxleOS is free of charge it would be great of users to help support the project.
 
 If you wish to help, please submit your artwork, full name, and other information
@@ -14,6 +12,7 @@ What's new
 ------------------------------------
 1. Right Click on a pixel to get its' color
 2. Canvas title now shows the zoom amount
+3. "S" indicator on color choosers for when using transparent colors to shade
 
 Made with love and Java,
 	Chris Soderquist

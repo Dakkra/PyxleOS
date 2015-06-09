@@ -1,6 +1,7 @@
 package com.dakkra.pyxleos.ui.components;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 
 import com.dakkra.pyxleos.ColorReference;
+import com.dakkra.pyxleos.util.Util;
 
 public class BGColorButton extends JButton {
 	private static final long serialVersionUID = -6634922597932677896L;
@@ -41,6 +43,14 @@ public class BGColorButton extends JButton {
 		g.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 20, 20);
 		g.setColor(color);
 		g.fillRoundRect(3, 3, this.getWidth() - 6, this.getHeight() - 6, 10, 10);
+		if (color.getAlpha() < 255) {
+			g.setFont(Util.makeFont(20, Font.BOLD));
+			g.setColor(Color.WHITE);
+			char[] t = "S".toCharArray();
+			g.drawChars(t, 0, 1, (this.getWidth() / 2)
+					- (getFont().getSize() / 2) + 1, (this.getHeight() / 2)
+					+ (getFont().getSize() / 2) + 1);
+		}
 
 	}
 
