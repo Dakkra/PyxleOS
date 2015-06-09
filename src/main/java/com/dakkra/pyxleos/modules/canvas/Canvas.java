@@ -182,8 +182,14 @@ public class Canvas extends Module {
 			int returnval = JOptionPane.showConfirmDialog(null,
 					exportDialogPanel(), "Export scale : ",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-			if (returnval == JOptionPane.OK_OPTION) {
-				int scaleAmt = Integer.parseInt(scaleField.getText());
+			int scaleAmt;
+			try {
+				scaleAmt = Integer.parseInt(scaleField.getText());
+			} catch (NumberFormatException e2) {
+				e2.printStackTrace();
+				return;
+			}
+			if (returnval == JOptionPane.OK_OPTION & scaleAmt > 0) {
 				JFileChooser oChooser = new JFileChooser();
 				int returnVal = oChooser.showSaveDialog(frame);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
