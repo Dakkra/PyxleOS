@@ -49,7 +49,7 @@ public class FGColorButton extends JButton {
 			g.setColor(Color.WHITE);
 			char[] t = "S".toCharArray();
 			g.drawChars(t, 0, 1, (this.getWidth() / 2)
-					- (getFont().getSize() / 2) + 1, (this.getHeight() / 2)
+					- (getFont().getSize() / 2), (this.getHeight() / 2)
 					+ (getFont().getSize() / 2) + 1);
 		}
 

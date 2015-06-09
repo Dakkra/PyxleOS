@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +37,8 @@ public class Canvas extends Module {
 	private DrawPane drawPane;
 
 	private JLabel mPosLabel;
+
+	private JLabel exportSizeLabel;
 
 	private JTextField wField;
 
@@ -152,12 +155,34 @@ public class Canvas extends Module {
 
 		panel.add(new JLabel("Pixel Scale"), "span");
 
-		panel.add(new JLabel("PX*"));
+		panel.add(new JLabel("1PX*"));
 		scaleField = new JTextField("10");
 		scaleField.setColumns(4);
+		scaleField.addKeyListener(new ScaleFieldEar());
 		panel.add(scaleField, "wrap");
 
+		exportSizeLabel = new JLabel("Size: " + "()");
+		panel.add(exportSizeLabel, "span");
+
+		updateExportLabel();
+
 		return panel;
+	}
+
+	private void updateExportLabel() {
+		try {
+			if (scaleField.getText() != "") {
+				if (Integer.parseInt(scaleField.getText()) > 0) {
+					int w = Integer.parseInt(wField.getText())
+							* Integer.parseInt(scaleField.getText());
+					int h = Integer.parseInt(hField.getText())
+							* Integer.parseInt(scaleField.getText());
+					exportSizeLabel
+							.setText("Size: " + "(" + w + ", " + h + ")");
+				}
+			}
+		} catch (NumberFormatException e) {
+		}
 	}
 
 	private class ClearEar implements ActionListener {
@@ -254,6 +279,23 @@ public class Canvas extends Module {
 			} else {
 				return;
 			}
+		}
+
+	}
+
+	private class ScaleFieldEar implements KeyListener {
+
+		@Override
+		public void keyTyped(java.awt.event.KeyEvent e) {
+		}
+
+		@Override
+		public void keyPressed(java.awt.event.KeyEvent e) {
+		}
+
+		@Override
+		public void keyReleased(java.awt.event.KeyEvent e) {
+			updateExportLabel();
 		}
 
 	}
