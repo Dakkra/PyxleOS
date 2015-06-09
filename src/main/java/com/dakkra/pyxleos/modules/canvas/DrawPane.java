@@ -18,6 +18,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
+import javax.swing.undo.UndoManager;
 
 import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.ui.MainWindow;
@@ -28,6 +29,8 @@ public class DrawPane extends JComponent {
 	private MainWindow mw;
 
 	private Canvas canvas;
+
+	private UndoManager um;
 
 	private Color paintColor;
 
@@ -57,6 +60,8 @@ public class DrawPane extends JComponent {
 		this.mw = mw;
 
 		this.canvas = canvas;
+
+		um = new UndoManager();
 
 		width = d.width;
 
@@ -192,6 +197,7 @@ public class DrawPane extends JComponent {
 		public void mousePressed(MouseEvent e) {
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			primaryPoint = currentPoint;
+			canvas.updateMousePos(currentPoint.x, currentPoint.y);
 
 			if (e.getButton() == MouseEvent.BUTTON3) {
 				int newColorInt = image.getRGB(currentPoint.x, currentPoint.y);
@@ -224,6 +230,7 @@ public class DrawPane extends JComponent {
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			currentPoint = convertToCanvasCoord(e.getPoint());
+			canvas.updateMousePos(currentPoint.x, currentPoint.y);
 			updateColors();
 			if (shift) {
 				resetPrevLayer();
@@ -243,6 +250,7 @@ public class DrawPane extends JComponent {
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			currentPoint = convertToCanvasCoord(e.getPoint());
+			canvas.updateMousePos(currentPoint.x, currentPoint.y);
 			resetPrevLayer();
 			updateColors();
 			gPrev.setPaint(paintColor);
@@ -271,6 +279,8 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
+			currentPoint = convertToCanvasCoord(e.getPoint());
+			canvas.updateMousePos(currentPoint.x, currentPoint.y);
 			updateColors();
 			paintColor = fgColor;
 		}

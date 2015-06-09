@@ -35,6 +35,8 @@ public class Canvas extends Module {
 
 	private DrawPane drawPane;
 
+	private JLabel mPosLabel;
+
 	private JTextField wField;
 
 	private JTextField hField;
@@ -57,7 +59,13 @@ public class Canvas extends Module {
 
 	public void updateTitle() {
 		int zoom = drawPane.getZoom();
-		frame.setTitle("Canvas: (" + zoom + "x)");
+		frame.setTitle("Canvas: " + "(" + wField.getText() + ","
+				+ hField.getText() + ") " + "(" + zoom + "x)");
+	}
+
+	public void updateMousePos(int x, int y) {
+		;
+		mPosLabel.setText("Mouse Pos: (" + x + ", " + y + ")");
 	}
 
 	private void makeUI() {
@@ -93,6 +101,9 @@ public class Canvas extends Module {
 		transButton.setFocusable(false);
 		transButton.addActionListener(new TransButtonEar());
 		menuBar.add(transButton);
+
+		mPosLabel = new JLabel("Mouse Pos: ()");
+		menuBar.add(mPosLabel);
 
 		JPanel container = new JPanel();
 		container.setLayout(new BorderLayout());
