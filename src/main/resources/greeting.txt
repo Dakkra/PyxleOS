@@ -1,13 +1,14 @@
 Welcome to PyxleOS!
 
-What's new in this version
+ATTENTION ARTISTS!!!!
 ------------------------------------
 
-1. CANVAS -- FINALLY!!!
-2. More themes! <3
-3. New Icon!
-4. ToolBar Color Buttons (to be used with canvas)
-5. Saving and exporting of image (export is used to save a scaled version)
+PyxleOS is in need of artists willing to make demos for the upcoming website!
+
+As PyxleOS is free of charge it would be great of users to help support the project.
+
+If you wish to help, please submit your artwork, full name, and other information
+you desire to see attached with the image you submit to contact@dakkra.com
 
 Made with love and Java,
 	Chris Soderquist

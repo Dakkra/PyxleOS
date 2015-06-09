@@ -20,9 +20,12 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 import com.dakkra.pyxleos.ColorReference;
+import com.dakkra.pyxleos.ui.MainWindow;
 
 public class DrawPane extends JComponent {
 	private static final long serialVersionUID = 6748629663390647156L;
+
+	private MainWindow mw;
 
 	private Color paintColor;
 
@@ -48,7 +51,8 @@ public class DrawPane extends JComponent {
 
 	private int height;
 
-	public DrawPane(Dimension d) {
+	public DrawPane(MainWindow mw, Dimension d) {
+		this.mw = mw;
 
 		width = d.width;
 
@@ -178,6 +182,24 @@ public class DrawPane extends JComponent {
 		public void mousePressed(MouseEvent e) {
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			primaryPoint = currentPoint;
+
+			if (e.getButton() == MouseEvent.BUTTON3) {
+				int newColorInt = image.getRGB(currentPoint.x, currentPoint.y);
+				Color newColor = new Color(newColorInt);
+				ColorReference.setFgColor(newColor);
+				if (newColor != null) {
+					updateColors();
+					paintColor = fgColor;
+					gPrev.setPaint(paintColor);
+					g2.setPaint(paintColor);
+					gPrev.drawLine(currentPoint.x, currentPoint.y,
+							currentPoint.x, currentPoint.y);
+					mw.updateColorButtons();
+					repaint();
+				}
+				return;
+			}
+
 			updateColors();
 			if (!shift) {
 				if (g2 != null) {

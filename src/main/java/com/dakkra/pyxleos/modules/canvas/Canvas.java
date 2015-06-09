@@ -93,7 +93,7 @@ public class Canvas extends Module {
 		container.setLayout(new BorderLayout());
 		container.setBackground(Color.DARK_GRAY);
 
-		drawPane = new DrawPane(new Dimension(
+		drawPane = new DrawPane(mw, new Dimension(
 				Integer.parseInt(wField.getText()), Integer.parseInt(hField
 						.getText())));
 

@@ -332,7 +332,6 @@ public class MainWindow {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JInternalFrame aboutFrame = Util.createIFrame("About");
-			aboutFrame.setBounds(0, 0, 400, 200);
 
 			JTextArea textArea = new JTextArea("");
 			textArea.setEditable(false);
@@ -350,7 +349,13 @@ public class MainWindow {
 
 			aboutFrame.add(textPane);
 
+			aboutFrame.pack();
+
+			aboutFrame.setSize(aboutFrame.getWidth() + 10,
+					aboutFrame.getHeight() + 10);
+
 			mw.addIFrame(aboutFrame);
+
 		}
 	}
 
