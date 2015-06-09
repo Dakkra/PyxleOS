@@ -55,6 +55,11 @@ public class Canvas extends Module {
 		}
 	}
 
+	public void updateTitle() {
+		int zoom = drawPane.getZoom();
+		frame.setTitle("Canvas: (" + zoom + "x)");
+	}
+
 	private void makeUI() {
 		frame.setTitle("Canvas");
 
@@ -93,15 +98,16 @@ public class Canvas extends Module {
 		container.setLayout(new BorderLayout());
 		container.setBackground(Color.DARK_GRAY);
 
-		drawPane = new DrawPane(mw, new Dimension(
-				Integer.parseInt(wField.getText()), Integer.parseInt(hField
-						.getText())));
+		drawPane = new DrawPane(mw, this, new Dimension(Integer.parseInt(wField
+				.getText()), Integer.parseInt(hField.getText())));
 
 		JScrollPane pane = new JScrollPane(drawPane);
 
 		container.add(pane, BorderLayout.CENTER);
 
 		frame.add(container);
+
+		updateTitle();
 
 		mw.addIFrame(frame);
 	}
@@ -199,10 +205,17 @@ public class Canvas extends Module {
 					BufferedImage orig = drawPane.getImage();
 					int width = orig.getWidth() * scaleAmt;
 					int height = orig.getHeight() * scaleAmt;
-					BufferedImage img = new BufferedImage(width, height,
-							BufferedImage.TYPE_INT_ARGB);
-					Graphics2D g = img.createGraphics();
-					g.drawImage(orig, 0, 0, width, height, frame);
+					BufferedImage img = null;
+					try {
+						img = new BufferedImage(width, height,
+								BufferedImage.TYPE_INT_ARGB);
+						Graphics2D g = img.createGraphics();
+						g.drawImage(orig, 0, 0, width, height, frame);
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(frame,
+								"Image is too large");
+						return;
+					}
 
 					try {
 						ImageIO.write(img, "png", oFile);

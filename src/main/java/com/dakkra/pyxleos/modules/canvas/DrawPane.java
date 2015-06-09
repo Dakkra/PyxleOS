@@ -27,6 +27,8 @@ public class DrawPane extends JComponent {
 
 	private MainWindow mw;
 
+	private Canvas canvas;
+
 	private Color paintColor;
 
 	private BufferedImage image;
@@ -51,8 +53,10 @@ public class DrawPane extends JComponent {
 
 	private int height;
 
-	public DrawPane(MainWindow mw, Dimension d) {
+	public DrawPane(MainWindow mw, Canvas canvas, Dimension d) {
 		this.mw = mw;
+
+		this.canvas = canvas;
 
 		width = d.width;
 
@@ -93,6 +97,7 @@ public class DrawPane extends JComponent {
 	private void scaleUp() {
 		scale += 1;
 		repaint();
+		canvas.updateTitle();
 	}
 
 	private void scaleDown() {
@@ -100,6 +105,7 @@ public class DrawPane extends JComponent {
 			scale -= 1;
 		}
 		repaint();
+		canvas.updateTitle();
 	}
 
 	private void updateColors() {
@@ -171,6 +177,10 @@ public class DrawPane extends JComponent {
 
 	public BufferedImage getImage() {
 		return image;
+	}
+
+	public int getZoom() {
+		return scale;
 	}
 
 	private class DefaultToolListener extends MouseMotionAdapter implements

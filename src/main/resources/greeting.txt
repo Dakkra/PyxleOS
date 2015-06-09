@@ -10,5 +10,10 @@ As PyxleOS is free of charge it would be great of users to help support the proj
 If you wish to help, please submit your artwork, full name, and other information
 you desire to see attached with the image you submit to contact@dakkra.com
 
+What's new
+------------------------------------
+1. Right Click on a pixel to get its' color
+2. Canvas title now shows the zoom amount
+
 Made with love and Java,
 	Chris Soderquist
