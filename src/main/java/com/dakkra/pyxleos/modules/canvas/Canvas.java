@@ -295,6 +295,7 @@ public class Canvas extends Module {
 			}
 			try {
 				ImageIO.write(drawPane.getImage(), "png", imgFile);
+				imageName = imgFile.getName();
 				updateTitle();
 				JOptionPane.showMessageDialog(frame, "Saved!");
 			} catch (IOException e1) {
