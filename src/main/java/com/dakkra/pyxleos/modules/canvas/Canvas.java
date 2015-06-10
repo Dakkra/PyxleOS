@@ -46,6 +46,8 @@ public class Canvas extends Module {
 
 	private JTextField scaleField;
 
+	private JTextField zoomField;
+
 	public Canvas(MainWindow mw) {
 		super(mw);
 
@@ -99,6 +101,13 @@ public class Canvas extends Module {
 		editClear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 				ActionEvent.CTRL_MASK));
 		editMenu.add(editClear);
+
+		JMenuItem editZoom = new JMenuItem(" Zoom ");
+		editZoom.addActionListener(new ZoomEar());
+		editZoom.setMnemonic(KeyEvent.VK_Z);
+		editZoom.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+				ActionEvent.ALT_MASK));
+		editMenu.add(editZoom);
 
 		menuBar.add(editMenu);
 
@@ -165,6 +174,18 @@ public class Canvas extends Module {
 		panel.add(exportSizeLabel, "span");
 
 		updateExportLabel();
+
+		return panel;
+	}
+
+	private JPanel zoomDialog() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new MigLayout());
+
+		panel.add(new JLabel("Zoom: "));
+
+		zoomField = new JTextField("" + drawPane.getZoom());
+		panel.add(zoomField, "wrap");
 
 		return panel;
 	}
@@ -300,6 +321,20 @@ public class Canvas extends Module {
 				drawPane.setTransparencyColor(newColor);
 			} else {
 				return;
+			}
+		}
+
+	}
+
+	private class ZoomEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int returnval = JOptionPane.showConfirmDialog(null, zoomDialog(),
+					"Zoom Factor : ", JOptionPane.OK_CANCEL_OPTION,
+					JOptionPane.PLAIN_MESSAGE);
+			if (returnval == JOptionPane.OK_OPTION) {
+				drawPane.setZoom(Integer.parseInt(zoomField.getText()));
 			}
 		}
 

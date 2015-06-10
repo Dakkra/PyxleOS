@@ -11,6 +11,7 @@ you desire to see attached with the image you submit to contact@dakkra.com
 What's new
 ------------------------------------
 1. New scaling algorithm (used to be linear)
+2. Zoom dialog in canvas (Alt+z)
 
 To do
 ------------------------------------

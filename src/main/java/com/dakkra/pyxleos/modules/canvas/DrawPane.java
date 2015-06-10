@@ -23,7 +23,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.undo.UndoManager;
-import javax.swing.undo.UndoableEdit;
 
 import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
@@ -213,6 +212,12 @@ public class DrawPane extends JComponent {
 
 	public int getZoom() {
 		return scale;
+	}
+
+	public void setZoom(int scale) {
+		this.scale = scale;
+		repaint();
+		canvas.updateTitle();
 	}
 
 	private class DefaultToolListener extends MouseMotionAdapter implements
