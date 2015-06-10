@@ -12,6 +12,7 @@ What's new
 ------------------------------------
 1. New scaling algorithm (used to be linear)
 2. Zoom dialog in canvas (Alt+z)
+3. Re-Done menu. Makes more sense now XD
 
 To do
 ------------------------------------

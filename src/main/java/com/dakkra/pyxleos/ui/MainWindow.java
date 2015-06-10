@@ -200,6 +200,13 @@ public class MainWindow {
 		fileMQuit.setMnemonic(KeyEvent.VK_Q);
 		fileMQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 				ActionEvent.CTRL_MASK));
+		JMenuItem fileNew = new JMenuItem("New Canvas");
+		fileNew.addActionListener(new CanvasEar(this));
+		fileNew.setMnemonic(KeyEvent.VK_N);
+		fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
+				ActionEvent.CTRL_MASK));
+		fileMenu.add(fileNew);
+
 		fileMenu.add(fileMQuit);
 		// Tools menu
 		JMenu toolsMenu = new JMenu(" Tools ");
@@ -209,12 +216,6 @@ public class MainWindow {
 		toolsMTE.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
 				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		toolsMenu.add(toolsMTE);
-		JMenuItem toolsMC = new JMenuItem("New Canvas");
-		toolsMC.addActionListener(new CanvasEar(this));
-		toolsMC.setMnemonic(KeyEvent.VK_C);
-		toolsMC.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
-				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
-		toolsMenu.add(toolsMC);
 		// Options menu
 		JMenu optionsMenu = new JMenu(" Options ");
 		JMenuItem optionColor = new JMenuItem(" Appearance ");
