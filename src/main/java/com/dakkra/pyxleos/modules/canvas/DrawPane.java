@@ -23,6 +23,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.undo.UndoManager;
+import javax.swing.undo.UndoableEdit;
 
 import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
@@ -315,8 +316,6 @@ public class DrawPane extends JComponent {
 		public void mouseExited(MouseEvent e) {
 			updateColors();
 			resetPrevLayer();
-			paintColor = fgColor;
-			shift = false;
 			gPrev.setPaint(paintColor);
 		}
 
@@ -384,11 +383,13 @@ public class DrawPane extends JComponent {
 		public void keyReleased(KeyEvent e) {
 			updateColors();
 			paintColor = fgColor;
-			shift = false;
 			gPrev.setPaint(paintColor);
 			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
 					currentPoint.y);
 			repaint();
+			if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+				shift = false;
+			}
 		}
 
 		@Override

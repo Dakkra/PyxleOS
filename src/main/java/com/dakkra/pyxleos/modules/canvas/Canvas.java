@@ -114,8 +114,8 @@ public class Canvas extends Module {
 		container.setLayout(new BorderLayout());
 		container.setBackground(Color.DARK_GRAY);
 
-		drawPane = new DrawPane(mw, this, new Dimension(Integer.parseInt(wField
-				.getText()), Integer.parseInt(hField.getText())));
+		DrawPaneThread drawPaneThread = new DrawPaneThread(this);
+		drawPaneThread.run();
 
 		JScrollPane pane = new JScrollPane(drawPane);
 
@@ -185,6 +185,23 @@ public class Canvas extends Module {
 		}
 	}
 
+	private class DrawPaneThread implements Runnable {
+
+		private Canvas canvas;
+
+		public DrawPaneThread(Canvas canvas) {
+			this.canvas = canvas;
+		}
+
+		@Override
+		public void run() {
+			drawPane = new DrawPane(mw, canvas, new Dimension(
+					Integer.parseInt(wField.getText()), Integer.parseInt(hField
+							.getText())));
+		}
+
+	}
+
 	private class ClearEar implements ActionListener {
 
 		@Override
@@ -218,10 +235,15 @@ public class Canvas extends Module {
 
 	}
 
-	private class ExportEar implements ActionListener {
+	private class ExportEar implements ActionListener, Runnable {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			run();
+		}
+
+		@Override
+		public void run() {
 			int returnval = JOptionPane.showConfirmDialog(null,
 					exportDialogPanel(), "Export scale : ",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -272,7 +294,7 @@ public class Canvas extends Module {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Color newColor = JColorChooser.showDialog(frame,
-					"Transparancy Color", drawPane.getTransparencyColor());
+					"Transparency Color", drawPane.getTransparencyColor());
 
 			if (newColor != null) {
 				drawPane.setTransparencyColor(newColor);

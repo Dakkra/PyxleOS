@@ -101,7 +101,7 @@ public class UISettings {
 	}
 
 	public void setThemeNight() {
-		bgColor = new Color(0, 0, 0);
+		bgColor = new Color(51, 51, 51);
 		baseColor = new Color(36, 36, 51);
 		selectionColor = new Color(74, 74, 98);
 		textColor = new Color(255, 255, 255);
