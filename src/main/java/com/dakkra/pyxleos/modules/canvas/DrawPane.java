@@ -120,6 +120,60 @@ public class DrawPane extends JComponent {
 		clear();
 	}
 
+	public DrawPane(MainWindow mw, Canvas canvas, BufferedImage oimage) {
+		this.mw = mw;
+
+		this.canvas = canvas;
+
+		um = new UndoManager();
+
+		width = oimage.getWidth();
+
+		height = oimage.getHeight();
+
+		image = oimage;
+
+		prevLayer = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_ARGB);
+
+		try {
+			tileLoad = ImageIO.read(PyxleOS.class
+					.getResourceAsStream("/tile.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		tileImg = new BufferedImage(tileLoad.getWidth(this),
+				tileLoad.getHeight(this), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D tileG = tileImg.createGraphics();
+		tileG.drawImage(tileLoad, 0, 0, this);
+		tileG.dispose();
+
+		g2 = image.createGraphics();
+
+		gPrev = prevLayer.createGraphics();
+
+		transparentColor = new Color(102, 102, 102);
+
+		scale = 10;
+
+		DefaultToolListener mouseDragListener = new DefaultToolListener();
+
+		addMouseListener(mouseDragListener);
+
+		addMouseMotionListener(mouseDragListener);
+
+		addMouseWheelListener(mouseDragListener);
+
+		addKeyListener(mouseDragListener);
+
+		setFocusable(true);
+
+		requestFocus();
+
+		requestFocusInWindow();
+
+	}
+
 	private void scaleUp() {
 		scale += Math.round((scale / 5) + 1);
 		repaint();

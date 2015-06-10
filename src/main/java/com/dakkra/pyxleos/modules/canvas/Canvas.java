@@ -34,6 +34,8 @@ public class Canvas extends Module {
 
 	private MainWindow mw;
 
+	private BufferedImage image = null;
+
 	private DrawPane drawPane;
 
 	private JLabel mPosLabel;
@@ -48,6 +50,10 @@ public class Canvas extends Module {
 
 	private JTextField zoomField;
 
+	private int canvasWidth;
+
+	private int canvasHeight;
+
 	public Canvas(MainWindow mw) {
 		super(mw);
 
@@ -58,16 +64,31 @@ public class Canvas extends Module {
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
 		if (returnval == JOptionPane.OK_OPTION) {
+			canvasWidth = Integer.parseInt(wField.getText());
+			canvasHeight = Integer.parseInt(hField.getText());
 			makeUI();
 		} else {
 			return;
 		}
 	}
 
+	public Canvas(MainWindow mw, BufferedImage image) {
+		super(mw);
+
+		this.mw = mw;
+
+		this.image = image;
+
+		canvasWidth = image.getWidth();
+		canvasHeight = image.getHeight();
+
+		makeUI();
+	}
+
 	public void updateTitle() {
 		int zoom = drawPane.getZoom();
-		frame.setTitle("Canvas: " + "(" + wField.getText() + ","
-				+ hField.getText() + ") " + "(" + zoom + "x)");
+		frame.setTitle("Canvas: " + "(" + canvasHeight + "," + canvasHeight
+				+ ") " + "(" + zoom + "x)");
 	}
 
 	public void updateMousePos(int x, int y) {
@@ -216,9 +237,13 @@ public class Canvas extends Module {
 
 		@Override
 		public void run() {
-			drawPane = new DrawPane(mw, canvas, new Dimension(
-					Integer.parseInt(wField.getText()), Integer.parseInt(hField
-							.getText())));
+
+			if (image != null) {
+				drawPane = new DrawPane(mw, canvas, image);
+			} else {
+				drawPane = new DrawPane(mw, canvas, new Dimension(canvasWidth,
+						canvasHeight));
+			}
 		}
 
 	}

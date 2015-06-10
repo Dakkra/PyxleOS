@@ -11,6 +11,7 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,6 +23,7 @@ import java.util.Properties;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
@@ -201,12 +203,19 @@ public class MainWindow {
 		fileMQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 				ActionEvent.CTRL_MASK));
 		JMenuItem fileNew = new JMenuItem("New Canvas");
-		fileNew.addActionListener(new CanvasEar(this));
+		fileNew.addActionListener(new NewCanvasEar(this));
 		fileNew.setMnemonic(KeyEvent.VK_N);
 		fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 				ActionEvent.CTRL_MASK));
 		fileMenu.add(fileNew);
+		JMenuItem fileOpen = new JMenuItem("New Canvas");
+		fileOpen.addActionListener(new OpenCanvasEar(this));
+		fileOpen.setMnemonic(KeyEvent.VK_O);
+		fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+				ActionEvent.CTRL_MASK));
 
+		fileMenu.add(fileNew);
+		fileMenu.add(fileOpen);
 		fileMenu.add(fileMQuit);
 		// Tools menu
 		JMenu toolsMenu = new JMenu(" Tools ");
@@ -380,10 +389,10 @@ public class MainWindow {
 		}
 	}
 
-	private class CanvasEar implements ActionListener {
+	private class NewCanvasEar implements ActionListener {
 		MainWindow mw;
 
-		public CanvasEar(MainWindow mw) {
+		public NewCanvasEar(MainWindow mw) {
 			this.mw = mw;
 		}
 
@@ -392,6 +401,37 @@ public class MainWindow {
 			@SuppressWarnings("unused")
 			Canvas canv = new Canvas(mw);
 		}
+	}
+
+	private class OpenCanvasEar implements ActionListener {
+		MainWindow mw;
+
+		public OpenCanvasEar(MainWindow mw) {
+			this.mw = mw;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFileChooser ofc = new JFileChooser();
+			int returnVal = ofc.showOpenDialog(mFrame);
+
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				BufferedImage img = null;
+				try {
+					img = ImageIO.read(ofc.getSelectedFile());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				if (img != null) {
+					@SuppressWarnings("unused")
+					Canvas canvas = new Canvas(mw, img);
+				} else {
+					JOptionPane.showMessageDialog(mFrame,
+							"Please select a png or jpg");
+				}
+			}
+		}
+
 	}
 
 	private class CustomizeUIEar implements ActionListener {
