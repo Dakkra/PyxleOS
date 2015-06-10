@@ -15,6 +15,8 @@ What's new
 3. "S" indicator on color choosers for when using transparent colors to shade
 4. Mouse Position now displayed next to the Transparency button
 5. Improved Window Behavior
+6. Multi-Threaded Canvas and export (makes it run faster and smoother)
+7. New Background Image and Splash Image
 
 Made with love and Java,
 	Chris Soderquist

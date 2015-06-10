@@ -1,5 +1,6 @@
 package com.dakkra.pyxleos.modules.textedit;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -53,6 +54,18 @@ public class TextEdit extends Module {
 		Point center = new Point((bounds.width / 2) - (frame.getWidth() / 2),
 				(bounds.height / 2) - (frame.getHeight() / 2));
 		frame.setLocation(center);
+	}
+
+	public void setSize(Dimension d) {
+		frame.setSize(d);
+		Rectangle bounds = mw.getDesktopPaneBounds();
+		Point center = new Point((bounds.width / 2) - (frame.getWidth() / 2),
+				(bounds.height / 2) - (frame.getHeight() / 2));
+		frame.setLocation(center);
+	}
+
+	public Dimension getSize() {
+		return frame.getSize();
 	}
 
 	private void makeUI() {

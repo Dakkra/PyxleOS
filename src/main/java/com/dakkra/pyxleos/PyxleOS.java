@@ -1,5 +1,6 @@
 package com.dakkra.pyxleos;
 
+import java.awt.Dimension;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -28,7 +29,10 @@ public class PyxleOS {
 			e1.printStackTrace();
 		}
 		te.setText(content);
-		te.packFrame();
+		te.setSize(new Dimension(620, 512));
+
+		System.out.println("" + te.getSize().getWidth() + "x"
+				+ te.getSize().getHeight());
 
 		System.out.println("Ready!");
 	}
