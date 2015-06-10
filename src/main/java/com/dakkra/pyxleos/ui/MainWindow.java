@@ -424,7 +424,7 @@ public class MainWindow {
 				}
 				if (img != null) {
 					@SuppressWarnings("unused")
-					Canvas canvas = new Canvas(mw, img);
+					Canvas canvas = new Canvas(mw, img, ofc.getSelectedFile());
 				} else {
 					JOptionPane.showMessageDialog(mFrame,
 							"Please select a png or jpg");

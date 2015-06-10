@@ -50,6 +50,10 @@ public class Canvas extends Module {
 
 	private JTextField zoomField;
 
+	private String imageName = "Canvas";
+
+	private File imgFile = null;
+
 	private int canvasWidth;
 
 	private int canvasHeight;
@@ -72,23 +76,27 @@ public class Canvas extends Module {
 		}
 	}
 
-	public Canvas(MainWindow mw, BufferedImage image) {
+	public Canvas(MainWindow mw, BufferedImage image, File imgFile) {
 		super(mw);
 
 		this.mw = mw;
 
 		this.image = image;
 
+		this.imgFile = imgFile;
+
 		canvasWidth = image.getWidth();
 		canvasHeight = image.getHeight();
+
+		imageName = imgFile.getName();
 
 		makeUI();
 	}
 
 	public void updateTitle() {
 		int zoom = drawPane.getZoom();
-		frame.setTitle("Canvas: " + "(" + canvasHeight + "," + canvasHeight
-				+ ") " + "(" + zoom + "x)");
+		frame.setTitle(imageName + ": " + "(" + canvasHeight + ","
+				+ canvasHeight + ") " + "(" + zoom + "x)");
 	}
 
 	public void updateMousePos(int x, int y) {
@@ -261,24 +269,25 @@ public class Canvas extends Module {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser oChooser = new JFileChooser();
-			int returnVal = oChooser.showSaveDialog(frame);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File oFile = new File(oChooser.getSelectedFile()
-						.getAbsoluteFile() + ".png");
-				System.out.println(oFile.getAbsolutePath());
-
-				try {
-					ImageIO.write(drawPane.getImage(), "png", oFile);
-					JOptionPane.showMessageDialog(frame, "Saved!");
-				} catch (IOException e1) {
-					e1.printStackTrace();
+			if (imgFile == null) {
+				JFileChooser oChooser = new JFileChooser();
+				int returnVal = oChooser.showSaveDialog(frame);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					imgFile = new File(oChooser.getSelectedFile() + ".png");
+				} else {
+					return;
 				}
 			} else {
-				return;
+
+			}
+			try {
+				ImageIO.write(drawPane.getImage(), "png", imgFile);
+				updateTitle();
+				JOptionPane.showMessageDialog(frame, "Saved!");
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		}
-
 	}
 
 	private class ExportEar implements ActionListener, Runnable {
