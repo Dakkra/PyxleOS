@@ -122,14 +122,14 @@ public class DrawPane extends JComponent {
 	}
 
 	private void scaleUp() {
-		scale += 1;
+		scale += Math.round((scale / 5) + 1);
 		repaint();
 		canvas.updateTitle();
 	}
 
 	private void scaleDown() {
-		if (scale - 1 > 0) {
-			scale -= 1;
+		if (scale - (Math.round((scale / 5) + 1)) > 0) {
+			scale -= Math.round((scale / 5) + 1);
 		}
 		repaint();
 		canvas.updateTitle();
