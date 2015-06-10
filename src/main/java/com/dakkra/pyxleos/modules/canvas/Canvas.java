@@ -93,6 +93,19 @@ public class Canvas extends Module {
 		makeUI();
 	}
 
+	public Canvas(MainWindow mw, BufferedImage image) {
+		super(mw);
+
+		this.mw = mw;
+
+		this.image = image;
+
+		canvasWidth = image.getWidth();
+		canvasHeight = image.getHeight();
+
+		makeUI();
+	}
+
 	public void updateTitle() {
 		int zoom = drawPane.getZoom();
 		frame.setTitle(imageName + ": " + "(" + canvasHeight + ","

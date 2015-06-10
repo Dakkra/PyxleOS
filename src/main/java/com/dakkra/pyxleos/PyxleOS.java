@@ -1,9 +1,13 @@
 package com.dakkra.pyxleos;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.imageio.ImageIO;
+
+import com.dakkra.pyxleos.modules.canvas.Canvas;
 import com.dakkra.pyxleos.modules.textedit.TextEdit;
 import com.dakkra.pyxleos.ui.MainWindow;
 import com.dakkra.pyxleos.ui.UISettings;
@@ -19,6 +23,16 @@ public class PyxleOS {
 
 		mw.setUIS();
 		mw.cnsUI();
+
+		BufferedImage img = null;
+
+		try {
+			img = ImageIO.read(PyxleOS.class.getResourceAsStream("/sword.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		@SuppressWarnings("unused")
+		Canvas canvas = new Canvas(mw, img);
 
 		TextEdit te = new TextEdit(mw);
 		InputStream input = PyxleOS.class.getResourceAsStream("/greeting.txt");
