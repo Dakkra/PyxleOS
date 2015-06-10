@@ -18,5 +18,15 @@ What's new
 6. Multi-Threaded Canvas and export (makes it run faster and smoother)
 7. New Background Image and Splash Image
 
+To do
+------------------------------------
+1. Add undo/redo to canvas
+2. Load images
+3. Get alpha value when right click on pixel
+4. Add a help/how to menu for canvas
+5. Import/Export User themes
+6. Color palettes
+7. Etc...
+
 Made with love and Java,
 	Chris Soderquist
