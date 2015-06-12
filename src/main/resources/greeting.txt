@@ -10,7 +10,7 @@ you desire to see attached with the image you submit to contact@dakkra.com
 
 What's new
 ------------------------------------
-1. New scaling algorithm (used to be linear)
+1. New zooming algorithm (used to be linear)
 2. Zoom dialog in canvas (Alt+z)
 3. Re-Done menu. Makes more sense now XD
 4. Loading images! Up to 800x800 is supported correctly!

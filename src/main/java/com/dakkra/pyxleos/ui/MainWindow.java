@@ -365,7 +365,7 @@ public class MainWindow {
 
 			aboutFrame.add(textPane);
 
-			aboutFrame.pack();
+			aboutFrame.setSize(500, 400);
 
 			aboutFrame.setSize(aboutFrame.getWidth() + 10,
 					aboutFrame.getHeight() + 10);

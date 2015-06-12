@@ -236,9 +236,9 @@ public class Canvas extends Module {
 		try {
 			if (scaleField.getText() != "") {
 				if (Integer.parseInt(scaleField.getText()) > 0) {
-					int w = Integer.parseInt(wField.getText())
+					int w = canvasWidth
 							* Integer.parseInt(scaleField.getText());
-					int h = Integer.parseInt(hField.getText())
+					int h = canvasHeight
 							* Integer.parseInt(scaleField.getText());
 					exportSizeLabel
 							.setText("Size: " + "(" + w + ", " + h + ")");

@@ -3,13 +3,27 @@ PyxleOS
 http://pyxleos.sourceforge.net
 Pyxle(pixel) OS(open source)
 
-Developer
+Licence
+------------------------------
+PyxleOS is under a GNU GENERAL PUBLIC LICENSE V2.0
+https://www.gnu.org/licenses/gpl-2.0.html
+
+Developers
 ------------------------------
 Chris Soderquist
 contact@dakkra.com
 http://dakkra.com
 
-Licence
+Thanks To
 ------------------------------
-PyxleOS is under a GNU GENERAL PUBLIC LICENSE V2.0
-https://www.gnu.org/licenses/gpl-2.0.html
+-- Mark Soderquist for introcing me to programming
+and helping me figure out many ideas
+-- Lissa M for being a great friend and inspiring
+me not to give up
+-- Shelby Hewitt for being the best sister ever
+and putting up with my nonsense
+-- Nathan Loveridge for understanding me being
+upset when thigns go wrong
+-- Cayson Larsen for his undying support
+-- Ryan Schroeder for allowing me to poke around
+on his project
