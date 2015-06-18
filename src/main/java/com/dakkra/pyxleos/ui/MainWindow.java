@@ -208,7 +208,7 @@ public class MainWindow {
 		fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 				ActionEvent.CTRL_MASK));
 		fileMenu.add(fileNew);
-		JMenuItem fileOpen = new JMenuItem("New Canvas");
+		JMenuItem fileOpen = new JMenuItem("Load Image");
 		fileOpen.addActionListener(new OpenCanvasEar(this));
 		fileOpen.setMnemonic(KeyEvent.VK_O);
 		fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,

@@ -22,7 +22,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import javax.swing.undo.UndoManager;
 
 import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
@@ -34,8 +33,6 @@ public class DrawPane extends JComponent {
 	private MainWindow mw;
 
 	private Canvas canvas;
-
-	private UndoManager um;
 
 	private Color paintColor;
 
@@ -69,8 +66,6 @@ public class DrawPane extends JComponent {
 		this.mw = mw;
 
 		this.canvas = canvas;
-
-		um = new UndoManager();
 
 		width = d.width;
 
@@ -124,8 +119,6 @@ public class DrawPane extends JComponent {
 		this.mw = mw;
 
 		this.canvas = canvas;
-
-		um = new UndoManager();
 
 		width = oimage.getWidth();
 
@@ -358,9 +351,8 @@ public class DrawPane extends JComponent {
 			if (shift) {
 				g2.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x,
 						currentPoint.y);
-			} else {
-				return;
 			}
+
 		}
 
 		@Override
