@@ -54,8 +54,7 @@ public class TextEditControl {
 		return fullText;
 	}
 
-	public static File saveText(File textFile, JTextArea textArea,
-			JInternalFrame frame) {
+	public static File saveText(File textFile, JTextArea textArea, JInternalFrame frame) {
 
 		if (textFile != null) {
 			File saveFile = new File(textFile.getAbsolutePath());

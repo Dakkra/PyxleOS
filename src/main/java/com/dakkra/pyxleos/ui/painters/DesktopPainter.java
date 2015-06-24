@@ -21,13 +21,11 @@ public class DesktopPainter implements Painter<JDesktopPane> {
 
 	@Override
 	public void paint(Graphics2D g, JDesktopPane object, int width, int height) {
-		g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,
-				RenderingHints.VALUE_STROKE_PURE);
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.drawImage(image, 0, 0, width, height, null);
-		Color backColor = new Color(uis.getbgColor().getRed(), uis.getbgColor()
-				.getGreen(), uis.getbgColor().getBlue(), 100);
+		Color backColor = new Color(uis.getbgColor().getRed(), uis.getbgColor().getGreen(), uis.getbgColor().getBlue(),
+				100);
 		g.setColor(backColor);
 		g.fillRect(0, 0, width, height);
 

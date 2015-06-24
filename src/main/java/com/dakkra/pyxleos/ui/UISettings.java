@@ -17,8 +17,7 @@ public class UISettings {
 
 	public UISettings() {
 		try {
-			bg = ImageIO
-					.read(PyxleOS.class.getResource("/PyxleOS-Default.jpg"));
+			bg = ImageIO.read(PyxleOS.class.getResource("/PyxleOS-Default.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

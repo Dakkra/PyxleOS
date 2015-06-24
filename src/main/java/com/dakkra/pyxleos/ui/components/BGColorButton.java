@@ -35,10 +35,8 @@ public class BGColorButton extends JButton {
 	@Override
 	public void paintComponent(Graphics g1) {
 		Graphics2D g = (Graphics2D) g1;
-		g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,
-				RenderingHints.VALUE_STROKE_PURE);
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g.setColor(Color.BLACK);
 		g.fillRoundRect(0, 0, this.getWidth(), this.getHeight(), 20, 20);
@@ -48,9 +46,8 @@ public class BGColorButton extends JButton {
 			g.setFont(Util.makeFont(20, Font.BOLD));
 			g.setColor(Color.WHITE);
 			char[] t = "S".toCharArray();
-			g.drawChars(t, 0, 1, (this.getWidth() / 2)
-					- (getFont().getSize() / 2), (this.getHeight() / 2)
-					+ (getFont().getSize() / 2) + 1);
+			g.drawChars(t, 0, 1, (this.getWidth() / 2) - (getFont().getSize() / 2),
+					(this.getHeight() / 2) + (getFont().getSize() / 2) + 1);
 		}
 
 	}
@@ -59,8 +56,7 @@ public class BGColorButton extends JButton {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(null, "Choose BG Color",
-					color);
+			Color newColor = JColorChooser.showDialog(null, "Choose BG Color", color);
 
 			if (newColor != null) {
 				ColorReference.setBgColor(newColor);

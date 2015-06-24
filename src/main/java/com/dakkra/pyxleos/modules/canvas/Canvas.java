@@ -63,8 +63,7 @@ public class Canvas extends Module {
 
 		this.mw = mw;
 
-		int returnval = JOptionPane.showConfirmDialog(null,
-				dimensionDialogPanel(), "Image Dimensions : ",
+		int returnval = JOptionPane.showConfirmDialog(null, dimensionDialogPanel(), "Image Dimensions : ",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
 		if (returnval == JOptionPane.OK_OPTION) {
@@ -108,8 +107,7 @@ public class Canvas extends Module {
 
 	public void updateTitle() {
 		int zoom = drawPane.getZoom();
-		frame.setTitle(imageName + ": " + "(" + canvasHeight + ","
-				+ canvasHeight + ") " + "(" + zoom + "x)");
+		frame.setTitle(imageName + ": " + "(" + canvasHeight + "," + canvasHeight + ") " + "(" + zoom + "x)");
 	}
 
 	public void updateMousePos(int x, int y) {
@@ -123,14 +121,12 @@ public class Canvas extends Module {
 		JMenuItem fileSave = new JMenuItem("Save");
 		fileSave.addActionListener(new SaveEar());
 		fileSave.setMnemonic(KeyEvent.VK_S);
-		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-				ActionEvent.CTRL_MASK));
+		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 
 		JMenuItem fileExport = new JMenuItem("Export");
 		fileExport.addActionListener(new ExportEar());
 		fileExport.setMnemonic(KeyEvent.VK_E);
-		fileExport.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,
-				ActionEvent.CTRL_MASK));
+		fileExport.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
 
 		fileMenu.add(fileSave);
 		fileMenu.add(fileExport);
@@ -140,15 +136,13 @@ public class Canvas extends Module {
 		JMenuItem editClear = new JMenuItem("Clear");
 		editClear.addActionListener(new ClearEar());
 		editClear.setMnemonic(KeyEvent.VK_N);
-		editClear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-				ActionEvent.CTRL_MASK));
+		editClear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		editMenu.add(editClear);
 
 		JMenuItem editZoom = new JMenuItem(" Zoom ");
 		editZoom.addActionListener(new ZoomEar());
 		editZoom.setMnemonic(KeyEvent.VK_Z);
-		editZoom.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-				ActionEvent.ALT_MASK));
+		editZoom.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.ALT_MASK));
 		editMenu.add(editZoom);
 
 		menuBar.add(editMenu);
@@ -236,12 +230,9 @@ public class Canvas extends Module {
 		try {
 			if (scaleField.getText() != "") {
 				if (Integer.parseInt(scaleField.getText()) > 0) {
-					int w = canvasWidth
-							* Integer.parseInt(scaleField.getText());
-					int h = canvasHeight
-							* Integer.parseInt(scaleField.getText());
-					exportSizeLabel
-							.setText("Size: " + "(" + w + ", " + h + ")");
+					int w = canvasWidth * Integer.parseInt(scaleField.getText());
+					int h = canvasHeight * Integer.parseInt(scaleField.getText());
+					exportSizeLabel.setText("Size: " + "(" + w + ", " + h + ")");
 				}
 			}
 		} catch (NumberFormatException e) {
@@ -262,8 +253,7 @@ public class Canvas extends Module {
 			if (image != null) {
 				drawPane = new DrawPane(mw, canvas, image);
 			} else {
-				drawPane = new DrawPane(mw, canvas, new Dimension(canvasWidth,
-						canvasHeight));
+				drawPane = new DrawPane(mw, canvas, new Dimension(canvasWidth, canvasHeight));
 			}
 		}
 
@@ -313,8 +303,7 @@ public class Canvas extends Module {
 
 		@Override
 		public void run() {
-			int returnval = JOptionPane.showConfirmDialog(null,
-					exportDialogPanel(), "Export scale : ",
+			int returnval = JOptionPane.showConfirmDialog(null, exportDialogPanel(), "Export scale : ",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 			int scaleAmt;
 			try {
@@ -327,21 +316,18 @@ public class Canvas extends Module {
 				JFileChooser oChooser = new JFileChooser();
 				int returnVal = oChooser.showSaveDialog(frame);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					File oFile = new File(oChooser.getSelectedFile()
-							.getAbsoluteFile() + ".png");
+					File oFile = new File(oChooser.getSelectedFile().getAbsoluteFile() + ".png");
 					System.out.println(oFile.getAbsolutePath());
 					BufferedImage orig = drawPane.getImage();
 					int width = orig.getWidth() * scaleAmt;
 					int height = orig.getHeight() * scaleAmt;
 					BufferedImage img = null;
 					try {
-						img = new BufferedImage(width, height,
-								BufferedImage.TYPE_INT_ARGB);
+						img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 						Graphics2D g = img.createGraphics();
 						g.drawImage(orig, 0, 0, width, height, frame);
 					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(frame,
-								"Image is too large");
+						JOptionPane.showMessageDialog(frame, "Image is too large");
 						return;
 					}
 
@@ -362,8 +348,7 @@ public class Canvas extends Module {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(frame,
-					"Transparency Color", drawPane.getTransparencyColor());
+			Color newColor = JColorChooser.showDialog(frame, "Transparency Color", drawPane.getTransparencyColor());
 
 			if (newColor != null) {
 				drawPane.setTransparencyColor(newColor);
@@ -378,9 +363,8 @@ public class Canvas extends Module {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int returnval = JOptionPane.showConfirmDialog(null, zoomDialog(),
-					"Zoom Factor : ", JOptionPane.OK_CANCEL_OPTION,
-					JOptionPane.PLAIN_MESSAGE);
+			int returnval = JOptionPane.showConfirmDialog(null, zoomDialog(), "Zoom Factor : ",
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 			if (returnval == JOptionPane.OK_OPTION) {
 				drawPane.setZoom(Integer.parseInt(zoomField.getText()));
 			}

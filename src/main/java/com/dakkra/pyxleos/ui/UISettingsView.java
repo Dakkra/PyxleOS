@@ -42,13 +42,11 @@ public class UISettingsView {
 		JMenuItem fileSave = new JMenuItem("Save");
 		fileSave.addActionListener(new SaveButtonEar());
 		fileSave.setMnemonic(KeyEvent.VK_S);
-		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-				ActionEvent.CTRL_MASK));
+		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		JMenuItem fileQuit = new JMenuItem("Quit");
 		fileQuit.addActionListener(new QuitEar(frame));
 		fileQuit.setMnemonic(KeyEvent.VK_Q);
-		fileQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-				ActionEvent.CTRL_MASK));
+		fileQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
 		fileMenu.add(fileSave);
 		fileMenu.add(fileQuit);
 		menuBar.add(fileMenu);
@@ -67,25 +65,22 @@ public class UISettingsView {
 
 		mPanel.add(new JLabel("Base:"));
 		UIColorButton baseColorButton = new UIColorButton(uis.getbaseColor());
-		baseColorButton.addActionListener(new BaseColorButtonEar(
-				baseColorButton));
+		baseColorButton.addActionListener(new BaseColorButtonEar(baseColorButton));
 		mPanel.add(baseColorButton, "wrap");
 
 		mPanel.add(new JLabel("Selection:"));
-		UIColorButton redColorButton = new UIColorButton(
-				uis.getselectionRedColor());
+		UIColorButton redColorButton = new UIColorButton(uis.getselectionRedColor());
 		redColorButton.addActionListener(new RedColorButtonEar(redColorButton));
 		mPanel.add(redColorButton, "wrap");
 
 		mPanel.add(new JLabel("Text:"));
 		UIColorButton textColorButton = new UIColorButton(uis.gettextColor());
-		textColorButton.addActionListener(new TextColorButtonEar(
-				textColorButton));
+		textColorButton.addActionListener(new TextColorButtonEar(textColorButton));
 		mPanel.add(textColorButton, "wrap");
 
 		mPanel.add(new JLabel("Built in:"));
-		String[] defaults = { "None Selected", "Default", "Crimson", "Sleek",
-				"Frozen", "SciFi", "Night", "Daylight", "Forest" };
+		String[] defaults = { "None Selected", "Default", "Crimson", "Sleek", "Frozen", "SciFi", "Night", "Daylight",
+				"Forest" };
 		comboBox = new JComboBox<String>(defaults);
 		comboBox.addItemListener(new SelectionHandler(frame));
 		mPanel.add(comboBox, "wrap");
@@ -160,8 +155,7 @@ public class UISettingsView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(null, "Color",
-					uis.getbgColor());
+			Color newColor = JColorChooser.showDialog(null, "Color", uis.getbgColor());
 			if (newColor != null) {
 				uis.setbgColor(newColor);
 				mw.updateGUI();
@@ -182,8 +176,7 @@ public class UISettingsView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(null, "Color",
-					uis.getbaseColor());
+			Color newColor = JColorChooser.showDialog(null, "Color", uis.getbaseColor());
 			if (newColor != null) {
 				uis.setbaseColor(newColor);
 				mw.updateGUI();
@@ -204,8 +197,7 @@ public class UISettingsView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(null, "Color",
-					uis.getselectionRedColor());
+			Color newColor = JColorChooser.showDialog(null, "Color", uis.getselectionRedColor());
 			if (newColor != null) {
 				uis.setselectionRedColor(newColor);
 				mw.updateGUI();
@@ -226,8 +218,7 @@ public class UISettingsView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(null, "Color",
-					uis.gettextColor());
+			Color newColor = JColorChooser.showDialog(null, "Color", uis.gettextColor());
 			if (newColor != null) {
 				uis.settextColor(newColor);
 				mw.updateGUI();

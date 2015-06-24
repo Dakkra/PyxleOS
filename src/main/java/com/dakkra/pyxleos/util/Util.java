@@ -34,8 +34,7 @@ public class Util {
 	}
 
 	public static void exitApp() {
-		int confirm = JOptionPane.showConfirmDialog(null,
-				"Are you sure you want to exit the application?");
+		int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit the application?");
 		if (confirm == JOptionPane.OK_OPTION) {
 			System.exit(0);
 		} else {
@@ -44,8 +43,7 @@ public class Util {
 	}
 
 	public static void exitIFrame(JInternalFrame iFrame) {
-		int confirm = JOptionPane.showConfirmDialog(null,
-				"Are you sure you want to close this module?");
+		int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to close this module?");
 		if (confirm == JOptionPane.OK_OPTION) {
 			iFrame.dispose();
 		} else {
@@ -85,12 +83,10 @@ public class Util {
 	}
 
 	public static Font makeFont(int size, int style) {
-		InputStream in = PyxleOS.class
-				.getResourceAsStream("/SourceSansPro-Regular.ttf");
+		InputStream in = PyxleOS.class.getResourceAsStream("/SourceSansPro-Regular.ttf");
 		Font myFont = null;
 		try {
-			myFont = Font.createFont(Font.TRUETYPE_FONT, in).deriveFont(style,
-					size);
+			myFont = Font.createFont(Font.TRUETYPE_FONT, in).deriveFont(style, size);
 		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

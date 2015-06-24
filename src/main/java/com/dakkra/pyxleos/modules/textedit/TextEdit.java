@@ -75,29 +75,25 @@ public class TextEdit extends Module {
 		JMenuItem fileNew = new JMenuItem("New");
 		fileNew.addActionListener(new NewEar());
 		fileNew.setMnemonic(KeyEvent.VK_N);
-		fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-				ActionEvent.CTRL_MASK));
+		fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		JMenuItem fileOpen = new JMenuItem("Open");
 		fileOpen.addActionListener(new OpenEar());
 		fileOpen.setMnemonic(KeyEvent.VK_O);
-		fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
-				ActionEvent.CTRL_MASK));
+		fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		fileReopen = new JMenuItem("Reopen");
 		fileReopen.setEnabled(false);
 		fileReopen.addActionListener(new ReopenEar());
 		fileReopen.setMnemonic(KeyEvent.VK_R);
-		fileReopen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
-				ActionEvent.CTRL_MASK));
+		fileReopen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
 		JMenuItem fileSave = new JMenuItem("Save");
 		fileSave.addActionListener(new SaveEar());
 		fileSave.setMnemonic(KeyEvent.VK_S);
-		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-				ActionEvent.CTRL_MASK));
+		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		JMenuItem fileSaveAs = new JMenuItem("Save As");
 		fileSaveAs.addActionListener(new SaveAsEar());
 		fileSaveAs.setMnemonic(KeyEvent.VK_S);
-		fileSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+		fileSaveAs
+				.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 
 		fileMenu.add(fileNew);
 		fileMenu.add(fileOpen);
@@ -110,13 +106,11 @@ public class TextEdit extends Module {
 		JMenuItem undo = new JMenuItem("Undo");
 		undo.addActionListener(new UndoEar());
 		undo.setMnemonic(KeyEvent.VK_Z);
-		undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-				ActionEvent.CTRL_MASK));
+		undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
 		JMenuItem redo = new JMenuItem("Redo");
 		redo.addActionListener(new RedoEar());
 		redo.setMnemonic(KeyEvent.VK_Z);
-		redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+		redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 
 		edit.add(undo);
 		edit.add(redo);
@@ -125,8 +119,7 @@ public class TextEdit extends Module {
 		JMenuItem textSize = new JMenuItem("Text Size");
 		textSize.addActionListener(new TextSizeEar());
 		textSize.setMnemonic(KeyEvent.VK_O);
-		textSize.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
-				ActionEvent.ALT_MASK));
+		textSize.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.ALT_MASK));
 		options.add(textSize);
 
 		menuBar.add(fileMenu);
@@ -196,8 +189,7 @@ public class TextEdit extends Module {
 
 			if (textFile != null) {
 				fileReopen.setEnabled(true);
-				System.out.println("Name: " + textFile.getName() + "||URI: "
-						+ textFile.getAbsolutePath());
+				System.out.println("Name: " + textFile.getName() + "||URI: " + textFile.getAbsolutePath());
 			} else {
 				return;
 			}
@@ -214,8 +206,7 @@ public class TextEdit extends Module {
 				textFile = jfc.getSelectedFile();
 				textFile = TextEditControl.saveText(textFile, textArea, frame);
 				fileReopen.setEnabled(true);
-				System.out.println("Name: " + textFile.getName() + "||URI: "
-						+ textFile.getAbsolutePath());
+				System.out.println("Name: " + textFile.getName() + "||URI: " + textFile.getAbsolutePath());
 			} else {
 				return;
 			}
@@ -248,14 +239,12 @@ public class TextEdit extends Module {
 		public void actionPerformed(ActionEvent e) {
 			int size = textAreaFont.getSize();
 			try {
-				size = Integer.parseInt(JOptionPane.showInputDialog(
-						"Input a new font size:", textAreaFont.getSize()));
+				size = Integer.parseInt(JOptionPane.showInputDialog("Input a new font size:", textAreaFont.getSize()));
 			} catch (NumberFormatException e1) {
 				System.out.println("Invalid Size or user cancelled");
 			}
 			if (size <= 0 || size > 70) {
-				JOptionPane
-						.showMessageDialog(null, "Invalid size! (1-70 only)");
+				JOptionPane.showMessageDialog(null, "Invalid size! (1-70 only)");
 			} else {
 				textAreaFont = Util.makeFont(size, Font.PLAIN);
 				textArea.setFont(textAreaFont);

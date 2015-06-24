@@ -39,8 +39,7 @@ public class Module {
 		fileExit = new JMenuItem("Quit");
 		fileExit.addActionListener(new ExitEar());
 		fileExit.setMnemonic(KeyEvent.VK_Q);
-		fileExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-				ActionEvent.CTRL_MASK));
+		fileExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
 
 		menuBar.add(fileMenu);
 
