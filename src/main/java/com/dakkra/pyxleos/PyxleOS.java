@@ -45,9 +45,6 @@ public class PyxleOS {
 		te.setText(content);
 		te.setSize(new Dimension(620, 512));
 
-		System.out.println("" + te.getSize().getWidth() + "x"
-				+ te.getSize().getHeight());
-
 		System.out.println("Ready!");
 	}
 }
