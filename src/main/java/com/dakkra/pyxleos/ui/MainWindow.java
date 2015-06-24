@@ -112,8 +112,7 @@ public class MainWindow {
 				}
 			}
 		} catch (Exception e) {
-			System.out
-					.println("Nimbus look and feel not found (MainView.java)");
+			System.out.println("Nimbus look and feel not found (MainView.java)");
 			e.printStackTrace();
 		}
 		// Initialize Main Frame
@@ -200,19 +199,16 @@ public class MainWindow {
 		JMenuItem fileMQuit = new JMenuItem("Quit");
 		fileMQuit.addActionListener(new QuitListener());
 		fileMQuit.setMnemonic(KeyEvent.VK_Q);
-		fileMQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-				ActionEvent.CTRL_MASK));
+		fileMQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
 		JMenuItem fileNew = new JMenuItem("New Canvas");
 		fileNew.addActionListener(new NewCanvasEar(this));
 		fileNew.setMnemonic(KeyEvent.VK_N);
-		fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-				ActionEvent.CTRL_MASK));
+		fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		fileMenu.add(fileNew);
 		JMenuItem fileOpen = new JMenuItem("Load Image");
 		fileOpen.addActionListener(new OpenCanvasEar(this));
 		fileOpen.setMnemonic(KeyEvent.VK_O);
-		fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
-				ActionEvent.CTRL_MASK));
+		fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 
 		fileMenu.add(fileNew);
 		fileMenu.add(fileOpen);
@@ -222,16 +218,14 @@ public class MainWindow {
 		JMenuItem toolsMTE = new JMenuItem("New TextEdit");
 		toolsMTE.addActionListener(new TextEditListener(this));
 		toolsMTE.setMnemonic(KeyEvent.VK_T);
-		toolsMTE.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,
-				ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+		toolsMTE.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
 		toolsMenu.add(toolsMTE);
 		// Options menu
 		JMenu optionsMenu = new JMenu(" Options ");
 		JMenuItem optionColor = new JMenuItem(" Appearance ");
 		optionColor.addActionListener(new CustomizeUIEar());
 		optionColor.setMnemonic(KeyEvent.VK_V);
-		optionColor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
-				ActionEvent.ALT_MASK));
+		optionColor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.ALT_MASK));
 		optionsMenu.add(optionColor);
 		// About menu
 		JMenu aboutMenu = new JMenu(" About ");
@@ -266,8 +260,7 @@ public class MainWindow {
 		UIManager.put("nimbusFocus", baseColor.brighter());
 		UIManager.put("nimbusSelectionBackground", baseRedColor);
 
-		UIManager.put("DesktopPane[Enabled].backgroundPainter",
-				new DesktopPainter(uis));
+		UIManager.put("DesktopPane[Enabled].backgroundPainter", new DesktopPainter(uis));
 	}
 
 	private void loadSettings() {
@@ -279,14 +272,10 @@ public class MainWindow {
 			properties = new Properties();
 			properties.load(iStream);
 
-			uis.setbgColor(new Color(Integer.parseInt(properties
-					.getProperty("bgColor"))));
-			uis.setbaseColor(new Color(Integer.parseInt(properties
-					.getProperty("baseColor"))));
-			uis.setselectionRedColor(new Color(Integer.parseInt(properties
-					.getProperty("baseRedColor"))));
-			uis.settextColor(new Color(Integer.parseInt(properties
-					.getProperty("textColor"))));
+			uis.setbgColor(new Color(Integer.parseInt(properties.getProperty("bgColor"))));
+			uis.setbaseColor(new Color(Integer.parseInt(properties.getProperty("baseColor"))));
+			uis.setselectionRedColor(new Color(Integer.parseInt(properties.getProperty("baseRedColor"))));
+			uis.settextColor(new Color(Integer.parseInt(properties.getProperty("textColor"))));
 
 			iStream.close();
 		} catch (IOException e1) {
@@ -303,20 +292,16 @@ public class MainWindow {
 			oStream = new FileOutputStream(colorPropertiesFile);
 
 			properties.setProperty("bgColor", "" + uis.getbgColor().getRGB());
-			properties.setProperty("baseColor", ""
-					+ uis.getbaseColor().getRGB());
-			properties.setProperty("baseRedColor", ""
-					+ uis.getselectionRedColor().getRGB());
-			properties.setProperty("textColor", ""
-					+ uis.gettextColor().getRGB());
+			properties.setProperty("baseColor", "" + uis.getbaseColor().getRGB());
+			properties.setProperty("baseRedColor", "" + uis.getselectionRedColor().getRGB());
+			properties.setProperty("textColor", "" + uis.gettextColor().getRGB());
 
 			properties.store(oStream, "Colors");
 
 			oStream.close();
 
 			if (!firstRun) {
-				JOptionPane.showMessageDialog(mFrame,
-						"Theme saved! Please restart for full effect");
+				JOptionPane.showMessageDialog(mFrame, "Theme saved! Please restart for full effect");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -367,8 +352,7 @@ public class MainWindow {
 
 			aboutFrame.setSize(500, 400);
 
-			aboutFrame.setSize(aboutFrame.getWidth() + 10,
-					aboutFrame.getHeight() + 10);
+			aboutFrame.setSize(aboutFrame.getWidth() + 10, aboutFrame.getHeight() + 10);
 
 			mw.addIFrame(aboutFrame);
 
@@ -426,8 +410,7 @@ public class MainWindow {
 					@SuppressWarnings("unused")
 					Canvas canvas = new Canvas(mw, img, ofc.getSelectedFile());
 				} else {
-					JOptionPane.showMessageDialog(mFrame,
-							"Please select a png or jpg");
+					JOptionPane.showMessageDialog(mFrame, "Please select a png or jpg");
 				}
 			}
 		}
