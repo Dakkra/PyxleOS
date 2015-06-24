@@ -73,17 +73,14 @@ public class DrawPane extends JComponent {
 
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-		prevLayer = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_ARGB);
+		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
 		try {
-			tileLoad = ImageIO.read(PyxleOS.class
-					.getResourceAsStream("/tile.png"));
+			tileLoad = ImageIO.read(PyxleOS.class.getResourceAsStream("/tile.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		tileImg = new BufferedImage(tileLoad.getWidth(this),
-				tileLoad.getHeight(this), BufferedImage.TYPE_INT_ARGB);
+		tileImg = new BufferedImage(tileLoad.getWidth(this), tileLoad.getHeight(this), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D tileG = tileImg.createGraphics();
 		tileG.drawImage(tileLoad, 0, 0, this);
 		tileG.dispose();
@@ -126,17 +123,14 @@ public class DrawPane extends JComponent {
 
 		image = oimage;
 
-		prevLayer = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_ARGB);
+		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
 		try {
-			tileLoad = ImageIO.read(PyxleOS.class
-					.getResourceAsStream("/tile.png"));
+			tileLoad = ImageIO.read(PyxleOS.class.getResourceAsStream("/tile.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		tileImg = new BufferedImage(tileLoad.getWidth(this),
-				tileLoad.getHeight(this), BufferedImage.TYPE_INT_ARGB);
+		tileImg = new BufferedImage(tileLoad.getWidth(this), tileLoad.getHeight(this), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D tileG = tileImg.createGraphics();
 		tileG.drawImage(tileLoad, 0, 0, this);
 		tileG.dispose();
@@ -206,18 +200,13 @@ public class DrawPane extends JComponent {
 	public void paintComponent(Graphics g1) {
 		Graphics2D g = (Graphics2D) g1;
 		Point point = centerImageCoord(new Point(0, 0));
-		TexturePaint tilePaint = new TexturePaint(tileImg, new Rectangle(
-				tileImg.getWidth(), tileImg.getHeight()));
+		TexturePaint tilePaint = new TexturePaint(tileImg, new Rectangle(tileImg.getWidth(), tileImg.getHeight()));
 		g.setColor(transparentColor);
-		g.fillRect(-point.x, -point.y, image.getWidth() * scale,
-				image.getHeight() * scale);
+		g.fillRect(-point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale);
 		g.setPaint(tilePaint);
-		g.fillRect(-point.x, -point.y, image.getWidth() * scale,
-				image.getHeight() * scale);
-		g.drawImage(image, -point.x, -point.y, image.getWidth() * scale,
-				image.getHeight() * scale, this);
-		g.drawImage(prevLayer, -point.x, -point.y, image.getWidth() * scale,
-				image.getHeight() * scale, this);
+		g.fillRect(-point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale);
+		g.drawImage(image, -point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale, this);
+		g.drawImage(prevLayer, -point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale, this);
 		updateColors();
 	}
 
@@ -242,8 +231,7 @@ public class DrawPane extends JComponent {
 	}
 
 	public void resetPrevLayer() {
-		prevLayer = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_ARGB);
+		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
 		gPrev = prevLayer.createGraphics();
 
@@ -267,8 +255,8 @@ public class DrawPane extends JComponent {
 		canvas.updateTitle();
 	}
 
-	private class DefaultToolListener extends MouseMotionAdapter implements
-			MouseListener, MouseWheelListener, KeyListener, FocusListener {
+	private class DefaultToolListener extends MouseMotionAdapter
+			implements MouseListener, MouseWheelListener, KeyListener, FocusListener {
 
 		private boolean shift;
 
@@ -287,8 +275,7 @@ public class DrawPane extends JComponent {
 					paintColor = fgColor;
 					gPrev.setPaint(paintColor);
 					g2.setPaint(paintColor);
-					gPrev.drawLine(currentPoint.x, currentPoint.y,
-							currentPoint.x, currentPoint.y);
+					gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x, currentPoint.y);
 					mw.updateColorButtons();
 					repaint();
 				}
@@ -299,8 +286,7 @@ public class DrawPane extends JComponent {
 			if (!shift) {
 				if (g2 != null) {
 					g2.setPaint(paintColor);
-					g2.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
-							currentPoint.y);
+					g2.drawLine(currentPoint.x, currentPoint.y, currentPoint.x, currentPoint.y);
 				}
 			}
 			repaint();
@@ -314,13 +300,11 @@ public class DrawPane extends JComponent {
 			if (shift) {
 				resetPrevLayer();
 				gPrev.setPaint(paintColor);
-				gPrev.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x,
-						currentPoint.y);
+				gPrev.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x, currentPoint.y);
 				repaint();
 			} else {
 				g2.setPaint(paintColor);
-				g2.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x,
-						currentPoint.y);
+				g2.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x, currentPoint.y);
 				repaint();
 				primaryPoint = currentPoint;
 			}
@@ -333,8 +317,7 @@ public class DrawPane extends JComponent {
 			resetPrevLayer();
 			updateColors();
 			gPrev.setPaint(paintColor);
-			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
-					currentPoint.y);
+			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x, currentPoint.y);
 			repaint();
 		}
 
@@ -349,8 +332,7 @@ public class DrawPane extends JComponent {
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			g2.setPaint(paintColor);
 			if (shift) {
-				g2.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x,
-						currentPoint.y);
+				g2.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x, currentPoint.y);
 			}
 
 		}
@@ -386,8 +368,7 @@ public class DrawPane extends JComponent {
 			resetPrevLayer();
 			if (gPrev != null) {
 				gPrev.setPaint(paintColor);
-				gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
-						currentPoint.y);
+				gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x, currentPoint.y);
 			}
 			repaint();
 		}
@@ -424,8 +405,7 @@ public class DrawPane extends JComponent {
 			}
 			}
 			;
-			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
-					currentPoint.y);
+			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x, currentPoint.y);
 			repaint();
 
 		}
@@ -435,8 +415,7 @@ public class DrawPane extends JComponent {
 			updateColors();
 			paintColor = fgColor;
 			gPrev.setPaint(paintColor);
-			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x,
-					currentPoint.y);
+			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x, currentPoint.y);
 			repaint();
 			if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
 				shift = false;
