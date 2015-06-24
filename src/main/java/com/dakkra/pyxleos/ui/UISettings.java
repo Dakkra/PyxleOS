@@ -63,6 +63,19 @@ public class UISettings {
 		bg = image;
 	}
 
+	// For creating the uisBack
+
+	public UISettings copyUIS() {
+		UISettings uisNew = new UISettings();
+		uisNew.setbaseColor(baseColor);
+		uisNew.setbgColor(bgColor);
+		uisNew.setbgImage(bg);
+		uisNew.setselectionRedColor(selectionColor);
+		uisNew.settextColor(textColor);
+
+		return uisNew;
+	}
+
 	// Default Options
 	public void setThemeDefault() {
 		bgColor = new Color(43, 57, 71);

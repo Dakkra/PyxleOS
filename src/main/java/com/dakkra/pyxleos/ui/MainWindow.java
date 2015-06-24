@@ -245,6 +245,7 @@ public class MainWindow {
 	public void updateNimbus() {
 		Color bgColor = uis.getbgColor();
 		Color baseColor = uis.getbaseColor();
+		System.out.println(baseColor);
 		Color baseRedColor = uis.getselectionRedColor();
 		Color textColor = uis.gettextColor();
 

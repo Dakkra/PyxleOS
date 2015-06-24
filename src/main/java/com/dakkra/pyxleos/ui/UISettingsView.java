@@ -1,6 +1,8 @@
 package com.dakkra.pyxleos.ui;
 
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -17,20 +19,24 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import net.miginfocom.swing.MigLayout;
-
 import com.dakkra.pyxleos.ui.components.UIColorButton;
 import com.dakkra.pyxleos.util.Util;
 import com.sun.glass.events.KeyEvent;
 
+import net.miginfocom.swing.MigLayout;
+
 public class UISettingsView {
-	public UISettings uis;
+	private UISettings uis;
+	private UISettings uisBack;
 	private MainWindow mw;
 	private JComboBox<String> comboBox;
+	private boolean savePressed;
 
 	public UISettingsView(MainWindow mw, UISettings uis) {
 		this.mw = mw;
 		this.uis = uis;
+		savePressed = false;
+		uisBack = uis.copyUIS();
 	}
 
 	public void makeUI() {
@@ -85,9 +91,18 @@ public class UISettingsView {
 		comboBox.addItemListener(new SelectionHandler(frame));
 		mPanel.add(comboBox, "wrap");
 
+		Container buttonCont = new Container();
+		buttonCont.setLayout(new FlowLayout(FlowLayout.CENTER));
+
 		JButton saveButton = new JButton("Save");
 		saveButton.addActionListener(new SaveButtonEar());
-		mPanel.add(saveButton);
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new QuitEar(frame));
+
+		buttonCont.add(saveButton);
+		buttonCont.add(cancelButton);
+
+		mPanel.add(buttonCont, "span, grow");
 
 		frame.add(mPanel);
 		frame.pack();
@@ -235,6 +250,7 @@ public class UISettingsView {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mw.saveSettings();
+			savePressed = true;
 		}
 
 	}
@@ -248,6 +264,14 @@ public class UISettingsView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if (savePressed != true) {
+				uis.setbaseColor(uisBack.getbaseColor());
+				uis.setbgColor(uisBack.getbgColor());
+				uis.setbgImage(uisBack.getbgImage());
+				uis.setselectionRedColor(uisBack.getselectionRedColor());
+				uis.settextColor(uisBack.gettextColor());
+			}
+			mw.updateGUI();
 			frame.dispose();
 		}
 

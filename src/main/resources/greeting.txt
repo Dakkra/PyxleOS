@@ -15,6 +15,7 @@ What's new
 3. Re-Done menu. Makes more sense now XD
 4. Loading images! Up to 800x800 is supported correctly!
 5. Sword image load up on default :D
+6. Made Appearance customization behavior more intuitive
 
 To do
 ------------------------------------
