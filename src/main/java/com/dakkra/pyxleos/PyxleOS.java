@@ -36,13 +36,13 @@ public class PyxleOS {
 
 		TextEdit te = new TextEdit(mw);
 		InputStream input = PyxleOS.class.getResourceAsStream("/greeting.txt");
-		String content = Util.read(input);
+		String greetingMessage = Util.read(input);
 		try {
 			input.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		te.setText(content);
+		te.setText(greetingMessage);
 		te.setSize(new Dimension(620, 512));
 
 		System.out.println("Ready!");
