@@ -91,18 +91,18 @@ public class UISettingsView {
 		comboBox.addItemListener(new SelectionHandler(frame));
 		mPanel.add(comboBox, "wrap");
 
-		Container buttonCont = new Container();
-		buttonCont.setLayout(new FlowLayout(FlowLayout.CENTER));
+		Container buttonContainer = new Container();
+		buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		JButton saveButton = new JButton("Save");
 		saveButton.addActionListener(new SaveButtonEar());
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(new QuitEar(frame));
 
-		buttonCont.add(saveButton);
-		buttonCont.add(cancelButton);
+		buttonContainer.add(saveButton);
+		buttonContainer.add(cancelButton);
 
-		mPanel.add(buttonCont, "span, grow");
+		mPanel.add(buttonContainer, "span, grow");
 
 		frame.add(mPanel);
 		frame.pack();
