@@ -3,7 +3,7 @@ An open source Java based pixel editor
 
 Pyxle (Pixel) OS (open source)
 
-Required to join: Java 7 programming knowledge and Gradle Knowledge.
+Required to join: Java 7(and up) programming knowledge and Gradle Knowledge.
 
 Eclipse + the Gradle plugin is recommended. 
 
