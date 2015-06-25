@@ -158,7 +158,7 @@ public class DrawPane extends JComponent {
 
 		addKeyListener(mouseDragListener);
 
-//		setFocusable(true);
+		setFocusable(true);
 
 		requestFocus();
 
@@ -419,6 +419,7 @@ public class DrawPane extends JComponent {
 				updateColors();
 				paintColor = bgColor;
 				gPrev.setPaint(paintColor);
+				System.out.println("control");
 				break;
 			}
 			case KeyEvent.VK_LEFT: {
