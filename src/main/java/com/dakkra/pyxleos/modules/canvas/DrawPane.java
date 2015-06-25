@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 
 import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
@@ -48,7 +49,7 @@ public class DrawPane extends JComponent {
 
 	private Graphics2D gPrev;
 
-	private Point currentPoint, primaryPoint;
+	private Point currentPoint, primaryPoint, offsetPoint;
 
 	private int scale;
 
@@ -61,6 +62,10 @@ public class DrawPane extends JComponent {
 	private int width;
 
 	private int height;
+
+	private int offsetX;
+
+	private int offsetY;
 
 	public DrawPane(MainWindow mw, Canvas canvas, Dimension d) {
 		this.mw = mw;
@@ -153,7 +158,7 @@ public class DrawPane extends JComponent {
 
 		addKeyListener(mouseDragListener);
 
-		setFocusable(true);
+//		setFocusable(true);
 
 		requestFocus();
 
@@ -161,16 +166,22 @@ public class DrawPane extends JComponent {
 
 	}
 
-	private void scaleUp() {
+	private void scaleUp(Point p) {
+		Point p2 = convertToCanvasCoord(p);
 		scale += Math.round((scale / 5) + 1);
+		offsetX += p2.x;
+		offsetY -= p2.y;
 		repaint();
 		canvas.updateTitle();
 	}
 
-	private void scaleDown() {
+	private void scaleDown(Point p) {
+		Point p2 = convertToCanvasCoord(p);
 		if (scale - (Math.round((scale / 5) + 1)) > 0) {
 			scale -= Math.round((scale / 5) + 1);
 		}
+		offsetX -= p2.x;
+		offsetY -= p2.y;
 		repaint();
 		canvas.updateTitle();
 	}
@@ -183,8 +194,8 @@ public class DrawPane extends JComponent {
 	public Point convertToCanvasCoord(Point point) {
 		point = centerImageCoord(point);
 
-		int x = point.x / scale;
-		int y = point.y / scale;
+		int x = (point.x + offsetX) / scale;
+		int y = (point.y + offsetY) / scale;
 
 		return new Point(x, y);
 	}
@@ -199,7 +210,7 @@ public class DrawPane extends JComponent {
 
 	public void paintComponent(Graphics g1) {
 		Graphics2D g = (Graphics2D) g1;
-		Point point = centerImageCoord(new Point(0, 0));
+		Point point = centerImageCoord(new Point(offsetX, offsetY));
 		TexturePaint tilePaint = new TexturePaint(tileImg, new Rectangle(tileImg.getWidth(), tileImg.getHeight()));
 		g.setColor(transparentColor);
 		g.fillRect(-point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale);
@@ -262,6 +273,7 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
+			offsetPoint = e.getPoint();
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			primaryPoint = currentPoint;
 			canvas.updateMousePos(currentPoint.x, currentPoint.y);
@@ -282,6 +294,10 @@ public class DrawPane extends JComponent {
 				return;
 			}
 
+			if (e.getButton() == MouseEvent.BUTTON2) {
+				return;
+			}
+
 			updateColors();
 			if (!shift) {
 				if (g2 != null) {
@@ -297,6 +313,13 @@ public class DrawPane extends JComponent {
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			canvas.updateMousePos(currentPoint.x, currentPoint.y);
 			updateColors();
+			if (SwingUtilities.isMiddleMouseButton(e)) {
+				offsetX += (offsetPoint.x - e.getX());
+				offsetY += (offsetPoint.y - e.getY());
+				offsetPoint = e.getPoint();
+				repaint();
+				return;
+			}
 			if (shift) {
 				resetPrevLayer();
 				gPrev.setPaint(paintColor);
@@ -329,8 +352,10 @@ public class DrawPane extends JComponent {
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			updateColors();
+			offsetPoint = e.getPoint();
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			g2.setPaint(paintColor);
+
 			if (shift) {
 				g2.drawLine(primaryPoint.x, primaryPoint.y, currentPoint.x, currentPoint.y);
 			}
@@ -356,10 +381,10 @@ public class DrawPane extends JComponent {
 		public void mouseWheelMoved(MouseWheelEvent e) {
 			updateColors();
 			if (e.getWheelRotation() < 0) {
-				scaleUp();
+				scaleUp(e.getPoint());
 				resetPrevLayer();
 			} else if (e.getWheelRotation() > 0) {
-				scaleDown();
+				scaleDown(e.getPoint());
 				resetPrevLayer();
 			}
 
@@ -394,6 +419,22 @@ public class DrawPane extends JComponent {
 				updateColors();
 				paintColor = bgColor;
 				gPrev.setPaint(paintColor);
+				break;
+			}
+			case KeyEvent.VK_LEFT: {
+				offsetX -= scale;
+				break;
+			}
+			case KeyEvent.VK_RIGHT: {
+				offsetX += scale;
+				break;
+			}
+			case KeyEvent.VK_UP: {
+				offsetY -= scale;
+				break;
+			}
+			case KeyEvent.VK_DOWN: {
+				offsetY += scale;
 				break;
 			}
 			default: {

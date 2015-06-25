@@ -10,12 +10,13 @@ you desire to see attached with the image you submit to contact@dakkra.com
 
 What's new
 ------------------------------------
-1. New zooming algorithm (used to be linear)
+1. New zooming algorithm (used to be linear and centered)
 2. Zoom dialog in canvas (Alt+z)
 3. Re-Done menu. Makes more sense now XD
 4. Loading images! Up to 800x800 is supported correctly!
 5. Sword image load up on default :D
 6. Made Appearance customization behavior more intuitive
+7. Using the arrow keys or middle mouse button you can now move the canvas image
 
 To do
 ------------------------------------
