@@ -249,7 +249,7 @@ public class UISettingsView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			mw.saveSettings();
+			mw.saveColorSettings();
 			savePressed = true;
 		}
 

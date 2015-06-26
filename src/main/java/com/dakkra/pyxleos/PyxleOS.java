@@ -21,7 +21,8 @@ public class PyxleOS {
 
 		MainWindow mw = new MainWindow(uis);
 
-		mw.setUIS();
+		mw.initUIS();
+		mw.initCS();
 		mw.cnsUI();
 
 		BufferedImage img = null;

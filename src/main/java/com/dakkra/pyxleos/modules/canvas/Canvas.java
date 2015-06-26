@@ -13,7 +13,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -24,11 +23,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
-import net.miginfocom.swing.MigLayout;
-
 import com.dakkra.pyxleos.modules.Module;
 import com.dakkra.pyxleos.ui.MainWindow;
 import com.sun.glass.events.KeyEvent;
+
+import net.miginfocom.swing.MigLayout;
 
 public class Canvas extends Module {
 
@@ -63,7 +62,7 @@ public class Canvas extends Module {
 
 		this.mw = mw;
 
-		int returnval = JOptionPane.showConfirmDialog(null, dimensionDialogPanel(), "Image Dimensions : ",
+		int returnval = JOptionPane.showConfirmDialog(frame, dimensionDialogPanel(), "Image Dimensions : ",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
 		if (returnval == JOptionPane.OK_OPTION) {
@@ -135,8 +134,8 @@ public class Canvas extends Module {
 		JMenu editMenu = new JMenu(" Edit ");
 		JMenuItem editClear = new JMenuItem("Clear");
 		editClear.addActionListener(new ClearEar());
-		editClear.setMnemonic(KeyEvent.VK_N);
-		editClear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+		editClear.setMnemonic(KeyEvent.VK_C);
+		editClear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.SHIFT_MASK));
 		editMenu.add(editClear);
 
 		JMenuItem editZoom = new JMenuItem(" Zoom ");
@@ -147,9 +146,9 @@ public class Canvas extends Module {
 
 		menuBar.add(editMenu);
 
-		JButton transButton = new JButton("Transparency Color");
+		JButton transButton = new JButton("Center Image");
 		transButton.setFocusable(false);
-		transButton.addActionListener(new TransButtonEar());
+		transButton.addActionListener(new CenterButtonEar());
 		menuBar.add(transButton);
 
 		mPosLabel = new JLabel("Mouse Pos: ()");
@@ -303,7 +302,7 @@ public class Canvas extends Module {
 
 		@Override
 		public void run() {
-			int returnval = JOptionPane.showConfirmDialog(null, exportDialogPanel(), "Export scale : ",
+			int returnval = JOptionPane.showConfirmDialog(frame, exportDialogPanel(), "Export scale : ",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 			int scaleAmt;
 			try {
@@ -344,17 +343,11 @@ public class Canvas extends Module {
 		}
 	}
 
-	private class TransButtonEar implements ActionListener {
+	private class CenterButtonEar implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Color newColor = JColorChooser.showDialog(frame, "Transparency Color", drawPane.getTransparencyColor());
-
-			if (newColor != null) {
-				drawPane.setTransparencyColor(newColor);
-			} else {
-				return;
-			}
+			drawPane.centerCanvas();
 		}
 
 	}

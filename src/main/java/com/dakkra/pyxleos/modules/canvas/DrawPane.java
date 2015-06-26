@@ -67,6 +67,8 @@ public class DrawPane extends JComponent {
 
 	private int offsetY;
 
+	private int offsetMoveAmt = CanvasSettings.getOffsetMoveAmt();
+
 	public DrawPane(MainWindow mw, Canvas canvas, Dimension d) {
 		this.mw = mw;
 
@@ -266,6 +268,12 @@ public class DrawPane extends JComponent {
 		canvas.updateTitle();
 	}
 
+	public void centerCanvas() {
+		offsetX = 0;
+		offsetY = 0;
+		repaint();
+	}
+
 	private class DefaultToolListener extends MouseMotionAdapter
 			implements MouseListener, MouseWheelListener, KeyListener, FocusListener {
 
@@ -419,23 +427,22 @@ public class DrawPane extends JComponent {
 				updateColors();
 				paintColor = bgColor;
 				gPrev.setPaint(paintColor);
-				System.out.println("control");
 				break;
 			}
 			case KeyEvent.VK_LEFT: {
-				offsetX -= scale;
+				offsetX -= scale * offsetMoveAmt;
 				break;
 			}
 			case KeyEvent.VK_RIGHT: {
-				offsetX += scale;
+				offsetX += scale * offsetMoveAmt;
 				break;
 			}
 			case KeyEvent.VK_UP: {
-				offsetY -= scale;
+				offsetY -= scale * offsetMoveAmt;
 				break;
 			}
 			case KeyEvent.VK_DOWN: {
-				offsetY += scale;
+				offsetY += scale * offsetMoveAmt;
 				break;
 			}
 			default: {

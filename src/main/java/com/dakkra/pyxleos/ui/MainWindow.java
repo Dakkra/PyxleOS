@@ -41,6 +41,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
 import com.dakkra.pyxleos.modules.canvas.Canvas;
+import com.dakkra.pyxleos.modules.canvas.CanvasSettingsView;
 import com.dakkra.pyxleos.modules.textedit.TextEdit;
 import com.dakkra.pyxleos.ui.components.BGColorButton;
 import com.dakkra.pyxleos.ui.components.FGColorButton;
@@ -57,6 +58,8 @@ public class MainWindow {
 	private UISettings uis;
 
 	private UISettingsView uisv;
+
+	private CanvasSettingsView csv;
 
 	private Properties properties;
 
@@ -80,8 +83,8 @@ public class MainWindow {
 		// If settings don't exist yet, make them
 		appDir = new File(System.getProperty("user.home"), "PyxleOS");
 		colorPropertiesFile = new File(appDir, "colors.pyxos");
-		if (colorPropertiesFile.exists()) {
-			loadSettings();
+		if (appDir.exists()) {
+			loadColorSettings();
 			firstRun = false;
 		} else {
 			firstRun = true;
@@ -90,13 +93,18 @@ public class MainWindow {
 			} else {
 				System.out.println("failed to create application directory");
 			}
-			saveSettings();
-			loadSettings();
+			saveColorSettings();
+
+			loadColorSettings();
 		}
 	}
 
-	public void setUIS() {
+	public void initUIS() {
 		uisv = new UISettingsView(this, uis);
+	}
+
+	public void initCS() {
+		csv = new CanvasSettingsView(this);
 	}
 
 	public void cnsUI() {
@@ -212,6 +220,7 @@ public class MainWindow {
 
 		fileMenu.add(fileNew);
 		fileMenu.add(fileOpen);
+		fileMenu.addSeparator();
 		fileMenu.add(fileMQuit);
 		// Tools menu
 		JMenu toolsMenu = new JMenu(" Tools ");
@@ -222,11 +231,17 @@ public class MainWindow {
 		toolsMenu.add(toolsMTE);
 		// Options menu
 		JMenu optionsMenu = new JMenu(" Options ");
-		JMenuItem optionColor = new JMenuItem(" Appearance ");
+		JMenuItem optionColor = new JMenuItem("Appearance");
 		optionColor.addActionListener(new CustomizeUIEar());
 		optionColor.setMnemonic(KeyEvent.VK_V);
 		optionColor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.ALT_MASK));
 		optionsMenu.add(optionColor);
+		JMenuItem optionCanvas = new JMenuItem("Canvas Settings");
+		optionCanvas.addActionListener(new CanvasEar());
+		optionCanvas.setMnemonic(KeyEvent.VK_C);
+		optionCanvas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.ALT_MASK));
+		optionsMenu.add(optionCanvas);
+
 		// About menu
 		JMenu aboutMenu = new JMenu(" About ");
 		JMenuItem aboutAbout = new JMenuItem("About");
@@ -263,7 +278,7 @@ public class MainWindow {
 		UIManager.put("DesktopPane[Enabled].backgroundPainter", new DesktopPainter(uis));
 	}
 
-	private void loadSettings() {
+	private void loadColorSettings() {
 		try {
 			System.out.println("Loading color settings");
 
@@ -283,7 +298,7 @@ public class MainWindow {
 		}
 	}
 
-	public void saveSettings() {
+	public void saveColorSettings() {
 		System.out.println("Saving color settings");
 
 		properties = new Properties();
@@ -307,6 +322,14 @@ public class MainWindow {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(mFrame, "Error while saving theme");
 		}
+	}
+
+	public void loadCanvasSettings() {
+
+	}
+
+	public void saveCanvasSettings() {
+
 	}
 
 	public void updateColorButtons() {
@@ -423,6 +446,15 @@ public class MainWindow {
 		public void actionPerformed(ActionEvent e) {
 			uisv.makeUI();
 		}
+	}
+
+	private class CanvasEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			csv.cnsGUI();
+		}
+
 	}
 
 	private class SwitchColorsEar implements ActionListener {
