@@ -106,7 +106,7 @@ public class Canvas extends Module {
 
 	public void updateTitle() {
 		int zoom = drawPane.getZoom();
-		frame.setTitle(imageName + ": " + "(" + canvasHeight + "," + canvasHeight + ") " + "(" + zoom + "x)");
+		frame.setTitle(imageName + ": " + "(" + canvasWidth + "," + canvasHeight + ") " + "(" + zoom + "x)");
 	}
 
 	public void updateMousePos(int x, int y) {

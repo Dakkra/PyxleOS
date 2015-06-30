@@ -2,6 +2,8 @@ package com.dakkra.pyxleos.modules.canvas;
 
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -30,7 +32,7 @@ public class CanvasSettingsView {
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu(" File ");
-		JMenuItem fileSave = new JMenuItem(" Save ");
+		JMenuItem fileSave = new JMenuItem("Save");
 		JMenuItem fileExit = new JMenuItem("Exit");
 		fileMenu.add(fileSave);
 		fileMenu.addSeparator();
@@ -55,8 +57,10 @@ public class CanvasSettingsView {
 		buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		JButton saveButton = new JButton("Save");
+		saveButton.addActionListener(new SaveEar());
 
 		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new CancelEar());
 
 		buttonContainer.add(saveButton);
 		buttonContainer.add(cancelButton);
@@ -72,6 +76,24 @@ public class CanvasSettingsView {
 		frame.setResizable(false);
 
 		mw.addIFrame(frame);
+	}
+
+	private class CancelEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO soemthign here
+		}
+
+	}
+
+	private class SaveEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO soemthign here
+		}
+
 	}
 
 }

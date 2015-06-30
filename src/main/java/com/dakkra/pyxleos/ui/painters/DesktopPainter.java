@@ -17,10 +17,12 @@ public class DesktopPainter implements Painter<JDesktopPane> {
 	public DesktopPainter(UISettings uis) {
 		this.uis = uis;
 		image = uis.getbgImage();
+		System.out.println("bg painter init");
 	}
 
 	@Override
 	public void paint(Graphics2D g, JDesktopPane object, int width, int height) {
+		// TODO find out why nimbus doesn't render this painter
 		g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.drawImage(image, 0, 0, width, height, null);

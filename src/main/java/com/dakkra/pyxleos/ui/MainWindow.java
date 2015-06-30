@@ -275,7 +275,9 @@ public class MainWindow {
 		UIManager.put("nimbusFocus", baseColor.brighter());
 		UIManager.put("nimbusSelectionBackground", baseRedColor);
 
-		UIManager.put("DesktopPane[Enabled].backgroundPainter", new DesktopPainter(uis));
+		DesktopPainter dp = new DesktopPainter(uis);
+
+		UIManager.put("DesktopPane[Enabled].backgroundPainter", dp);
 	}
 
 	private void loadColorSettings() {
