@@ -13,9 +13,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import com.dakkra.pyxleos.ui.MainWindow;
 import com.dakkra.pyxleos.util.Util;
+import com.sun.glass.events.KeyEvent;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -23,17 +25,27 @@ public class CanvasSettingsView {
 
 	private MainWindow mw;
 
+	private TransparencyCustomizer transparencyCustomizer;
+
+	private JInternalFrame frame;
+
 	public CanvasSettingsView(MainWindow mw) {
 		this.mw = mw;
 	}
 
 	public void cnsGUI() {
-		JInternalFrame frame = Util.createIFrame("Canvas Settings");
+		frame = Util.createIFrame("Canvas Settings");
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu(" File ");
 		JMenuItem fileSave = new JMenuItem("Save");
+		fileSave.setMnemonic(KeyEvent.VK_S);
+		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		fileSave.addActionListener(new SaveEar());
 		JMenuItem fileExit = new JMenuItem("Exit");
+		fileExit.setMnemonic(KeyEvent.VK_Q);
+		fileExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+		fileExit.addActionListener(new CancelEar());
 		fileMenu.add(fileSave);
 		fileMenu.addSeparator();
 		fileMenu.add(fileExit);
@@ -49,9 +61,9 @@ public class CanvasSettingsView {
 		moveAmtField.setColumns(2);
 		panel.add(moveAmtField, "wrap");
 
-		JButton tranparencyButton = new JButton("Transparency Color");
-
-		panel.add(tranparencyButton, "span, grow");
+		JButton transparencyButton = new JButton("Transparency Colors");
+		transparencyButton.addActionListener(new TransparencyEar());
+		panel.add(transparencyButton, "span, grow");
 
 		Container buttonContainer = new Container();
 		buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -78,11 +90,12 @@ public class CanvasSettingsView {
 		mw.addIFrame(frame);
 	}
 
+	// Event listeners (I call them ears.. heh)
 	private class CancelEar implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO soemthign here
+			frame.dispose();
 		}
 
 	}
@@ -91,7 +104,16 @@ public class CanvasSettingsView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO soemthign here
+			mw.saveCanvasSettings();
+		}
+
+	}
+
+	private class TransparencyEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			transparencyCustomizer = new TransparencyCustomizer(mw);
 		}
 
 	}

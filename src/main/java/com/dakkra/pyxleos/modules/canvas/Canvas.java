@@ -116,6 +116,7 @@ public class Canvas extends Module {
 
 	private void makeUI() {
 		frame.setTitle("Canvas");
+		frame.setLayout(new BorderLayout());
 
 		JMenuItem fileSave = new JMenuItem("Save");
 		fileSave.addActionListener(new SaveEar());
@@ -146,10 +147,10 @@ public class Canvas extends Module {
 
 		menuBar.add(editMenu);
 
-		JButton transButton = new JButton("Center Image");
-		transButton.setFocusable(false);
-		transButton.addActionListener(new CenterButtonEar());
-		menuBar.add(transButton);
+		JButton centerButton = new JButton("Center Image");
+		centerButton.setFocusable(false);
+		centerButton.addActionListener(new CenterButtonEar());
+		menuBar.add(centerButton);
 
 		mPosLabel = new JLabel("Mouse Pos: ()");
 		menuBar.add(mPosLabel);
@@ -165,7 +166,7 @@ public class Canvas extends Module {
 
 		container.add(pane, BorderLayout.CENTER);
 
-		frame.add(container);
+		frame.add(container, BorderLayout.CENTER);
 
 		updateTitle();
 

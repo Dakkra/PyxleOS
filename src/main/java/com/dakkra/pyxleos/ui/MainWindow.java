@@ -61,13 +61,17 @@ public class MainWindow {
 
 	private CanvasSettingsView csv;
 
-	private Properties properties;
+	private Properties appearanceProperties;
+
+	private Properties canvasProperties;
 
 	private OutputStream oStream;
 
 	private InputStream iStream;
 
-	private File colorPropertiesFile;
+	private File appearancePropertiesFile;
+
+	private File canvasPropertiesFile;
 
 	private File appDir;
 
@@ -82,7 +86,7 @@ public class MainWindow {
 		this.uis = uis;
 		// If settings don't exist yet, make them
 		appDir = new File(System.getProperty("user.home"), "PyxleOS");
-		colorPropertiesFile = new File(appDir, "colors.pyxos");
+		appearancePropertiesFile = new File(appDir, "colors.pyxos");
 		if (appDir.exists()) {
 			loadColorSettings();
 			firstRun = false;
@@ -284,15 +288,15 @@ public class MainWindow {
 		try {
 			System.out.println("Loading color settings");
 
-			iStream = new FileInputStream(colorPropertiesFile);
+			iStream = new FileInputStream(appearancePropertiesFile);
 
-			properties = new Properties();
-			properties.load(iStream);
+			appearanceProperties = new Properties();
+			appearanceProperties.load(iStream);
 
-			uis.setbgColor(new Color(Integer.parseInt(properties.getProperty("bgColor"))));
-			uis.setbaseColor(new Color(Integer.parseInt(properties.getProperty("baseColor"))));
-			uis.setselectionRedColor(new Color(Integer.parseInt(properties.getProperty("baseRedColor"))));
-			uis.settextColor(new Color(Integer.parseInt(properties.getProperty("textColor"))));
+			uis.setbgColor(new Color(Integer.parseInt(appearanceProperties.getProperty("bgColor"))));
+			uis.setbaseColor(new Color(Integer.parseInt(appearanceProperties.getProperty("baseColor"))));
+			uis.setselectionRedColor(new Color(Integer.parseInt(appearanceProperties.getProperty("baseRedColor"))));
+			uis.settextColor(new Color(Integer.parseInt(appearanceProperties.getProperty("textColor"))));
 
 			iStream.close();
 		} catch (IOException e1) {
@@ -303,17 +307,17 @@ public class MainWindow {
 	public void saveColorSettings() {
 		System.out.println("Saving color settings");
 
-		properties = new Properties();
+		appearanceProperties = new Properties();
 
 		try {
-			oStream = new FileOutputStream(colorPropertiesFile);
+			oStream = new FileOutputStream(appearancePropertiesFile);
 
-			properties.setProperty("bgColor", "" + uis.getbgColor().getRGB());
-			properties.setProperty("baseColor", "" + uis.getbaseColor().getRGB());
-			properties.setProperty("baseRedColor", "" + uis.getselectionRedColor().getRGB());
-			properties.setProperty("textColor", "" + uis.gettextColor().getRGB());
+			appearanceProperties.setProperty("bgColor", "" + uis.getbgColor().getRGB());
+			appearanceProperties.setProperty("baseColor", "" + uis.getbaseColor().getRGB());
+			appearanceProperties.setProperty("baseRedColor", "" + uis.getselectionRedColor().getRGB());
+			appearanceProperties.setProperty("textColor", "" + uis.gettextColor().getRGB());
 
-			properties.store(oStream, "Colors");
+			appearanceProperties.store(oStream, "Colors");
 
 			oStream.close();
 
@@ -327,11 +331,11 @@ public class MainWindow {
 	}
 
 	public void loadCanvasSettings() {
-
+		System.out.println("Loading Canvas Settings");
 	}
 
 	public void saveCanvasSettings() {
-
+		System.out.println("Saving Canvas Settings");
 	}
 
 	public void updateColorButtons() {
