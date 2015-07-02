@@ -343,6 +343,10 @@ public class MainWindow {
 		bgColorButton.updateButton();
 	}
 
+	public Color getSelectionColor() {
+		return uis.getselectionRedColor();
+	}
+
 	// Action Listeners
 	private class QuitListener implements ActionListener {
 

@@ -128,7 +128,7 @@ public class TransparencyCustomizer {
 			Graphics2D g = (Graphics2D) g1;
 			g.setPaint(tilePaint);
 			g.fillRect(0, 0, 200, 200);
-			g.setColor(Color.RED);
+			g.setColor(mw.getSelectionColor());
 			g.drawRect(0, 0, 200, 200);
 		}
 	}
