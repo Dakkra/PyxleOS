@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -42,6 +43,10 @@ public class TransparencyCustomizer {
 
 	private JTextField blockSizeField = new JTextField("4");
 
+	private UIColorButton primaryColorButton;
+
+	private UIColorButton secondaryColorButton;
+
 	public TransparencyCustomizer(MainWindow mw) {
 		this.mw = mw;
 		updatePaint();
@@ -62,10 +67,13 @@ public class TransparencyCustomizer {
 		controlsContainer.setLayout(new MigLayout());
 		displayContainer.setLayout(new BorderLayout());
 
-		UIColorButton primaryColorButton = new UIColorButton(primaryColor);
+		primaryColorButton = new UIColorButton(primaryColor);
 		primaryColorButton.setText("      ");
-		UIColorButton secondaryColorButton = new UIColorButton(secondaryColor);
+		primaryColorButton.addActionListener(new PrimaryColorEar());
+
+		secondaryColorButton = new UIColorButton(secondaryColor);
 		secondaryColorButton.setText("      ");
+		secondaryColorButton.addActionListener(new SecondaryColorEar());
 
 		blockSizeField.setColumns(3);
 
@@ -140,6 +148,36 @@ public class TransparencyCustomizer {
 			updatePaint();
 			tilePane.repaint();
 		}
+	}
+
+	private class PrimaryColorEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Color newColor = JColorChooser.showDialog(null, "Color", primaryColor);
+			if (newColor != null) {
+				primaryColor = newColor;
+				primaryColorButton.setColor(newColor);
+			} else {
+				return;
+			}
+		}
+
+	}
+
+	private class SecondaryColorEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Color newColor = JColorChooser.showDialog(null, "Color", secondaryColor);
+			if (newColor != null) {
+				secondaryColor = newColor;
+				secondaryColorButton.setColor(newColor);
+			} else {
+				return;
+			}
+		}
+
 	}
 
 }
