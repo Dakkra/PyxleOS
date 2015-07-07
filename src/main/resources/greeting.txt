@@ -17,6 +17,7 @@ What's new
 5. Sword image load up on default :D
 6. Made Appearance customization behavior more intuitive
 7. Using the arrow keys or middle mouse button you can now move the canvas image
+8. Canvas settings (look through them for good options)
 
 To do
 ------------------------------------

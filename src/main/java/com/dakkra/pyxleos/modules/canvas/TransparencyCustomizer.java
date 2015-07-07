@@ -172,7 +172,6 @@ public class TransparencyCustomizer {
 			CanvasSettings.setBlockSize(blockSize);
 			CanvasSettings.setTransparencyPrimaryColor(primaryColor);
 			CanvasSettings.setTransparencySecondaryColor(secondaryColor);
-			System.out.println("(Save-IN) Block Size: " + CanvasSettings.getBlockSize());
 			isReady = true;
 		}
 
