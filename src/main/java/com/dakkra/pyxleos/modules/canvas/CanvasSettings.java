@@ -1,14 +1,19 @@
 package com.dakkra.pyxleos.modules.canvas;
 
 import java.awt.Color;
+import java.awt.TexturePaint;
 
 public class CanvasSettings {
 
 	private static int offsetMoveAmt = 3;
 
+	private static int blockSize = 4;
+
 	private static Color transparencyPrimaryColor = new Color(102, 102, 102);
 
 	private static Color transparencySecondaryColor = new Color(51, 51, 51);
+
+	private static TexturePaint transPaint;
 
 	public static int getOffsetMoveAmt() {
 		return offsetMoveAmt;
@@ -35,7 +40,23 @@ public class CanvasSettings {
 	}
 
 	public static void setDefaults() {
-		// TODO make this reset to defaults
+
+	}
+
+	public static TexturePaint getTransPaint() {
+		return transPaint;
+	}
+
+	public static void setTransPaint(TexturePaint transPaint) {
+		CanvasSettings.transPaint = transPaint;
+	}
+
+	public static int getBlockSize() {
+		return blockSize;
+	}
+
+	public static void setBlockSize(int blockSize) {
+		CanvasSettings.blockSize = blockSize;
 	}
 
 }

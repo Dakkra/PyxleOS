@@ -25,8 +25,6 @@ public class CanvasSettingsView {
 
 	private MainWindow mw;
 
-	private TransparencyCustomizer transparencyCustomizer;
-
 	private JInternalFrame frame;
 
 	public CanvasSettingsView(MainWindow mw) {
@@ -113,7 +111,8 @@ public class CanvasSettingsView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			transparencyCustomizer = new TransparencyCustomizer(mw);
+			@SuppressWarnings("unused")
+			TransparencyCustomizer transparencyCustomizer = new TransparencyCustomizer(mw);
 		}
 
 	}

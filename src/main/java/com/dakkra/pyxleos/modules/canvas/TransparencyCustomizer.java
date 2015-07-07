@@ -35,21 +35,26 @@ public class TransparencyCustomizer {
 
 	private Color secondaryColor = CanvasSettings.getTransparencySecondaryColor();
 
+	private int blockSize = CanvasSettings.getBlockSize();
+
 	private TexturePaint tilePaint;
 
 	private BufferedImage tileImg;
 
 	private TilePane tilePane;
 
-	private JTextField blockSizeField = new JTextField("4");
+	private JTextField blockSizeField = new JTextField("" + blockSize);
 
 	private UIColorButton primaryColorButton;
 
 	private UIColorButton secondaryColorButton;
 
+	private boolean isReady;
+
 	public TransparencyCustomizer(MainWindow mw) {
 		this.mw = mw;
 		updatePaint();
+		isReady = false;
 		cnsUI();
 	}
 
@@ -80,7 +85,9 @@ public class TransparencyCustomizer {
 		JButton updateButton = new JButton("Update ->");
 		updateButton.addActionListener(new UpdateEar());
 		JButton saveButton = new JButton("Save");
+		saveButton.addActionListener(new SaveEar());
 		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new CancelEar());
 
 		controlsContainer.add(primaryColorButton, "span, grow");
 		controlsContainer.add(secondaryColorButton, "span, grow");
@@ -108,19 +115,27 @@ public class TransparencyCustomizer {
 	}
 
 	private void updatePaint() {
-		int size = Integer.parseInt(blockSizeField.getText()) * 2;
-		tileImg = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+		blockSize = Integer.parseInt(blockSizeField.getText()) * 2;
+		tileImg = new BufferedImage(blockSize, blockSize, BufferedImage.TYPE_INT_ARGB);
 
 		Graphics2D tileG = tileImg.createGraphics();
 
 		tileG.setColor(primaryColor);
-		tileG.fillRect(0, 0, size, size);
+		tileG.fillRect(0, 0, blockSize, blockSize);
 
 		tileG.setColor(secondaryColor);
-		tileG.fillRect(0, 0, size / 2, size / 2);
-		tileG.fillRect(size / 2, size / 2, size, size);
+		tileG.fillRect(0, 0, blockSize / 2, blockSize / 2);
+		tileG.fillRect(blockSize / 2, blockSize / 2, blockSize, blockSize);
 
 		tilePaint = new TexturePaint(tileImg, new Rectangle(tileImg.getWidth(), tileImg.getHeight()));
+	}
+
+	public boolean isReady() {
+		return isReady;
+	}
+
+	public TexturePaint getTexturePaint() {
+		return tilePaint;
 	}
 
 	private class TilePane extends JComponent {
@@ -148,6 +163,28 @@ public class TransparencyCustomizer {
 			updatePaint();
 			tilePane.repaint();
 		}
+	}
+
+	private class SaveEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			CanvasSettings.setBlockSize(blockSize);
+			CanvasSettings.setTransparencyPrimaryColor(primaryColor);
+			CanvasSettings.setTransparencySecondaryColor(secondaryColor);
+			CanvasSettings.setTransPaint(tilePaint);
+			isReady = true;
+		}
+
+	}
+
+	private class CancelEar implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			frame.dispose();
+		}
+
 	}
 
 	private class PrimaryColorEar implements ActionListener {

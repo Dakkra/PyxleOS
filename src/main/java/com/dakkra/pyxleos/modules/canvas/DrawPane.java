@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
@@ -18,14 +17,11 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
 import com.dakkra.pyxleos.ColorReference;
-import com.dakkra.pyxleos.PyxleOS;
 import com.dakkra.pyxleos.ui.MainWindow;
 
 public class DrawPane extends JComponent {
@@ -41,10 +37,6 @@ public class DrawPane extends JComponent {
 
 	private BufferedImage prevLayer;
 
-	private BufferedImage tileImg;
-
-	private Image tileLoad;
-
 	private Graphics2D g2;
 
 	private Graphics2D gPrev;
@@ -58,6 +50,8 @@ public class DrawPane extends JComponent {
 	private Color fgColor = ColorReference.getFgColor();
 
 	private Color bgColor = ColorReference.getBgColor();
+
+	private TexturePaint transPaint;
 
 	private int width;
 
@@ -81,16 +75,6 @@ public class DrawPane extends JComponent {
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
 		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
-		try {
-			tileLoad = ImageIO.read(PyxleOS.class.getResourceAsStream("/tile.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		tileImg = new BufferedImage(tileLoad.getWidth(this), tileLoad.getHeight(this), BufferedImage.TYPE_INT_ARGB);
-		Graphics2D tileG = tileImg.createGraphics();
-		tileG.drawImage(tileLoad, 0, 0, this);
-		tileG.dispose();
 
 		g2 = image.createGraphics();
 
@@ -131,16 +115,6 @@ public class DrawPane extends JComponent {
 		image = oimage;
 
 		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
-		try {
-			tileLoad = ImageIO.read(PyxleOS.class.getResourceAsStream("/tile.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		tileImg = new BufferedImage(tileLoad.getWidth(this), tileLoad.getHeight(this), BufferedImage.TYPE_INT_ARGB);
-		Graphics2D tileG = tileImg.createGraphics();
-		tileG.drawImage(tileLoad, 0, 0, this);
-		tileG.dispose();
 
 		g2 = image.createGraphics();
 
@@ -191,6 +165,7 @@ public class DrawPane extends JComponent {
 	private void updateColors() {
 		fgColor = ColorReference.getFgColor();
 		bgColor = ColorReference.getBgColor();
+		transPaint = CanvasSettings.getTransPaint();
 	}
 
 	public Point convertToCanvasCoord(Point point) {
@@ -213,10 +188,9 @@ public class DrawPane extends JComponent {
 	public void paintComponent(Graphics g1) {
 		Graphics2D g = (Graphics2D) g1;
 		Point point = centerImageCoord(new Point(offsetX, offsetY));
-		TexturePaint tilePaint = new TexturePaint(tileImg, new Rectangle(tileImg.getWidth(), tileImg.getHeight()));
 		g.setColor(transparentColor);
 		g.fillRect(-point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale);
-		g.setPaint(tilePaint);
+		g.setPaint(transPaint);
 		g.fillRect(-point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale);
 		g.drawImage(image, -point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale, this);
 		g.drawImage(prevLayer, -point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale, this);
