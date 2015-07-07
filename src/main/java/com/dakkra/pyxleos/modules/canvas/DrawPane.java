@@ -51,7 +51,7 @@ public class DrawPane extends JComponent {
 
 	private Color bgColor = ColorReference.getBgColor();
 
-	private TexturePaint transPaint;
+	private TexturePaint transPaint = CanvasSettings.getTransPaint();
 
 	private int width;
 

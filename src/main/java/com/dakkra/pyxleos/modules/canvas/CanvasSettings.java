@@ -1,7 +1,10 @@
 package com.dakkra.pyxleos.modules.canvas;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.TexturePaint;
+import java.awt.image.BufferedImage;
 
 public class CanvasSettings {
 
@@ -44,11 +47,20 @@ public class CanvasSettings {
 	}
 
 	public static TexturePaint getTransPaint() {
-		return transPaint;
-	}
+		BufferedImage tileImg = new BufferedImage(blockSize, blockSize, BufferedImage.TYPE_INT_ARGB);
 
-	public static void setTransPaint(TexturePaint transPaint) {
-		CanvasSettings.transPaint = transPaint;
+		Graphics2D tileG = tileImg.createGraphics();
+
+		tileG.setColor(transparencyPrimaryColor);
+		tileG.fillRect(0, 0, blockSize, blockSize);
+
+		tileG.setColor(transparencySecondaryColor);
+		tileG.fillRect(0, 0, blockSize / 2, blockSize / 2);
+		tileG.fillRect(blockSize / 2, blockSize / 2, blockSize, blockSize);
+
+		transPaint = new TexturePaint(tileImg, new Rectangle(blockSize, blockSize));
+
+		return transPaint;
 	}
 
 	public static int getBlockSize() {

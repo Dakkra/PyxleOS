@@ -41,6 +41,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
 import com.dakkra.pyxleos.modules.canvas.Canvas;
+import com.dakkra.pyxleos.modules.canvas.CanvasSettings;
 import com.dakkra.pyxleos.modules.canvas.CanvasSettingsView;
 import com.dakkra.pyxleos.modules.textedit.TextEdit;
 import com.dakkra.pyxleos.ui.components.BGColorButton;
@@ -65,10 +66,6 @@ public class MainWindow {
 
 	private Properties canvasProperties;
 
-	private OutputStream oStream;
-
-	private InputStream iStream;
-
 	private File appearancePropertiesFile;
 
 	private File canvasPropertiesFile;
@@ -87,19 +84,36 @@ public class MainWindow {
 		// If settings don't exist yet, make them
 		appDir = new File(System.getProperty("user.home"), "PyxleOS");
 		appearancePropertiesFile = new File(appDir, "colors.pyxos");
-		if (appDir.exists()) {
+		canvasPropertiesFile = new File(appDir, "canvas.pyxos");
+		if (fileCheck()) {
 			loadColorSettings();
+			loadCanvasSettings();
 			firstRun = false;
 		} else {
 			firstRun = true;
-			if (appDir.mkdirs()) {
-				System.out.println("application directory created");
-			} else {
-				System.out.println("failed to create application directory");
+			if (!appDir.exists()) {
+				if (appDir.mkdirs()) {
+					System.out.println("application directory created");
+				} else {
+					System.out.println("failed to create application directory");
+				}
 			}
-			saveColorSettings();
-
+			if (!appearancePropertiesFile.exists()) {
+				saveColorSettings();
+			}
+			if (!canvasPropertiesFile.exists()) {
+				saveCanvasSettings();
+			}
 			loadColorSettings();
+			loadCanvasSettings();
+		}
+	}
+
+	private boolean fileCheck() {
+		if (appDir.exists() && appearancePropertiesFile.exists() && canvasPropertiesFile.exists()) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -285,10 +299,11 @@ public class MainWindow {
 	}
 
 	private void loadColorSettings() {
-		try {
-			System.out.println("Loading color settings");
+		System.out.println("Loading color settings");
 
-			iStream = new FileInputStream(appearancePropertiesFile);
+		try {
+
+			InputStream iStream = new FileInputStream(appearancePropertiesFile);
 
 			appearanceProperties = new Properties();
 			appearanceProperties.load(iStream);
@@ -301,6 +316,7 @@ public class MainWindow {
 			iStream.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
+			System.out.println("Error while loading color settings");
 		}
 	}
 
@@ -310,7 +326,7 @@ public class MainWindow {
 		appearanceProperties = new Properties();
 
 		try {
-			oStream = new FileOutputStream(appearancePropertiesFile);
+			OutputStream oStream = new FileOutputStream(appearancePropertiesFile);
 
 			appearanceProperties.setProperty("bgColor", "" + uis.getbgColor().getRGB());
 			appearanceProperties.setProperty("baseColor", "" + uis.getbaseColor().getRGB());
@@ -332,10 +348,50 @@ public class MainWindow {
 
 	public void loadCanvasSettings() {
 		System.out.println("Loading Canvas Settings");
+
+		try {
+
+			InputStream iStream = new FileInputStream(canvasPropertiesFile);
+
+			canvasProperties = new Properties();
+			canvasProperties.load(iStream);
+
+			CanvasSettings.setTransparencyPrimaryColor(
+					new Color(Integer.parseInt(canvasProperties.getProperty("PrimaryColor"))));
+			CanvasSettings.setTransparencySecondaryColor(
+					new Color(Integer.parseInt(canvasProperties.getProperty("SecondaryColor"))));
+			CanvasSettings.setBlockSize(Integer.parseInt(canvasProperties.getProperty("BlockSize")));
+			System.out.println("(Load) Block Size: " + CanvasSettings.getBlockSize());
+
+			iStream.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			System.out.println("Error while loading canvas settings");
+		}
 	}
 
 	public void saveCanvasSettings() {
 		System.out.println("Saving Canvas Settings");
+
+		canvasProperties = new Properties();
+
+		try {
+			OutputStream oStream = new FileOutputStream(canvasPropertiesFile);
+
+			canvasProperties.setProperty("PrimaryColor", "" + CanvasSettings.getTransparencyPrimaryColor().getRGB());
+			canvasProperties.setProperty("SecondaryColor",
+					"" + CanvasSettings.getTransparencySecondaryColor().getRGB());
+			canvasProperties.setProperty("BlockSize", "" + CanvasSettings.getBlockSize());
+
+			System.out.println("(Save) Block Size: " + CanvasSettings.getBlockSize());
+
+			canvasProperties.store(oStream, "Canvas");
+			oStream.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(mFrame, "Error while saving canvas settings");
+		}
 	}
 
 	public void updateColorButtons() {

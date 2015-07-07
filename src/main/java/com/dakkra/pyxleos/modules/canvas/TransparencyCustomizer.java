@@ -115,7 +115,7 @@ public class TransparencyCustomizer {
 	}
 
 	private void updatePaint() {
-		blockSize = Integer.parseInt(blockSizeField.getText()) * 2;
+		blockSize = Integer.parseInt(blockSizeField.getText());
 		tileImg = new BufferedImage(blockSize, blockSize, BufferedImage.TYPE_INT_ARGB);
 
 		Graphics2D tileG = tileImg.createGraphics();
@@ -172,7 +172,7 @@ public class TransparencyCustomizer {
 			CanvasSettings.setBlockSize(blockSize);
 			CanvasSettings.setTransparencyPrimaryColor(primaryColor);
 			CanvasSettings.setTransparencySecondaryColor(secondaryColor);
-			CanvasSettings.setTransPaint(tilePaint);
+			System.out.println("(Save-IN) Block Size: " + CanvasSettings.getBlockSize());
 			isReady = true;
 		}
 
