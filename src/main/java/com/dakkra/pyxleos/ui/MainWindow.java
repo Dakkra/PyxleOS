@@ -361,7 +361,7 @@ public class MainWindow {
 			CanvasSettings.setTransparencySecondaryColor(
 					new Color(Integer.parseInt(canvasProperties.getProperty("SecondaryColor"))));
 			CanvasSettings.setBlockSize(Integer.parseInt(canvasProperties.getProperty("BlockSize")));
-			System.out.println("(Load) Block Size: " + CanvasSettings.getBlockSize());
+			CanvasSettings.setOffsetMoveAmt(Integer.parseInt(canvasProperties.getProperty("Move Amt")));
 
 			iStream.close();
 		} catch (IOException e1) {
@@ -382,8 +382,7 @@ public class MainWindow {
 			canvasProperties.setProperty("SecondaryColor",
 					"" + CanvasSettings.getTransparencySecondaryColor().getRGB());
 			canvasProperties.setProperty("BlockSize", "" + CanvasSettings.getBlockSize());
-
-			System.out.println("(Save) Block Size: " + CanvasSettings.getBlockSize());
+			canvasProperties.setProperty("Move Amt", "" + CanvasSettings.getOffsetMoveAmt());
 
 			canvasProperties.store(oStream, "Canvas");
 			oStream.close();

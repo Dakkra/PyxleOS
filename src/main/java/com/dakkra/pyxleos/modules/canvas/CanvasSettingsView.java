@@ -27,6 +27,8 @@ public class CanvasSettingsView {
 
 	private JInternalFrame frame;
 
+	private JTextField moveAmtField;
+
 	public CanvasSettingsView(MainWindow mw) {
 		this.mw = mw;
 	}
@@ -55,7 +57,7 @@ public class CanvasSettingsView {
 		JLabel moveAmtLabel = new JLabel("Arrow Key Movement Amount: ");
 		panel.add(moveAmtLabel);
 
-		JTextField moveAmtField = new JTextField("" + CanvasSettings.getOffsetMoveAmt());
+		moveAmtField = new JTextField("" + CanvasSettings.getOffsetMoveAmt());
 		moveAmtField.setColumns(2);
 		panel.add(moveAmtField, "wrap");
 
@@ -102,6 +104,7 @@ public class CanvasSettingsView {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			CanvasSettings.setOffsetMoveAmt(Integer.parseInt(moveAmtField.getText()));
 			mw.saveCanvasSettings();
 		}
 

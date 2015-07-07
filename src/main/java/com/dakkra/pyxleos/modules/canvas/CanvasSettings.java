@@ -10,7 +10,7 @@ public class CanvasSettings {
 
 	private static int offsetMoveAmt = 3;
 
-	private static int blockSize = 4;
+	private static int blockSize = 15;
 
 	private static Color transparencyPrimaryColor = new Color(102, 102, 102);
 

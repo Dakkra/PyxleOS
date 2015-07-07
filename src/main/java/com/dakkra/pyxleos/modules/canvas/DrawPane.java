@@ -162,10 +162,11 @@ public class DrawPane extends JComponent {
 		canvas.updateTitle();
 	}
 
-	private void updateColors() {
+	private void updateSettings() {
 		fgColor = ColorReference.getFgColor();
 		bgColor = ColorReference.getBgColor();
 		transPaint = CanvasSettings.getTransPaint();
+		offsetMoveAmt = CanvasSettings.getOffsetMoveAmt();
 	}
 
 	public Point convertToCanvasCoord(Point point) {
@@ -194,7 +195,7 @@ public class DrawPane extends JComponent {
 		g.fillRect(-point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale);
 		g.drawImage(image, -point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale, this);
 		g.drawImage(prevLayer, -point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale, this);
-		updateColors();
+		updateSettings();
 	}
 
 	public void clear() {
@@ -202,7 +203,7 @@ public class DrawPane extends JComponent {
 
 		g2 = image.createGraphics();
 
-		updateColors();
+		updateSettings();
 
 		repaint();
 
@@ -222,7 +223,7 @@ public class DrawPane extends JComponent {
 
 		gPrev = prevLayer.createGraphics();
 
-		updateColors();
+		updateSettings();
 
 		repaint();
 
@@ -265,7 +266,7 @@ public class DrawPane extends JComponent {
 				Color newColor = new Color(newColorInt);
 				ColorReference.setFgColor(newColor);
 				if (newColor != null) {
-					updateColors();
+					updateSettings();
 					paintColor = fgColor;
 					gPrev.setPaint(paintColor);
 					g2.setPaint(paintColor);
@@ -280,7 +281,7 @@ public class DrawPane extends JComponent {
 				return;
 			}
 
-			updateColors();
+			updateSettings();
 			if (!shift) {
 				if (g2 != null) {
 					g2.setPaint(paintColor);
@@ -294,7 +295,7 @@ public class DrawPane extends JComponent {
 		public void mouseDragged(MouseEvent e) {
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			canvas.updateMousePos(currentPoint.x, currentPoint.y);
-			updateColors();
+			updateSettings();
 			if (SwingUtilities.isMiddleMouseButton(e)) {
 				offsetX += (offsetPoint.x - e.getX());
 				offsetY += (offsetPoint.y - e.getY());
@@ -320,7 +321,7 @@ public class DrawPane extends JComponent {
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			canvas.updateMousePos(currentPoint.x, currentPoint.y);
 			resetPrevLayer();
-			updateColors();
+			updateSettings();
 			gPrev.setPaint(paintColor);
 			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x, currentPoint.y);
 			repaint();
@@ -328,12 +329,12 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			updateColors();
+			updateSettings();
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			updateColors();
+			updateSettings();
 			offsetPoint = e.getPoint();
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			g2.setPaint(paintColor);
@@ -348,20 +349,20 @@ public class DrawPane extends JComponent {
 		public void mouseEntered(MouseEvent e) {
 			currentPoint = convertToCanvasCoord(e.getPoint());
 			canvas.updateMousePos(currentPoint.x, currentPoint.y);
-			updateColors();
+			updateSettings();
 			paintColor = fgColor;
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			updateColors();
+			updateSettings();
 			resetPrevLayer();
 			gPrev.setPaint(paintColor);
 		}
 
 		@Override
 		public void mouseWheelMoved(MouseWheelEvent e) {
-			updateColors();
+			updateSettings();
 			if (e.getWheelRotation() < 0) {
 				scaleUp(e.getPoint());
 				resetPrevLayer();
@@ -382,23 +383,23 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void keyTyped(KeyEvent e) {
-			updateColors();
+			updateSettings();
 			paintColor = fgColor;
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
 			resetPrevLayer();
-			updateColors();
+			updateSettings();
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_SHIFT: {
-				updateColors();
+				updateSettings();
 				shift = true;
 				gPrev.setPaint(paintColor);
 				break;
 			}
 			case KeyEvent.VK_CONTROL: {
-				updateColors();
+				updateSettings();
 				paintColor = bgColor;
 				gPrev.setPaint(paintColor);
 				break;
@@ -420,7 +421,7 @@ public class DrawPane extends JComponent {
 				break;
 			}
 			default: {
-				updateColors();
+				updateSettings();
 				paintColor = fgColor;
 				shift = false;
 				gPrev.setPaint(paintColor);
@@ -435,7 +436,7 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			updateColors();
+			updateSettings();
 			paintColor = fgColor;
 			gPrev.setPaint(paintColor);
 			gPrev.drawLine(currentPoint.x, currentPoint.y, currentPoint.x, currentPoint.y);
@@ -447,13 +448,13 @@ public class DrawPane extends JComponent {
 
 		@Override
 		public void focusGained(FocusEvent e) {
-			updateColors();
+			updateSettings();
 			paintColor = fgColor;
 		}
 
 		@Override
 		public void focusLost(FocusEvent e) {
-			updateColors();
+			updateSettings();
 			paintColor = fgColor;
 		}
 
