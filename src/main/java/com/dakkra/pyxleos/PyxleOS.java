@@ -33,7 +33,7 @@ public class PyxleOS {
 		tileG.dispose();
 
 		UISettings uis = new UISettings();
-
+		
 		MainWindow mw = new MainWindow(uis);
 
 		mw.initUIS();
