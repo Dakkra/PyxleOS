@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -17,7 +18,6 @@ import javax.swing.KeyStroke;
 
 import com.dakkra.pyxleos.ui.MainWindow;
 import com.dakkra.pyxleos.util.Util;
-import com.sun.glass.events.KeyEvent;
 
 import net.miginfocom.swing.MigLayout;
 

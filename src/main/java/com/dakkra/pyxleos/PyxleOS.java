@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
+import javax.swing.SwingUtilities;
 
 import com.dakkra.pyxleos.modules.canvas.Canvas;
 import com.dakkra.pyxleos.modules.textedit.TextEdit;
@@ -19,6 +20,12 @@ public class PyxleOS {
 	public static void main(String[] args) {
 		System.out.println("Initializing PyxleOS");
 
+		SwingUtilities.invokeLater(() -> initPyxleOS());
+
+		System.out.println("Ready!");
+	}
+
+	public static void initPyxleOS() {
 		Image tileLoad = null;
 
 		try {
@@ -33,7 +40,7 @@ public class PyxleOS {
 		tileG.dispose();
 
 		UISettings uis = new UISettings();
-		
+
 		MainWindow mw = new MainWindow(uis);
 
 		mw.initUIS();
@@ -60,7 +67,5 @@ public class PyxleOS {
 		}
 		te.setText(greetingMessage);
 		te.setSize(new Dimension(620, 512));
-
-		System.out.println("Ready!");
 	}
 }

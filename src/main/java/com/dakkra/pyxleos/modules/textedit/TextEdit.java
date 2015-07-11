@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -20,7 +21,6 @@ import javax.swing.undo.UndoManager;
 import com.dakkra.pyxleos.modules.Module;
 import com.dakkra.pyxleos.ui.MainWindow;
 import com.dakkra.pyxleos.util.Util;
-import com.sun.glass.events.KeyEvent;
 
 public class TextEdit extends Module {
 	private MainWindow mw;

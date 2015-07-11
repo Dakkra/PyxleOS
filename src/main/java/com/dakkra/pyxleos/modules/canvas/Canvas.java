@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -25,7 +26,6 @@ import javax.swing.KeyStroke;
 
 import com.dakkra.pyxleos.modules.Module;
 import com.dakkra.pyxleos.ui.MainWindow;
-import com.sun.glass.events.KeyEvent;
 
 import net.miginfocom.swing.MigLayout;
 

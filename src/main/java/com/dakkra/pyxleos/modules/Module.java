@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -15,7 +16,6 @@ import javax.swing.KeyStroke;
 
 import com.dakkra.pyxleos.ui.MainWindow;
 import com.dakkra.pyxleos.util.Util;
-import com.sun.glass.events.KeyEvent;
 
 public class Module {
 	protected MainWindow mw;
