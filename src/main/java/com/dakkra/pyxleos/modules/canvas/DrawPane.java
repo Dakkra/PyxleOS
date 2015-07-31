@@ -28,118 +28,65 @@ public class DrawPane extends JComponent {
 	private static final long serialVersionUID = 6748629663390647156L;
 
 	private MainWindow mw;
-
 	private Canvas canvas;
-
 	private Color paintColor;
-
 	private BufferedImage image;
-
 	private BufferedImage prevLayer;
-
 	private Graphics2D g2;
-
 	private Graphics2D gPrev;
-
 	private Point currentPoint, primaryPoint, offsetPoint;
-
 	private int scale;
-
 	private Color transparentColor;
-
 	private Color fgColor = ColorReference.getFgColor();
-
 	private Color bgColor = ColorReference.getBgColor();
-
 	private TexturePaint transPaint = CanvasSettings.getTransPaint();
-
 	private int width;
-
 	private int height;
-
 	private int offsetX;
-
 	private int offsetY;
-
 	private int offsetMoveAmt = CanvasSettings.getOffsetMoveAmt();
 
 	public DrawPane(MainWindow mw, Canvas canvas, Dimension d) {
 		this.mw = mw;
-
 		this.canvas = canvas;
-
 		width = d.width;
-
 		height = d.height;
-
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
 		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
 		g2 = image.createGraphics();
-
 		gPrev = prevLayer.createGraphics();
-
 		transparentColor = new Color(102, 102, 102);
-
 		scale = 10;
-
 		DefaultToolListener mouseDragListener = new DefaultToolListener();
-
 		addMouseListener(mouseDragListener);
-
 		addMouseMotionListener(mouseDragListener);
-
 		addMouseWheelListener(mouseDragListener);
-
 		addKeyListener(mouseDragListener);
-
 		setFocusable(true);
-
 		requestFocus();
-
 		requestFocusInWindow();
-
 		clear();
 	}
 
 	public DrawPane(MainWindow mw, Canvas canvas, BufferedImage oimage) {
 		this.mw = mw;
-
 		this.canvas = canvas;
-
 		width = oimage.getWidth();
-
 		height = oimage.getHeight();
-
 		image = oimage;
-
 		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
 		g2 = image.createGraphics();
-
 		gPrev = prevLayer.createGraphics();
-
 		transparentColor = new Color(102, 102, 102);
-
 		scale = 10;
-
 		DefaultToolListener mouseDragListener = new DefaultToolListener();
-
 		addMouseListener(mouseDragListener);
-
 		addMouseMotionListener(mouseDragListener);
-
 		addMouseWheelListener(mouseDragListener);
-
 		addKeyListener(mouseDragListener);
-
 		setFocusable(true);
-
 		requestFocus();
-
 		requestFocusInWindow();
-
 	}
 
 	private void scaleUp(Point p) {

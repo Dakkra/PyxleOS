@@ -32,36 +32,23 @@ import net.miginfocom.swing.MigLayout;
 public class Canvas extends Module {
 
 	private MainWindow mw;
-
 	private BufferedImage image = null;
-
 	private DrawPane drawPane;
-
 	private JLabel mPosLabel;
-
 	private JLabel exportSizeLabel;
-
 	private JTextField wField;
-
 	private JTextField hField;
-
 	private JTextField scaleField;
-
 	private JTextField zoomField;
-
 	private String imageName = "Canvas";
-
 	private File imgFile = null;
-
 	private int canvasWidth;
-
 	private int canvasHeight;
 
 	public Canvas(MainWindow mw) {
 		super(mw);
 
 		this.mw = mw;
-
 		int returnval = JOptionPane.showConfirmDialog(frame, dimensionDialogPanel(), "Image Dimensions : ",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
@@ -78,14 +65,11 @@ public class Canvas extends Module {
 		super(mw);
 
 		this.mw = mw;
-
 		this.image = image;
-
 		this.imgFile = imgFile;
 
 		canvasWidth = image.getWidth();
 		canvasHeight = image.getHeight();
-
 		imageName = imgFile.getName();
 
 		makeUI();
@@ -95,7 +79,6 @@ public class Canvas extends Module {
 		super(mw);
 
 		this.mw = mw;
-
 		this.image = image;
 
 		canvasWidth = image.getWidth();
