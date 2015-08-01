@@ -30,7 +30,7 @@ public class DrawPane extends JComponent {
 	private MainWindow mw;
 	private Canvas canvas;
 	private Color paintColor;
-	private BufferedImage image;
+	private PixelImage image;
 	private BufferedImage prevLayer;
 	private Graphics2D g2;
 	private Graphics2D gPrev;
@@ -51,7 +51,7 @@ public class DrawPane extends JComponent {
 		this.canvas = canvas;
 		width = d.width;
 		height = d.height;
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		image = new PixelImage(width, height);
 		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		g2 = image.createGraphics();
 		gPrev = prevLayer.createGraphics();
@@ -73,7 +73,7 @@ public class DrawPane extends JComponent {
 		this.canvas = canvas;
 		width = oimage.getWidth();
 		height = oimage.getHeight();
-		image = oimage;
+		image = new PixelImage(width, height, oimage);
 		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		g2 = image.createGraphics();
 		gPrev = prevLayer.createGraphics();
@@ -140,18 +140,15 @@ public class DrawPane extends JComponent {
 		g.fillRect(-point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale);
 		g.setPaint(transPaint);
 		g.fillRect(-point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale);
-		g.drawImage(image, -point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale, this);
+		g.drawImage(image.getImage(), -point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale, this);
 		g.drawImage(prevLayer, -point.x, -point.y, image.getWidth() * scale, image.getHeight() * scale, this);
 		updateSettings();
 	}
 
 	public void clear() {
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
+		image.clearImage();
 		g2 = image.createGraphics();
-
 		updateSettings();
-
 		repaint();
 
 	}
@@ -167,17 +164,14 @@ public class DrawPane extends JComponent {
 
 	public void resetPrevLayer() {
 		prevLayer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
 		gPrev = prevLayer.createGraphics();
-
 		updateSettings();
-
 		repaint();
 
 	}
 
 	public BufferedImage getImage() {
-		return image;
+		return image.getImage();
 	}
 
 	public int getZoom() {
@@ -209,7 +203,7 @@ public class DrawPane extends JComponent {
 			canvas.updateMousePos(currentPoint.x, currentPoint.y);
 
 			if (e.getButton() == MouseEvent.BUTTON3) {
-				int newColorInt = image.getRGB(currentPoint.x, currentPoint.y);
+				int newColorInt = image.getImage().getRGB(currentPoint.x, currentPoint.y);
 				Color newColor = new Color(newColorInt);
 				ColorReference.setFgColor(newColor);
 				if (newColor != null) {

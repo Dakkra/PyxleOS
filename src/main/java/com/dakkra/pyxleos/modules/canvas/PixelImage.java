@@ -5,6 +5,7 @@
 package com.dakkra.pyxleos.modules.canvas;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class PixelImage {
@@ -18,6 +19,14 @@ public class PixelImage {
 		this.height = height;
 		mapArray = new PixelPoint[width][height];
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+	}
+
+	public PixelImage(int width, int height, BufferedImage oimage) {
+		this.width = width;
+		this.height = height;
+		mapArray = new PixelPoint[width][height];
+		img = oimage;
 
 	}
 
@@ -46,8 +55,12 @@ public class PixelImage {
 	public Graphics2D createGraphics() {
 		return img.createGraphics();
 	}
-	
-	public void clearImage(){
+
+	public void clearImage() {
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	}
+
+	public BufferedImage getImage() {
+		return img;
 	}
 }
