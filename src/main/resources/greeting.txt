@@ -12,6 +12,7 @@ What's new
 ------------------------------------
 1. Update to Java 8
 2. Performance fixes (runs smoother and faster now)
+3. New Icon (again)
 
 To do
 ------------------------------------
