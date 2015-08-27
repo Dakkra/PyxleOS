@@ -37,6 +37,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import com.dakkra.pyxleos.ColorReference;
 import com.dakkra.pyxleos.PyxleOS;
@@ -211,7 +212,8 @@ public class MainWindow {
 		}
 
 		for (Window window : Window.getWindows()) {
-			SwingUtilities.updateComponentTreeUI(window);
+			// SwingUtilities.updateComponentTreeUI(window);
+			NimbusLookAndFeel.updateStyles(window);
 		}
 		updateColorButtons();
 	}
