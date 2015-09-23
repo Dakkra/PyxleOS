@@ -4,10 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -26,7 +23,6 @@ import com.dakkra.pyxleos.util.Util;
 public class TextEdit extends Module {
     private MainWindow mw;
     private JTextArea textArea;
-    // private JInternalFrame frame;
     private File textFile;
     private JMenuItem fileReopen;
     private Font textAreaFont;
@@ -127,6 +123,8 @@ public class TextEdit extends Module {
         menuBar.add(options);
 
         textArea = new JTextArea("");
+
+        textArea.addKeyListener(new GroupKeyEar());
 
         textArea.getDocument().addUndoableEditListener(undoManager);
 
@@ -248,6 +246,28 @@ public class TextEdit extends Module {
             } else {
                 textAreaFont = Util.makeFont(size, Font.PLAIN);
                 textArea.setFont(textAreaFont);
+            }
+        }
+    }
+
+    private class GroupKeyEar implements KeyListener {
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            switch (e.getKeyChar()) {
+                //TODO: Close braces,brackets,parens,and quotes
+                default:
+                    break;
             }
         }
     }
