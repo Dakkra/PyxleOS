@@ -1,12 +1,6 @@
 package com.dakkra.pyxleos.modules;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
@@ -39,7 +33,7 @@ public class Module {
 		fileExit = new JMenuItem("Quit");
 		fileExit.addActionListener(new ExitEar());
 		fileExit.setMnemonic(KeyEvent.VK_Q);
-		fileExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+		fileExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
 
 		menuBar.add(fileMenu);
 

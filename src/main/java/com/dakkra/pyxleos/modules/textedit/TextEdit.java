@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
@@ -23,232 +24,231 @@ import com.dakkra.pyxleos.ui.MainWindow;
 import com.dakkra.pyxleos.util.Util;
 
 public class TextEdit extends Module {
-	private MainWindow mw;
-	private JTextArea textArea;
-	// private JInternalFrame frame;
-	private File textFile;
-	private JMenuItem fileReopen;
-	private Font textAreaFont;
+    private MainWindow mw;
+    private JTextArea textArea;
+    // private JInternalFrame frame;
+    private File textFile;
+    private JMenuItem fileReopen;
+    private Font textAreaFont;
 
-	private UndoManager undoManager = new UndoManager();
+    private UndoManager undoManager = new UndoManager();
 
-	public TextEdit(MainWindow mw) {
-		super(mw);
-		this.mw = mw;
-		textFile = null;
-		makeUI();
-	}
+    public TextEdit(MainWindow mw) {
+        super(mw);
+        this.mw = mw;
+        textFile = null;
+        makeUI();
+    }
 
-	public void setText(String text) {
-		textArea.setText(text);
-	}
+    public void setText(String text) {
+        textArea.setText(text);
+    }
 
-	public String getText() {
-		String text = textArea.getText();
-		return text;
-	}
+    public String getText() {
+        return textArea.getText();
+    }
 
-	public void packFrame() {
-		frame.pack();
-		Rectangle bounds = mw.getDesktopPaneBounds();
-		Point center = new Point((bounds.width / 2) - (frame.getWidth() / 2),
-				(bounds.height / 2) - (frame.getHeight() / 2));
-		frame.setLocation(center);
-	}
+    public void packFrame() {
+        frame.pack();
+        Rectangle bounds = mw.getDesktopPaneBounds();
+        Point center = new Point((bounds.width / 2) - (frame.getWidth() / 2),
+                (bounds.height / 2) - (frame.getHeight() / 2));
+        frame.setLocation(center);
+    }
 
-	public void setSize(Dimension d) {
-		frame.setSize(d);
-		Rectangle bounds = mw.getDesktopPaneBounds();
-		Point center = new Point((bounds.width / 2) - (frame.getWidth() / 2),
-				(bounds.height / 2) - (frame.getHeight() / 2));
-		frame.setLocation(center);
-	}
+    public void setSize(Dimension d) {
+        frame.setSize(d);
+        Rectangle bounds = mw.getDesktopPaneBounds();
+        Point center = new Point((bounds.width / 2) - (frame.getWidth() / 2),
+                (bounds.height / 2) - (frame.getHeight() / 2));
+        frame.setLocation(center);
+    }
 
-	public Dimension getSize() {
-		return frame.getSize();
-	}
+    public Dimension getSize() {
+        return frame.getSize();
+    }
 
-	private void makeUI() {
+    private void makeUI() {
 
-		frame.setTitle("TextEdit");
+        frame.setTitle("TextEdit");
 
-		JMenuItem fileNew = new JMenuItem("New");
-		fileNew.addActionListener(new NewEar());
-		fileNew.setMnemonic(KeyEvent.VK_N);
-		fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-		JMenuItem fileOpen = new JMenuItem("Open");
-		fileOpen.addActionListener(new OpenEar());
-		fileOpen.setMnemonic(KeyEvent.VK_O);
-		fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
-		fileReopen = new JMenuItem("Reopen");
-		fileReopen.setEnabled(false);
-		fileReopen.addActionListener(new ReopenEar());
-		fileReopen.setMnemonic(KeyEvent.VK_R);
-		fileReopen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
-		JMenuItem fileSave = new JMenuItem("Save");
-		fileSave.addActionListener(new SaveEar());
-		fileSave.setMnemonic(KeyEvent.VK_S);
-		fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-		JMenuItem fileSaveAs = new JMenuItem("Save As");
-		fileSaveAs.addActionListener(new SaveAsEar());
-		fileSaveAs.setMnemonic(KeyEvent.VK_S);
-		fileSaveAs
-				.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+        JMenuItem fileNew = new JMenuItem("New");
+        fileNew.addActionListener(new NewEar());
+        fileNew.setMnemonic(KeyEvent.VK_N);
+        fileNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+        JMenuItem fileOpen = new JMenuItem("Open");
+        fileOpen.addActionListener(new OpenEar());
+        fileOpen.setMnemonic(KeyEvent.VK_O);
+        fileOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        fileReopen = new JMenuItem("Reopen");
+        fileReopen.setEnabled(false);
+        fileReopen.addActionListener(new ReopenEar());
+        fileReopen.setMnemonic(KeyEvent.VK_R);
+        fileReopen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
+        JMenuItem fileSave = new JMenuItem("Save");
+        fileSave.addActionListener(new SaveEar());
+        fileSave.setMnemonic(KeyEvent.VK_S);
+        fileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+        JMenuItem fileSaveAs = new JMenuItem("Save As");
+        fileSaveAs.addActionListener(new SaveAsEar());
+        fileSaveAs.setMnemonic(KeyEvent.VK_S);
+        fileSaveAs
+                .setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
 
-		fileMenu.add(fileNew);
-		fileMenu.add(fileOpen);
-		fileMenu.add(fileReopen);
-		fileMenu.add(fileSave);
-		fileMenu.add(fileSaveAs);
-		fileMenu.add(fileExit);
+        fileMenu.add(fileNew);
+        fileMenu.add(fileOpen);
+        fileMenu.add(fileReopen);
+        fileMenu.add(fileSave);
+        fileMenu.add(fileSaveAs);
+        fileMenu.add(fileExit);
 
-		JMenu edit = new JMenu(" Edit ");
-		JMenuItem undo = new JMenuItem("Undo");
-		undo.addActionListener(new UndoEar());
-		undo.setMnemonic(KeyEvent.VK_Z);
-		undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
-		JMenuItem redo = new JMenuItem("Redo");
-		redo.addActionListener(new RedoEar());
-		redo.setMnemonic(KeyEvent.VK_Z);
-		redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK));
+        JMenu edit = new JMenu(" Edit ");
+        JMenuItem undo = new JMenuItem("Undo");
+        undo.addActionListener(new UndoEar());
+        undo.setMnemonic(KeyEvent.VK_Z);
+        undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
+        JMenuItem redo = new JMenuItem("Redo");
+        redo.addActionListener(new RedoEar());
+        redo.setMnemonic(KeyEvent.VK_Z);
+        redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
 
-		edit.add(undo);
-		edit.add(redo);
+        edit.add(undo);
+        edit.add(redo);
 
-		JMenu options = new JMenu(" Options ");
-		JMenuItem textSize = new JMenuItem("Text Size");
-		textSize.addActionListener(new TextSizeEar());
-		textSize.setMnemonic(KeyEvent.VK_O);
-		textSize.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.ALT_MASK));
-		options.add(textSize);
+        JMenu options = new JMenu(" Options ");
+        JMenuItem textSize = new JMenuItem("Text Size");
+        textSize.addActionListener(new TextSizeEar());
+        textSize.setMnemonic(KeyEvent.VK_O);
+        textSize.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.ALT_MASK));
+        options.add(textSize);
 
-		menuBar.add(fileMenu);
-		menuBar.add(edit);
-		menuBar.add(options);
+        menuBar.add(fileMenu);
+        menuBar.add(edit);
+        menuBar.add(options);
 
-		textArea = new JTextArea("");
+        textArea = new JTextArea("");
 
-		textArea.getDocument().addUndoableEditListener(undoManager);
+        textArea.getDocument().addUndoableEditListener(undoManager);
 
-		textAreaFont = Util.makeFont(17, Font.PLAIN);
+        textAreaFont = Util.makeFont(17, Font.PLAIN);
 
-		textArea.setFont(textAreaFont);
+        textArea.setFont(textAreaFont);
 
-		frame.setJMenuBar(menuBar);
+        frame.setJMenuBar(menuBar);
 
-		JScrollPane textPane = new JScrollPane(textArea);
+        JScrollPane textPane = new JScrollPane(textArea);
 
-		frame.add(textPane);
+        frame.add(textPane);
 
-		frame.setSize(550, 350);
+        frame.setSize(550, 350);
 
-		mw.addIFrame(frame);
-	}
+        mw.addIFrame(frame);
+    }
 
-	private class NewEar implements ActionListener {
+    private class NewEar implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			TextEditControl.reset(frame, textArea);
-			textFile = null;
-			fileReopen.setEnabled(false);
-		}
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            TextEditControl.reset(frame, textArea);
+            textFile = null;
+            fileReopen.setEnabled(false);
+        }
 
-	}
+    }
 
-	private class OpenEar implements ActionListener {
+    private class OpenEar implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JFileChooser jfc = new JFileChooser();
-			int returnval = jfc.showOpenDialog(null);
-			if (returnval == JFileChooser.APPROVE_OPTION) {
-				textFile = jfc.getSelectedFile();
-				textArea.setText(TextEditControl.readText(textFile, frame));
-				fileReopen.setEnabled(true);
-			} else {
-				return;
-			}
-		}
-	}
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser jfc = new JFileChooser();
+            int returnval = jfc.showOpenDialog(null);
+            if (returnval == JFileChooser.APPROVE_OPTION) {
+                textFile = jfc.getSelectedFile();
+                textArea.setText(TextEditControl.readText(textFile, frame));
+                fileReopen.setEnabled(true);
+            } else {
+                return;
+            }
+        }
+    }
 
-	private class ReopenEar implements ActionListener {
+    private class ReopenEar implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			textArea.setText(TextEditControl.readText(textFile, frame));
-		}
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            textArea.setText(TextEditControl.readText(textFile, frame));
+        }
 
-	}
+    }
 
-	private class SaveEar implements ActionListener {
+    private class SaveEar implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			textFile = TextEditControl.saveText(textFile, textArea, frame);
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            textFile = TextEditControl.saveText(textFile, textArea, frame);
 
-			if (textFile != null) {
-				fileReopen.setEnabled(true);
-				System.out.println("Name: " + textFile.getName() + "||URI: " + textFile.getAbsolutePath());
-			} else {
-				return;
-			}
-		}
-	}
+            if (textFile != null) {
+                fileReopen.setEnabled(true);
+                System.out.println("Name: " + textFile.getName() + "||URI: " + textFile.getAbsolutePath());
+            } else {
+                return;
+            }
+        }
+    }
 
-	private class SaveAsEar implements ActionListener {
+    private class SaveAsEar implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JFileChooser jfc = new JFileChooser();
-			int returnval = jfc.showSaveDialog(null);
-			if (returnval == JFileChooser.APPROVE_OPTION) {
-				textFile = jfc.getSelectedFile();
-				textFile = TextEditControl.saveText(textFile, textArea, frame);
-				fileReopen.setEnabled(true);
-				System.out.println("Name: " + textFile.getName() + "||URI: " + textFile.getAbsolutePath());
-			} else {
-				return;
-			}
-		}
-	}
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser jfc = new JFileChooser();
+            int returnval = jfc.showSaveDialog(null);
+            if (returnval == JFileChooser.APPROVE_OPTION) {
+                textFile = jfc.getSelectedFile();
+                textFile = TextEditControl.saveText(textFile, textArea, frame);
+                fileReopen.setEnabled(true);
+                System.out.println("Name: " + textFile.getName() + "||URI: " + textFile.getAbsolutePath());
+            } else {
+                return;
+            }
+        }
+    }
 
-	private class RedoEar implements ActionListener {
+    private class RedoEar implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (undoManager.canRedo()) {
-				undoManager.redo();
-			}
-		}
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (undoManager.canRedo()) {
+                undoManager.redo();
+            }
+        }
 
-	}
+    }
 
-	private class UndoEar implements ActionListener {
+    private class UndoEar implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (undoManager.canUndo()) {
-				undoManager.undo();
-			}
-		}
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (undoManager.canUndo()) {
+                undoManager.undo();
+            }
+        }
 
-	}
+    }
 
-	private class TextSizeEar implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			int size = textAreaFont.getSize();
-			try {
-				size = Integer.parseInt(JOptionPane.showInputDialog("Input a new font size:", textAreaFont.getSize()));
-			} catch (NumberFormatException e1) {
-				System.out.println("Invalid Size or user cancelled");
-			}
-			if (size <= 0 || size > 70) {
-				JOptionPane.showMessageDialog(null, "Invalid size! (1-70 only)");
-			} else {
-				textAreaFont = Util.makeFont(size, Font.PLAIN);
-				textArea.setFont(textAreaFont);
-			}
-		}
-	}
+    private class TextSizeEar implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            int size = textAreaFont.getSize();
+            try {
+                size = Integer.parseInt(JOptionPane.showInputDialog("Input a new font size:", textAreaFont.getSize()));
+            } catch (NumberFormatException e1) {
+                System.out.println("Invalid Size or user cancelled");
+            }
+            if (size <= 0 || size > 70) {
+                JOptionPane.showMessageDialog(null, "Invalid size! (1-70 only)");
+            } else {
+                textAreaFont = Util.makeFont(size, Font.PLAIN);
+                textArea.setFont(textAreaFont);
+            }
+        }
+    }
 }

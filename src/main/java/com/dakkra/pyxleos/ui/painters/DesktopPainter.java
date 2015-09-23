@@ -17,7 +17,7 @@ public class DesktopPainter implements Painter<JDesktopPane> {
 	public DesktopPainter(UISettings uis) {
 		this.uis = uis;
 		image = uis.getbgImage();
-		System.out.println("bg painter init");
+		//System.out.println("DesktopPainter.java bg painter init");
 	}
 
 	@Override
