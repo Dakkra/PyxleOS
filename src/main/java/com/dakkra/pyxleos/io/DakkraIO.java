@@ -9,7 +9,7 @@ public class DakkraIO {
 
     /***
      *Loads an image from the resources
-     * @param uri Path to resource
+     * @param uri path to the image resource
      * @return Image that has been loaded
      */
     public static BufferedImage loadImageResource(String uri) {
