@@ -14,8 +14,8 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 mainClassName = 'com.dakkra.pyxleos.PyxleOS'
 
-sourceCompatibility = 1.7
-version = '1.0.0A'
+sourceCompatibility = 1.8
+version = '0.2.8'
 
 jar {
     manifest {

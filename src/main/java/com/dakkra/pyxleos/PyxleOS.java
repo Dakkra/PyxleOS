@@ -1,31 +1,71 @@
 package com.dakkra.pyxleos;
 
-import com.dakkra.pyxleos.ui.MainWindow;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.imageio.ImageIO;
+import javax.swing.SwingUtilities;
+
+import com.dakkra.pyxleos.modules.canvas.Canvas;
+import com.dakkra.pyxleos.modules.textedit.TextEdit;
+import com.dakkra.pyxleos.ui.MainWindow;
+import com.dakkra.pyxleos.ui.UISettings;
+import com.dakkra.pyxleos.util.Util;
 
 public class PyxleOS {
+	public static void main(String[] args) {
+		System.out.println("Initializing PyxleOS");
 
-    public static final GraphicsDevice SYSTEM_DISPLAY = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-    public static final int DISPLAY_WIDTH = SYSTEM_DISPLAY.getDisplayMode().getWidth();
-    public static final int DISPLAY_HEIGHT = SYSTEM_DISPLAY.getDisplayMode().getHeight();
+		SwingUtilities.invokeLater(() -> initPyxleOS());
 
-    public static void main(String[] args) {
-        System.out.println("Initializing...");
+		System.out.println("Ready!");
+	}
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                initApp();
-            }
-        });
-    }
+	public static void initPyxleOS() {
+		Image tileLoad = null;
 
-    private static void initApp() {
-        MainWindow mw = new MainWindow();
+		try {
+			tileLoad = ImageIO.read(PyxleOS.class.getResourceAsStream("/tile.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		BufferedImage tileImg = new BufferedImage(tileLoad.getWidth(null), tileLoad.getHeight(null),
+				BufferedImage.TYPE_INT_ARGB);
+		Graphics2D tileG = tileImg.createGraphics();
+		tileG.drawImage(tileLoad, 0, 0, null);
+		tileG.dispose();
 
-        mw.showMainWindow();
-    }
+		UISettings uis = new UISettings();
 
+		MainWindow mw = new MainWindow(uis);
+
+		mw.initUIS();
+		mw.initCS();
+		mw.cnsUI();
+
+		BufferedImage img = null;
+
+		try {
+			img = ImageIO.read(PyxleOS.class.getResourceAsStream("/sword.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		@SuppressWarnings("unused")
+		Canvas canvas = new Canvas(mw, img);
+
+		TextEdit te = new TextEdit(mw);
+		InputStream input = PyxleOS.class.getResourceAsStream("/greeting.txt");
+		String greetingMessage = Util.read(input);
+		try {
+			input.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		te.setText(greetingMessage);
+		te.setSize(new Dimension(620, 512));
+	}
 }
